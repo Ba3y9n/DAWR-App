@@ -687,35 +687,59 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         </div>
       </section>
 
-      {/* 4. Phase 7 & 8 — Circular Impact & Gamification Section */}
-      <section id="impact-section" className="bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-emerald-700/60 space-y-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-emerald-800/80 pb-4">
-          <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-600/40">
-              <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-              <span>{isAr ? "مؤشرات الأثر البيئي" : "Environmental Impact Stats"}</span>
+      {/* 4. Full-Width Clean Impact Dashboard Banner (أثر قرارات الاستدامة) */}
+      <section 
+        id="impact-section" 
+        className="w-full relative py-10 my-8 bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white shadow-xl border-y border-emerald-800/40 rounded-3xl overflow-hidden px-6 sm:px-10 space-y-8"
+      >
+        {/* Top Row: Section Title & Gamification Badge */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-300 bg-emerald-950/80 px-3.5 py-1 rounded-full border border-emerald-500/30">
+              <Leaf className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span>{isAr ? "مؤشرات الأثر البيئي الوطنية" : "Environmental Impact Stats"}</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-black text-white pt-2">
+            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight pt-1">
               {isAr ? "أثر قرارات الاستدامة في منصة دَوْر" : "Sustainability Impact Index"}
             </h3>
           </div>
-          <div className="bg-emerald-950/90 border border-emerald-500/40 px-4 py-2 rounded-2xl text-xs font-bold text-emerald-200">
-            🍃 {isAr ? "تحصل على +50 نقطة دَوْر عند كل قرار دائري منفّذ" : "Earn +50 DAWR points per circular decision"}
+
+          <div className="inline-flex items-center gap-2 bg-emerald-950/90 border border-emerald-400/30 px-4 py-2 rounded-2xl text-xs font-extrabold text-emerald-200 shadow-md backdrop-blur-xs">
+            <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>{isAr ? "تحصل على +50 نقطة دَوْر عند كل قرار دائري منفّذ" : "Earn +50 DAWR points per circular decision"}</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-emerald-950/60 border border-emerald-700/40 p-4 rounded-2xl space-y-1">
-            <span className="text-xs text-emerald-300 font-bold block">{isAr ? "وفورات الانبعاثات الحالية" : "CO2 Avoided"}</span>
-            <span className="text-2xl font-black text-white">18.5 {isAr ? "كجم CO2e" : "kg CO2e"}</span>
+        {/* Clean Minimal Stats Row (3 Metrics with Vertical Dividers & No Inner Boxes) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 py-2">
+          {/* Stat 1: CO2 Avoided */}
+          <div className="flex flex-col items-center text-center space-y-1 md:border-l md:border-white/10 px-4">
+            <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight drop-shadow-md">
+              18.5 <span className="text-base sm:text-lg text-emerald-300 font-bold">{isAr ? "كجم CO2e" : "kg CO2e"}</span>
+            </span>
+            <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
+              {isAr ? "وفورات الانبعاثات الكربونية الحالية" : "CO2 Emissions Avoided"}
+            </span>
           </div>
-          <div className="bg-emerald-950/60 border border-emerald-700/40 p-4 rounded-2xl space-y-1">
-            <span className="text-xs text-emerald-300 font-bold block">{isAr ? "المنتجات المستفادة" : "Products Saved"}</span>
-            <span className="text-2xl font-black text-white">15 {isAr ? "منتجاً" : "items"}</span>
+
+          {/* Stat 2: Products Saved */}
+          <div className="flex flex-col items-center text-center space-y-1 md:border-l md:border-white/10 px-4">
+            <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight drop-shadow-md">
+              15 <span className="text-base sm:text-lg text-emerald-300 font-bold">{isAr ? "منتجاً" : "items"}</span>
+            </span>
+            <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
+              {isAr ? "المنتجات المستفادة وتحويل مسارها" : "Products Saved & Diverted"}
+            </span>
           </div>
-          <div className="bg-emerald-950/60 border border-emerald-700/40 p-4 rounded-2xl space-y-1">
-            <span className="text-xs text-emerald-300 font-bold block">{isAr ? "رصيد نقاط دَوْر" : "DAWR Points"}</span>
-            <span className="text-2xl font-black text-emerald-300">270 {isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
+
+          {/* Stat 3: DAWR Points */}
+          <div className="flex flex-col items-center text-center space-y-1 px-4">
+            <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-300 tracking-tight drop-shadow-md">
+              270 <span className="text-base sm:text-lg text-white font-bold">{isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
+            </span>
+            <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
+              {isAr ? "رصيد نقاط دَوْر الاستدامة المكتسبة" : "Earned Sustainability DAWR Points"}
+            </span>
           </div>
         </div>
       </section>
