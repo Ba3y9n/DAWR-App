@@ -1,45 +1,45 @@
 import { PresetSample, CharityPlatform } from "../types";
 
-export const PRESET_SAMPLES: PresetSample[] = [
+export const PRESET_SAMPLES = [
   {
     id: "shirt",
     name: "قميص قطني",
-    badge: "منسوجات",
+    badge: "منسوجات قطن 100%",
     color: "emerald",
+    circularScore: "92/100",
+    routeAr: "إعادة استخدام وتبرع",
     bgGradient: "from-emerald-500/20 to-teal-500/10 border-emerald-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=80"
-  },
-  {
-    id: "cardboard",
-    name: "كرتون تغليف",
-    badge: "ورق وكرتون",
-    color: "amber",
-    bgGradient: "from-amber-500/20 to-orange-500/10 border-amber-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=500&auto=format&fit=crop&q=80"
-  },
-  {
-    id: "electronics",
-    name: "جهاز إلكتروني",
-    badge: "إلكترونيات",
-    color: "blue",
-    bgGradient: "from-blue-500/20 to-indigo-500/10 border-blue-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500&auto=format&fit=crop&q=80"
+    sampleImage: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80"
   },
   {
     id: "plastic",
-    name: "قارورة بلاستيك",
-    badge: "بلاستيك PET",
+    name: "قارورة بلاستيكية PET",
+    badge: "بلاستيك PET شفاف",
     color: "cyan",
+    circularScore: "85/100",
+    routeAr: "فرز وآلة RVM الذكية",
     bgGradient: "from-cyan-500/20 to-sky-500/10 border-cyan-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?w=500&auto=format&fit=crop&q=80"
+    sampleImage: "https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?w=800&auto=format&fit=crop&q=80"
   },
   {
-    id: "book",
-    name: "كتاب ورقي",
-    badge: "ورق مطبوع",
-    color: "purple",
-    bgGradient: "from-purple-500/20 to-violet-500/10 border-purple-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500&auto=format&fit=crop&q=80"
+    id: "cardboard",
+    name: "صندوق كرتون تغليف",
+    badge: "ورق وكرتون مقوى",
+    color: "amber",
+    circularScore: "88/100",
+    routeAr: "إعادة تدوير ورق",
+    bgGradient: "from-amber-500/20 to-orange-500/10 border-amber-500/30",
+    sampleImage: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    id: "electronics",
+    name: "جهاز إلكتروني ذكي",
+    badge: "إلكترونيات ودارات",
+    color: "blue",
+    circularScore: "94/100",
+    routeAr: "إصلاح وإعادة بيع",
+    bgGradient: "from-blue-500/20 to-indigo-500/10 border-blue-500/30",
+    sampleImage: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&auto=format&fit=crop&q=80"
   }
 ];
 
