@@ -3,43 +3,43 @@ import { PresetSample, CharityPlatform } from "../types";
 export const PRESET_SAMPLES = [
   {
     id: "shirt",
-    name: "قميص قطني",
-    badge: "منسوجات قطن 100%",
+    name: "منسوجات وأثواب قطنية",
+    badge: "قطن عضوي محلي 100%",
     color: "emerald",
-    circularScore: "92/100",
-    routeAr: "إعادة استخدام وتبرع",
+    circularScore: "95/100",
+    routeAr: "تبرع وإعادة استخدام - كسوة",
     bgGradient: "from-emerald-500/20 to-teal-500/10 border-emerald-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80"
+    sampleImage: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=800&auto=format&fit=crop&q=80"
   },
   {
     id: "plastic",
-    name: "قارورة بلاستيكية PET",
-    badge: "بلاستيك PET شفاف",
+    name: "عبوات مياه مكررة PET",
+    badge: "بلاستيك PET قابل للتدوير",
     color: "cyan",
-    circularScore: "85/100",
-    routeAr: "فرز وآلة RVM الذكية",
+    circularScore: "88/100",
+    routeAr: "فرز وآلات RVM بالقصيم",
     bgGradient: "from-cyan-500/20 to-sky-500/10 border-cyan-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?w=800&auto=format&fit=crop&q=80"
+    sampleImage: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&auto=format&fit=crop&q=80"
   },
   {
     id: "cardboard",
-    name: "صندوق كرتون تغليف",
-    badge: "ورق وكرتون مقوى",
+    name: "صناديق كرتون شحن وتغليف",
+    badge: "كرتون مقوى محلي معاد تدويره",
     color: "amber",
-    circularScore: "88/100",
-    routeAr: "إعادة تدوير ورق",
+    circularScore: "90/100",
+    routeAr: "تدوير ورقي - مراكز القصيم",
     bgGradient: "from-amber-500/20 to-orange-500/10 border-amber-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80"
+    sampleImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&auto=format&fit=crop&q=80"
   },
   {
     id: "electronics",
-    name: "جهاز إلكتروني ذكي",
-    badge: "إلكترونيات ودارات",
+    name: "أجهزة وإلكترونيات مستدامة",
+    badge: "معادن ودارات إلكترونية",
     color: "blue",
     circularScore: "94/100",
-    routeAr: "إصلاح وإعادة بيع",
+    routeAr: "إصلاح وإعادة استخدام محلي",
     bgGradient: "from-blue-500/20 to-indigo-500/10 border-blue-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&auto=format&fit=crop&q=80"
+    sampleImage: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80"
   }
 ];
 
