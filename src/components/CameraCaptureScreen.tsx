@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Camera, Upload, RefreshCw, Sparkles, Zap, Search, HelpCircle, AlertCircle, CheckCircle2, ArrowRight, Recycle, Leaf } from "lucide-react";
+import { Camera, Upload, RefreshCw, Sparkles, Zap, Search, HelpCircle, AlertCircle, CheckCircle2, ArrowRight, Recycle, Leaf, Target } from "lucide-react";
 import { PRESET_SAMPLES } from "../data/presetSamples";
 import { Language, ActiveTab } from "../types";
 import { LandingSections } from "./LandingSections";
@@ -460,58 +460,171 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
     );
   }
 
-  // Otherwise render Home View with Hero, Recent Analyzed Samples Grid, and Landing Sections
+  // Otherwise render Home View with Hero, How DAWR Works, Recent Decisions Grid, and Landing Sections
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-12 bg-white">
       {/* 1. Full-Width Hero Portal Banner */}
-      <section className="w-full relative min-h-[42vh] sm:min-h-[48vh] flex flex-col justify-center rounded-3xl overflow-hidden shadow-xl border border-emerald-200/60 bg-emerald-950 px-8 sm:px-14 md:px-20 py-10 sm:py-14">
-        {/* Clear & Vivid Sustainable Nature Background Image */}
+      <section className="w-full relative min-h-[46vh] sm:min-h-[52vh] flex flex-col justify-center rounded-3xl overflow-hidden shadow-xl border border-emerald-200/60 bg-emerald-950 px-6 sm:px-12 md:px-16 py-10 sm:py-14">
+        {/* Vivid Sustainable Nature Background Image */}
         <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-85 transform scale-105"
+          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-95 transform scale-105"
         />
-        {/* Soft Light Overlay for Vividness */}
+        {/* Soft Light Overlay for Clear & Vivid Background View */}
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/45 via-emerald-900/30 to-black/20" />
 
-        {/* Right-Aligned Banner Titles Container */}
-        <div className="relative z-10 flex flex-col items-start text-right space-y-2 max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight drop-shadow-lg">
-            {isAr ? "دَوْر - DAWR" : "DAWR Platform"}
+        {/* Right-Aligned Text & Action Buttons Container */}
+        <div className="relative z-10 flex flex-col items-start text-right space-y-4 max-w-3xl">
+          {/* Brand Tagline Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/85 border border-emerald-400/40 text-emerald-200 text-xs font-black tracking-wide shadow-md backdrop-blur-xs">
+            <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+            <span>{isAr ? "لا ترمِه... أعطه دَوْرًا آخر" : "Don't throw it away... Give it another round"}</span>
+          </div>
+
+          {/* Main Value Proposition Headline */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
+            {isAr ? "قبل أن ترميه... دَوْر يعرف قيمته" : "Before throwing it... DAWR knows its value"}
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl font-black text-emerald-200 drop-shadow-md">
-            {isAr ? "لا ترمِه... أعطه دَوْرًا آخر" : "Don't throw it away... Give it another round"}
+
+          {/* Explanatory Paragraph */}
+          <p className="text-sm sm:text-base md:text-lg text-white font-extrabold leading-relaxed max-w-2xl drop-shadow-md">
+            {isAr
+              ? "صوّر أي منتج، ودع الذكاء الاصطناعي يحلل حالته وخامته ويقترح أفضل مسار دائري له قبل أن يتحول إلى نفايات."
+              : "Scan any product with AI to analyze its condition and materials, discovering the optimum circular route."}
           </p>
+
+          {/* Circular Pathways Pill List */}
+          <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-bold text-emerald-100">
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة استخدام</span>
+            <span>•</span>
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إصلاح</span>
+            <span>•</span>
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تبرع</span>
+            <span>•</span>
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة بيع</span>
+            <span>•</span>
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تدوير</span>
+          </div>
+
+          {/* Action Buttons Row */}
+          <div className="flex flex-wrap items-center gap-3 pt-3 w-full sm:w-auto">
+            <button
+              onClick={() => onNavigateToScan?.()}
+              className="py-3.5 px-7 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 hover:from-emerald-700 hover:to-teal-800 text-white font-black text-sm sm:text-base shadow-xl shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-400/40"
+            >
+              <Camera className="w-4 h-4 text-emerald-200 shrink-0" />
+              <span>{isAr ? "افحص منتجًا الآن" : "Scan Product Now"}</span>
+            </button>
+
+            <button
+              onClick={() => {
+                document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="py-3.5 px-6 rounded-2xl bg-emerald-950/80 hover:bg-emerald-950 text-white border border-emerald-400/40 font-bold text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer backdrop-blur-xs"
+            >
+              <span>{isAr ? "شاهد كيف يعمل" : "See How It Works"}</span>
+              <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* 2. White Area Below Hero: Description & Prominent Action Button */}
-      <div className="text-center px-4 space-y-5 py-2">
-        <p className="text-sm sm:text-base md:text-lg text-slate-700 max-w-3xl mx-auto leading-relaxed font-medium">
-          {isAr
-            ? "افحص أي منتج بالكاميرا فوراً للتعرف على خاماته واستكشاف المسار البيئي الأفضل: إعادة استخدام، إصلاح، تبرع، أو تدوير."
-            : "Scan any product with your camera to analyze materials and discover the best eco pathway."}
-        </p>
-
-        <div className="flex justify-center pt-1">
-          <button
-            onClick={() => onNavigateToScan?.()}
-            className="w-full max-w-xs sm:max-w-sm py-4 px-8 rounded-2xl bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 hover:from-emerald-900 hover:to-teal-900 text-white font-black text-base sm:text-lg shadow-xl shadow-emerald-900/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 cursor-pointer"
-          >
-            <span>{isAr ? "أبدأ الآن ←" : "Start Now ←"}</span>
-            <ArrowRight className={`w-5 h-5 ${isAr ? "rotate-180" : "rotate-0"}`} />
-          </button>
+      {/* 2. Phase 5 — How DAWR Works Stepper Section (كيف يعمل دَوْر؟) */}
+      <section id="how-it-works" className="space-y-6 pt-4 scroll-mt-24">
+        <div className="text-center space-y-1.5 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+            <span>{isAr ? "دليل الفحص" : "Scanning Guide"}</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            {isAr ? "كيف يعمل دَوْر؟" : "How DAWR Works"}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium">
+            {isAr ? "4 خطوات ذكية للوصول إلى أفضل قرار دائري وحفظ قيمة المنتجات" : "4 simple AI-powered steps to make optimum circular decisions"}
+          </p>
         </div>
-      </div>
 
-      {/* 3. Recent Analyzed Samples Grid Section (Home Page Feature) */}
-      <section className="space-y-5 pt-2">
+        {/* 4-Step Stepper Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
+            <div className="flex items-center justify-between">
+              <span className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-900 font-black text-xs flex items-center justify-center border border-emerald-300">
+                01
+              </span>
+              <div className="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+                <Camera className="w-5 h-5" />
+              </div>
+            </div>
+            <div>
+              <h3 className="text-base font-black text-slate-900">{isAr ? "صوّر المنتج" : "Snap Item"}</h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                {isAr ? "التقط صورة بالكاميرا الحية أو ارفع ملف من جهازك." : "Take a live photo or upload an image file."}
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
+            <div className="flex items-center justify-between">
+              <span className="w-9 h-9 rounded-2xl bg-teal-100 text-teal-900 font-black text-xs flex items-center justify-center border border-teal-300">
+                02
+              </span>
+              <div className="w-10 h-10 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-600 shrink-0">
+                <Sparkles className="w-5 h-5" />
+              </div>
+            </div>
+            <div>
+              <h3 className="text-base font-black text-slate-900">{isAr ? "يحلله الذكاء الاصطناعي" : "AI Vision Analysis"}</h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                {isAr ? "نموذج Gemini يكتشف الخامات وحالة المنتج الدقيقة." : "Gemini Vision detects item materials and exact state."}
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
+            <div className="flex items-center justify-between">
+              <span className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-900 font-black text-xs flex items-center justify-center border border-emerald-300">
+                03
+              </span>
+              <div className="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+                <Recycle className="w-5 h-5" />
+              </div>
+            </div>
+            <div>
+              <h3 className="text-base font-black text-slate-900">{isAr ? "دَوْر يقارن المسارات" : "Compare Pathways"}</h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                {isAr ? "مقارنة خيارات إعادة الاستخدام، الإصلاح، التبرع، والتدوير." : "Evaluates reuse, repair, donation, and recycling options."}
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
+            <div className="flex items-center justify-between">
+              <span className="w-9 h-9 rounded-2xl bg-amber-100 text-amber-900 font-black text-xs flex items-center justify-center border border-amber-300">
+                04
+              </span>
+              <div className="w-10 h-10 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
+                <Target className="w-5 h-5" />
+              </div>
+            </div>
+            <div>
+              <h3 className="text-base font-black text-slate-900">{isAr ? "تحصل على أفضل قرار" : "Get Best Decision"}</h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                {isAr ? "تنفيذ المسار الأنسب وحصد نقاط استدامة حسابك." : "Execute the recommended route & claim DAWR points."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Phase 6 — Previous Decisions Section (آخر قراراتك الدائرية) */}
+      <section id="previous-decisions" className="space-y-5 pt-2">
         <div className="flex items-center justify-between px-1">
           <div>
             <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-emerald-700" />
-              <span>{isAr ? "عينات سريعة مفحوصة سابقاً" : "Recent Analyzed Samples"}</span>
+              <span>{isAr ? "آخر قراراتك الدائرية" : "Your Recent Circular Decisions"}</span>
             </h3>
             <p className="text-xs text-slate-500 font-medium pt-0.5">
-              {isAr ? "نماذج حقيقية لمؤشرات الاستدامة والمسارات البيئية الذكية" : "Real examples of circular score indexes and eco routes"}
+              {isAr ? "قرارات ونماذج حقيقية لمؤشرات الاستدامة والمسارات البيئية المنفذة" : "Real examples of circular score indexes and executed eco routes"}
             </p>
           </div>
           <button
@@ -523,7 +636,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
           </button>
         </div>
 
-        {/* Elegant Card Grid for Recent Samples */}
+        {/* Elegant Card Grid for Recent Decisions */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {PRESET_SAMPLES.slice(0, 4).map((sample) => (
             <div
@@ -541,7 +654,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                 <div>
                   <h4 className="text-base font-black text-slate-900">{sample.name}</h4>
                   <p className="text-xs text-emerald-800 font-bold pt-0.5">
-                    {isAr ? "مؤشر الاستدامة الدائرية: 85/100" : "Circular Score: 85/100"}
+                    {isAr ? "مؤشر القرار الدائري: 92/100" : "Circular Score: 92/100"}
                   </p>
                 </div>
               </div>
@@ -560,7 +673,40 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         </div>
       </section>
 
-      {/* 4. Landing Sections (Circular Economy Pillars, Ecosystem & Features) */}
+      {/* 4. Phase 7 & 8 — Circular Impact & Gamification Section */}
+      <section id="impact-section" className="bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-emerald-700/60 space-y-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-emerald-800/80 pb-4">
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-600/40">
+              <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{isAr ? "مؤشرات الأثر البيئي" : "Environmental Impact Stats"}</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black text-white pt-2">
+              {isAr ? "أثر قرارات الاستدامة في منصة دَوْر" : "Sustainability Impact Index"}
+            </h3>
+          </div>
+          <div className="bg-emerald-950/90 border border-emerald-500/40 px-4 py-2 rounded-2xl text-xs font-bold text-emerald-200">
+            🍃 {isAr ? "تحصل على +50 نقطة دَوْر عند كل قرار دائري منفّذ" : "Earn +50 DAWR points per circular decision"}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="bg-emerald-950/60 border border-emerald-700/40 p-4 rounded-2xl space-y-1">
+            <span className="text-xs text-emerald-300 font-bold block">{isAr ? "وفورات الانبعاثات الحالية" : "CO2 Avoided"}</span>
+            <span className="text-2xl font-black text-white">18.5 {isAr ? "كجم CO2e" : "kg CO2e"}</span>
+          </div>
+          <div className="bg-emerald-950/60 border border-emerald-700/40 p-4 rounded-2xl space-y-1">
+            <span className="text-xs text-emerald-300 font-bold block">{isAr ? "المنتجات المستفادة" : "Products Saved"}</span>
+            <span className="text-2xl font-black text-white">15 {isAr ? "منتجاً" : "items"}</span>
+          </div>
+          <div className="bg-emerald-950/60 border border-emerald-700/40 p-4 rounded-2xl space-y-1">
+            <span className="text-xs text-emerald-300 font-bold block">{isAr ? "رصيد نقاط دَوْر" : "DAWR Points"}</span>
+            <span className="text-2xl font-black text-emerald-300">270 {isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Landing Sections (Circular Economy Pillars, Ecosystem & Features) */}
       <LandingSections
         language={language}
         onAnalyzeClick={() => onNavigateToScan?.()}
