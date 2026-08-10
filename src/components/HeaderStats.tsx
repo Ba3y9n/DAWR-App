@@ -30,28 +30,46 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
     { id: "home" as ActiveTab, labelAr: "الرئيسية", labelEn: "Home", action: () => onChangeTab?.("home") },
     { id: "scan" as ActiveTab, labelAr: "الفحص الذكي", labelEn: "Smart Scan", action: () => onChangeTab?.("scan") },
     {
-      id: "howItWorks" as any,
-      labelAr: "كيف يعمل دَوْر؟",
-      labelEn: "How DAWR Works",
+      id: "pathways" as any,
+      labelAr: "المسارات",
+      labelEn: "Pathways",
       action: () => {
         onChangeTab?.("home");
         setTimeout(() => {
-          document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+          document.getElementById("pathways-section")?.scrollIntoView({ behavior: "smooth" });
         }, 100);
       },
     },
     {
-      id: "impact" as any,
-      labelAr: "الأثر الدائري",
-      labelEn: "Circular Impact",
+      id: "reuseIdeas" as any,
+      labelAr: "أفكار إعادة الاستخدام",
+      labelEn: "Reuse Ideas",
       action: () => {
         onChangeTab?.("home");
         setTimeout(() => {
-          document.getElementById("impact-section")?.scrollIntoView({ behavior: "smooth" });
+          document.getElementById("ideas-section")?.scrollIntoView({ behavior: "smooth" });
         }, 100);
       },
     },
-    { id: "updates" as ActiveTab, labelAr: "التحديثات", labelEn: "Updates", action: () => onChangeTab?.("updates") },
+    {
+      id: "stores" as any,
+      labelAr: "المتاجر",
+      labelEn: "Eco Stores",
+      action: () => {
+        onChangeTab?.("home");
+        setTimeout(() => {
+          document.getElementById("stores-section")?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      },
+    },
+    {
+      id: "knowledge" as any,
+      labelAr: "مركز المعرفة",
+      labelEn: "Knowledge Center",
+      action: () => {
+        onChangeTab?.("updates");
+      },
+    },
   ];
 
   return (

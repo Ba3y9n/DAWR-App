@@ -206,7 +206,7 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
       {/* Container for Middle Content Sections */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* 1. DAWR Interactive Circular Journey (مسار دَوْر التفاعلي) */}
-        <section className="space-y-6">
+        <section id="pathways-section" className="space-y-6 scroll-mt-24">
         {/* Section Header */}
         <div className="text-center space-y-1.5 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
@@ -415,7 +415,7 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
       </div>
 
       {/* 2. Full-Bleed 100% Width Main Features Strip (المميزات الرئيسية - شارات مبسطة) */}
-      <section className="w-full py-10 bg-gradient-to-r from-slate-950 via-teal-950 to-slate-950 text-white border-y border-teal-800/40 shadow-xl px-6 sm:px-12 md:px-20 rounded-none">
+      <section id="ideas-section" className="w-full py-10 bg-gradient-to-r from-slate-950 via-teal-950 to-slate-950 text-white border-y border-teal-800/40 shadow-xl px-6 sm:px-12 md:px-20 rounded-none scroll-mt-24">
         <div className="w-full max-w-7xl mx-auto space-y-6 text-center">
           <div className="space-y-1">
             <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
@@ -445,7 +445,7 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
       </section>
 
       {/* 3. Official Full-Bleed Darker Teal Footer (أسفل الصفحة) */}
-      <footer className="w-full mt-16 border-t border-teal-900 bg-gradient-to-b from-teal-900 via-cyan-950 to-slate-950 text-white px-6 sm:px-12 md:px-20 pt-12 pb-24 shadow-xl space-y-8 rounded-none">
+      <footer id="stores-section" className="w-full mt-16 border-t border-teal-900 bg-gradient-to-b from-teal-900 via-cyan-950 to-slate-950 text-white px-6 sm:px-12 md:px-20 pt-12 pb-24 shadow-xl space-y-8 rounded-none scroll-mt-24">
         <div className="w-full max-w-7xl mx-auto space-y-8">
           <div className="grid grid-cols-3 gap-6 text-start">
             {/* Column 1: الرئيسية */}

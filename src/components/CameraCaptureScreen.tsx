@@ -244,217 +244,405 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
     onAnalyzeSample(presetId);
   };
 
-  // If we are in "scan" tab mode, render the Smart Scan Camera & Preset Demo Samples page
+  // If we are in "scan" tab mode, render the Premium Clean Smart Scan Page
   if (activeTab === "scan") {
     return (
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8 bg-white">
-        {/* Smart Scan Header Banner */}
-        <div className="bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white rounded-3xl p-6 shadow-xl border border-emerald-700/60 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center shrink-0 shadow-inner">
-              <Camera className="w-6 h-6 text-emerald-400" />
+      <div className="w-full bg-slate-50/70 min-h-screen py-8 px-4 sm:px-6 lg:px-8 space-y-8 font-sans text-slate-900" dir={isAr ? "rtl" : "ltr"}>
+        
+        {/* 1. TOP HERO AREA WITH DECORATIVE PRODUCT STORY COMPOSITION */}
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
+          <div className="space-y-3 text-right flex-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{isAr ? "فحص منتجات بالذكاء الاصطناعي" : "AI Product Scanner"}</span>
             </div>
-            <div>
-              <h2 className="text-xl font-black text-white tracking-tight">
-                {isAr ? "الفحص الذكي وتوجيه المنتج" : "AI Smart Product Scan & Guidance"}
-              </h2>
-              <p className="text-xs text-emerald-200 font-medium">
-                {isAr ? "صوّر منتجك بالكاميرا أو ارفع صورة للحصول على التحليل الدائري المباشر" : "Snap a photo or upload an image for instant circular AI analysis"}
+            <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+              {isAr ? "اكتشف دَوْر منتجك التالي" : "Discover Your Product's Next Round"}
+            </h1>
+            <p className="text-sm sm:text-base text-slate-600 font-medium max-w-xl leading-relaxed">
+              {isAr
+                ? "أضف صورة، ودَع الذكاء الاصطناعي يحدد أفضل مسار دائري له."
+                : "Add a photo, and let AI determine its best circular pathway."}
+            </p>
+          </div>
+
+          {/* Decorative Photorealistic Product Story Composition Image (Wooden Chair, Cotton Shirt, Coffee Machine, Glass Container, PET Bottle, Smartphone & Emerald Flow Ring) */}
+          <div className="relative w-full md:w-96 h-48 sm:h-56 rounded-3xl overflow-hidden bg-white border border-emerald-100/90 shadow-sm flex items-center justify-center p-1 shrink-0 group">
+            <img 
+              src="/assets/dawr_hero_composition.jpg" 
+              alt="DAWR Circular Product Composition" 
+              className="w-full h-full object-cover rounded-2xl group-hover:scale-102 transition-transform duration-500"
+            />
+          </div>
+        </div>
+
+        {/* 2. PROGRESS STEPS (01 أضف المنتج ➔ 02 تحليل دَوْر ➔ 03 القرار الدائري) */}
+        <div className="max-w-7xl mx-auto bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs">
+          <div className="flex items-center justify-between gap-2 max-w-3xl mx-auto">
+            {/* Step 1 */}
+            <div className={`flex items-center gap-2 ${capturedImage ? "text-emerald-700 font-bold" : "text-emerald-950 font-black"}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${capturedImage ? "bg-emerald-100 text-emerald-800" : "bg-emerald-900 text-white"}`}>
+                01
+              </div>
+              <span className="text-xs sm:text-sm font-extrabold">{isAr ? "أضف المنتج" : "Add Product"}</span>
+            </div>
+
+            <div className={`flex-1 h-0.5 ${capturedImage ? "bg-emerald-500" : "bg-slate-200"}`} />
+
+            {/* Step 2 */}
+            <div className={`flex items-center gap-2 ${isAnalyzing ? "text-emerald-950 font-black" : capturedImage ? "text-slate-800 font-bold" : "text-slate-400"}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${isAnalyzing ? "bg-emerald-900 text-white animate-pulse" : capturedImage ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-400"}`}>
+                02
+              </div>
+              <span className="text-xs sm:text-sm font-extrabold">{isAr ? "تحليل دَوْر" : "DAWR Analysis"}</span>
+            </div>
+
+            <div className="flex-1 h-0.5 bg-slate-200" />
+
+            {/* Step 3 */}
+            <div className="flex items-center gap-2 text-slate-400">
+              <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-xs font-black">
+                03
+              </div>
+              <span className="text-xs sm:text-sm font-extrabold">{isAr ? "القرار الدائري" : "Circular Decision"}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. 12-COLUMN LAYOUT (LEFT: MAIN SCAN / UPLOAD / PREVIEW ZONE, RIGHT: SIDEBAR) */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* LEFT COLUMN: UPLOAD / CAMERA / PREVIEW / QUICK DEMOS (7 Columns) */}
+          <div className="lg:col-span-7 space-y-6">
+
+            {/* MOBILE SPECIFIC CAMERA-FIRST ACTION BAR */}
+            <div className="block sm:hidden bg-emerald-900 text-white rounded-2xl p-4 text-center space-y-3">
+              <h3 className="text-base font-black">{isAr ? "صوّر منتجك واكتشف دَوْره التالي" : "Scan item for circular path"}</h3>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setUseLiveCamera(true)}
+                  className="flex-1 py-3 px-3 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+                >
+                  <Camera className="w-4 h-4" />
+                  <span>{isAr ? "فتح الكاميرا" : "Open Camera"}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex-1 py-3 px-3 rounded-xl bg-emerald-800 text-white border border-emerald-600 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                >
+                  <Upload className="w-4 h-4" />
+                  <span>{isAr ? "اختيار من الصور" : "Pick Photo"}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* MAIN UPLOAD / CAMERA / PREVIEW ZONE */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 space-y-6 relative overflow-hidden">
+              
+              {/* INLINE LIVE CAMERA MODE (DESKTOP / MOBILE ON-DEMAND) */}
+              {useLiveCamera ? (
+                <div className="space-y-4">
+                  <div className="relative rounded-2xl overflow-hidden bg-slate-950 aspect-[4/3] border-2 border-emerald-600 shadow-md">
+                    <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
+                    
+                    {/* Laser Scanner Laser Effect */}
+                    <div className="absolute inset-x-0 top-0 h-full pointer-events-none overflow-hidden">
+                      <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-300 shadow-[0_0_15px_#10b981] animate-scan" />
+                    </div>
+
+                    {/* Camera Action Overlay */}
+                    <div className="absolute bottom-4 inset-x-4 flex items-center justify-between gap-3 z-20">
+                      <button
+                        type="button"
+                        onClick={() => setUseLiveCamera(false)}
+                        className="py-2.5 px-4 rounded-xl bg-slate-900/90 text-white border border-slate-700 text-xs font-bold hover:bg-slate-800 transition cursor-pointer"
+                      >
+                        {isAr ? "إلغاء" : "Cancel"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => handleCaptureFromCamera(e)}
+                        className="py-3 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg transition cursor-pointer"
+                      >
+                        <Camera className="w-4 h-4" />
+                        <span>{isAr ? "التقط الصورة" : "Capture Photo"}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : capturedImage ? (
+                /* PRODUCT PREVIEW STATE */
+                <div className="space-y-5">
+                  <div className="relative rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 aspect-[4/3] max-h-80 mx-auto shadow-xs group">
+                    <img src={capturedImage} alt="Product Preview" className="w-full h-full object-cover" />
+                    
+                    {/* Scanning Overlay when analyzing */}
+                    {isAnalyzing && (
+                      <div className="absolute inset-0 bg-emerald-950/50 backdrop-blur-xs flex flex-col items-center justify-center p-6 text-center space-y-3 z-20">
+                        <div className="w-12 h-12 rounded-full border-4 border-emerald-400 border-t-transparent animate-spin" />
+                        <div className="space-y-1">
+                          <p className="text-sm font-black text-white">{isAr ? "جاري تحليل الخامات بالذكاء الاصطناعي..." : "Analyzing with AI..."}</p>
+                          <div className="text-xs text-emerald-200 font-medium animate-pulse">
+                            <span>{isAr ? "نتعرف على المنتج ونحلل حالته ومواده..." : "Identifying product materials..."}</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {!isAnalyzing && (
+                      <div className="absolute top-3 right-3 flex items-center gap-2 z-10">
+                        <button
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          className="py-1.5 px-3 rounded-xl bg-white/90 hover:bg-white text-slate-800 border border-slate-200 text-xs font-bold shadow-xs cursor-pointer"
+                        >
+                          {isAr ? "تغيير الصورة" : "Change Image"}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setCapturedImage(null)}
+                          className="p-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs cursor-pointer"
+                          title={isAr ? "حذف الصورة" : "Remove"}
+                        >
+                          <RefreshCw className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Primary CTA for Analysis */}
+                  <button
+                    type="button"
+                    onClick={(e) => handleCaptureFromCamera(e)}
+                    disabled={isAnalyzing}
+                    className="w-full py-4 px-6 rounded-2xl bg-emerald-900 hover:bg-emerald-950 text-white font-black text-base shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                  >
+                    {isAnalyzing ? (
+                      <>
+                        <RefreshCw className="w-5 h-5 animate-spin text-white" />
+                        <span>{isAr ? "جاري تحليل دَوْر..." : "Analyzing..."}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-5 h-5 text-emerald-400" />
+                        <span>{isAr ? "ابدأ تحليل دَوْر بالذكاء الاصطناعي" : "Analyze Product with AI"}</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              ) : (
+                /* CLEAN DESKTOP DEFAULT UPLOAD ZONE */
+                <div 
+                  onClick={() => fileInputRef.current?.click()}
+                  className="border-2 border-dashed border-slate-300 hover:border-emerald-500 bg-slate-50/70 hover:bg-emerald-50/20 rounded-2xl p-8 sm:p-12 flex flex-col items-center justify-center text-center space-y-4 transition-all cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-emerald-100/80 border border-emerald-200 flex items-center justify-center text-emerald-800 group-hover:scale-105 transition-transform shadow-2xs">
+                    <Upload className="w-8 h-8" />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-black text-slate-900">
+                      {isAr ? "أضف صورة المنتج" : "Upload Product Image"}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 font-medium">
+                      {isAr ? "اسحب الصورة هنا أو اخترها من جهازك" : "Drag and drop or select file from your device"}
+                    </p>
+                    <p className="text-[11px] text-slate-400 font-bold pt-1">
+                      {isAr ? "الصيغ المدعومة: JPG • PNG • WEBP" : "Supported formats: JPG • PNG • WEBP"}
+                    </p>
+                  </div>
+
+                  {/* Primary & Secondary Action CTAs */}
+                  <div className="flex items-center gap-3 pt-2" onClick={(e) => e.stopPropagation()}>
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="py-3 px-6 rounded-xl bg-emerald-900 hover:bg-emerald-950 text-white font-black text-xs sm:text-sm flex items-center gap-2 shadow-xs cursor-pointer"
+                    >
+                      <Upload className="w-4 h-4" />
+                      <span>{isAr ? "رفع صورة" : "Upload Image"}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setUseLiveCamera(true)}
+                      className="py-3 px-5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 font-bold text-xs sm:text-sm flex items-center gap-2 cursor-pointer"
+                    >
+                      <Camera className="w-4 h-4 text-emerald-700" />
+                      <span>{isAr ? "استخدام الكاميرا" : "Use Camera"}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+                accept="image/*"
+                className="hidden"
+              />
+
+              {/* Error Messages */}
+              {cameraError && (
+                <div className="bg-amber-50 border border-amber-300 text-amber-900 text-xs font-bold p-3.5 rounded-xl text-center flex items-center justify-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-amber-700 shrink-0" />
+                  <span>{cameraError}</span>
+                </div>
+              )}
+              {analysisError && (
+                <div className="bg-rose-50 border border-rose-300 text-rose-800 text-xs font-bold p-3.5 rounded-xl text-center flex items-center justify-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                  <span>{analysisError}</span>
+                </div>
+              )}
+
+              {/* Manual Text Notes Search Field */}
+              <div className="pt-2 border-t border-slate-100 relative">
+                <input
+                  type="text"
+                  value={manualText}
+                  onChange={(e) => setManualText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && manualText.trim()) {
+                      onAnalyzeCustom(undefined, manualText);
+                    }
+                  }}
+                  placeholder={isAr ? "أو اكتب اسم المنتج والملاحظات هنا..." : "Or type product notes..."}
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-emerald-600 text-slate-800 text-xs rounded-xl px-4 py-2.5 pl-10 focus:outline-none placeholder:text-slate-400 font-medium"
+                />
+                <button
+                  onClick={() => manualText.trim() && onAnalyzeCustom(undefined, manualText)}
+                  className="absolute left-3 top-4 text-slate-400 hover:text-emerald-700 p-1 cursor-pointer"
+                >
+                  <Search className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* DEMO SAMPLES QUICK PRESETS GRID */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xs p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xs font-black text-slate-900 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>{isAr ? "عينات سريعة للتجربة" : "Quick Presets"}</span>
+                </h3>
+                <span className="text-[10px] text-emerald-800 font-extrabold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                  {isAr ? "نقرة واحدة للتحليل" : "One-click Demo"}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                {PRESET_SAMPLES.map((sample) => {
+                  const isSelected = selectedSampleId === sample.id;
+                  return (
+                    <button
+                      key={sample.id}
+                      onClick={() => handleSampleClick(sample.id)}
+                      disabled={isAnalyzing}
+                      className={`flex flex-col items-center p-2.5 rounded-2xl border transition-all cursor-pointer text-center space-y-1.5 group ${
+                        isSelected
+                          ? "bg-emerald-50 border-emerald-600 shadow-xs"
+                          : "bg-white border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30"
+                      }`}
+                    >
+                      <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200 flex items-center justify-center">
+                        <img src={sample.sampleImage} alt={sample.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                      </div>
+                      <div className="w-full">
+                        <h4 className="text-[11px] font-black text-slate-900 truncate">{sample.name}</h4>
+                        <span className="text-[9px] text-emerald-800 font-extrabold block truncate">
+                          {sample.badge}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: SIDEBAR (HOW IT WORKS & PRIVACY TRUST BADGE) (5 Columns) */}
+          <div className="lg:col-span-5 space-y-6">
+
+            {/* HOW DAWR WORKS SIDE PANEL */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xs p-6 space-y-5">
+              <h3 className="text-base font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-emerald-700" />
+                <span>{isAr ? "كيف يعمل دَوْر؟" : "How DAWR Works"}</span>
+              </h3>
+
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-black text-xs shrink-0">
+                    1
+                  </div>
+                  <div className="space-y-0.5">
+                    <h4 className="text-xs font-black text-slate-900">{isAr ? "أضف صورة المنتج" : "Add Product Photo"}</h4>
+                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                      {isAr ? "التقط صورة واضحة للمنتج أو اخترها من معرض الصور." : "Take a photo or pick an image."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-black text-xs shrink-0">
+                    2
+                  </div>
+                  <div className="space-y-0.5">
+                    <h4 className="text-xs font-black text-slate-900">{isAr ? "التحليل الذكي" : "AI Smart Analysis"}</h4>
+                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                      {isAr ? "نفهم المنتج، حالته، مواده وقابليته للاستدامة." : "AI identifies materials and exact condition."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-black text-xs shrink-0">
+                    3
+                  </div>
+                  <div className="space-y-0.5">
+                    <h4 className="text-xs font-black text-slate-900">{isAr ? "توصية المسار الأفضل" : "Optimal Pathway"}</h4>
+                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                      {isAr ? "نقترح أفضل قرار دائري يحافظ على قيمة المنتج." : "Recommends best reuse, repair, donation, or recycling route."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-black text-xs shrink-0">
+                    4
+                  </div>
+                  <div className="space-y-0.5">
+                    <h4 className="text-xs font-black text-slate-900">{isAr ? "تعرّف على الأثر" : "Environmental Impact"}</h4>
+                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                      {isAr ? "اعرف أثر قرارك البيئي بطريقة واضحة." : "View CO2 saved and sustainability score."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* PRIVACY MESSAGE TRUST CARD */}
+            <div className="bg-emerald-950 text-white rounded-3xl p-5 space-y-2.5 border border-emerald-800/50 shadow-xs">
+              <div className="flex items-center gap-2 text-emerald-400 font-black text-xs">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>{isAr ? "خصوصيتك مهمة" : "Your Privacy Matters"}</span>
+              </div>
+              <p className="text-xs text-emerald-100 font-medium leading-relaxed">
+                {isAr
+                  ? "تُستخدم صورتك للتحليل الفوري فقط وفق سياسة المنصة والأنظمة المعتمدة."
+                  : "Your image is used strictly for instant AI analysis in compliance with platform policies."}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Camera Viewfinder Frame */}
-        <div className="relative rounded-3xl overflow-hidden border-2 border-emerald-800/30 bg-slate-900 shadow-xl aspect-[4/3] max-w-3xl mx-auto flex flex-col items-center justify-center group">
-          {/* Decorative Camera Target Corners */}
-          <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-emerald-400 rounded-tl-lg z-10"></div>
-          <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-emerald-400 rounded-tr-lg z-10"></div>
-          <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-emerald-400 rounded-bl-lg z-10"></div>
-          <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-emerald-400 rounded-br-lg z-10"></div>
-
-          {/* Laser Scanner Animation */}
-          {(isAnalyzing || useLiveCamera) && (
-            <div className="absolute inset-x-0 top-0 h-full pointer-events-none z-30 overflow-hidden">
-              <div className="absolute inset-x-0 h-1.5 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 shadow-[0_0_25px_#10b981,0_0_12px_#06b6d4] animate-scan z-30" />
-              {isAnalyzing && (
-                <>
-                  <div className="absolute inset-0 bg-emerald-950/20 backdrop-blur-[1px] z-20" />
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-slate-950/90 border border-emerald-500/60 text-emerald-300 text-[11px] font-black tracking-wide flex items-center gap-2 shadow-xl z-30">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                    <span>{isAr ? "مسح بصري مباشر بالليزر..." : "Live Laser Scanning..."}</span>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-
-          {/* Camera View Area */}
-          {useLiveCamera ? (
-            <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
-          ) : capturedImage ? (
-            <div className="relative w-full h-full">
-              <img src={capturedImage} alt="Captured Product" className="w-full h-full object-cover" />
-              {!isAnalyzing && (
-                <button
-                  onClick={() => setCapturedImage(null)}
-                  className="absolute top-3 right-3 bg-slate-900/80 border border-slate-700 text-white p-2 rounded-full hover:bg-slate-800 transition shadow-md cursor-pointer z-10"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          ) : isAnalyzing ? (
-            <div className="relative w-full h-full">
-              <img
-                src="https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?w=500&auto=format&fit=crop&q=80"
-                alt="Scanning Product"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center p-6 text-center space-y-3 z-0">
-              <div className="w-16 h-16 rounded-2xl bg-emerald-800/20 border border-emerald-500/30 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
-                <Camera className="w-8 h-8 text-emerald-400" />
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm font-black text-white">
-                  {isAr ? "التقط صورة أو قم برفع ملف" : "Take a photo or upload a file"}
-                </p>
-              </div>
-
-              {/* Toggle Camera / Upload Buttons */}
-              <div className="flex items-center gap-2 pt-2 z-10">
-                <button
-                  type="button"
-                  onClick={() => setUseLiveCamera(true)}
-                  className="text-xs bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-500 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition active:scale-95 font-bold shadow-sm cursor-pointer"
-                >
-                  <Zap className="w-3.5 h-3.5 text-emerald-100" />
-                  <span>{isAr ? "الكاميرا الحية" : "Live Camera"}</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="text-xs bg-teal-600 hover:bg-teal-700 text-white border border-teal-500 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition active:scale-95 font-bold shadow-sm cursor-pointer"
-                >
-                  <Upload className="w-3.5 h-3.5 text-teal-100" />
-                  <span>{isAr ? "رفع صورة" : "Upload File"}</span>
-                </button>
-              </div>
-            </div>
-          )}
-
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileUpload}
-            accept="image/*"
-            className="hidden"
-          />
-
-          {cameraError && (
-            <div className="absolute bottom-2 inset-x-2 bg-amber-950/90 border border-amber-500/40 text-amber-200 text-[11px] p-2 rounded-xl text-center z-20">
-              {cameraError}
-            </div>
-          )}
-        </div>
-
-        {/* Primary Action Button */}
-        <div className="flex flex-col items-center justify-center space-y-3 max-w-3xl mx-auto">
-          {analysisError && (
-            <div className="w-full bg-rose-50 border border-rose-300 text-rose-800 p-3.5 rounded-2xl text-xs font-bold flex items-start gap-2.5 shadow-sm">
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-              <div className="flex-1 space-y-1">
-                <p>{analysisError}</p>
-              </div>
-            </div>
-          )}
-
-          <button
-            type="button"
-            onClick={(e) => handleCaptureFromCamera(e)}
-            disabled={isAnalyzing}
-            className="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 hover:from-emerald-900 hover:to-teal-900 text-white font-black text-base sm:text-lg shadow-xl shadow-emerald-900/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 disabled:opacity-60 disabled:pointer-events-none cursor-pointer"
-          >
-            {isAnalyzing ? (
-              <>
-                <RefreshCw className="w-5 h-5 animate-spin text-white" />
-                <span>{isAr ? "جاري تحليل الخامات بالذكاء الاصطناعي..." : "Analyzing Materials with Gemini AI..."}</span>
-              </>
-            ) : (
-              <>
-                <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-                  <Camera className="w-4 h-4 text-white" />
-                </div>
-                <span>{isAr ? "صوّر منتجك وتعرّف على المسار الدائري" : "Scan Item & Discover Route Path"}</span>
-              </>
-            )}
-          </button>
-
-          {/* Text Search Input */}
-          <div className="w-full relative">
-            <input
-              type="text"
-              value={manualText}
-              onChange={(e) => setManualText(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && manualText.trim()) {
-                  onAnalyzeCustom(undefined, manualText);
-                }
-              }}
-              placeholder={isAr ? "أو اكتب اسم المنتج أو الملاحظات هنا..." : "Or type product name here..."}
-              className="w-full bg-white border border-emerald-200 focus:border-emerald-600 text-slate-800 text-xs sm:text-sm rounded-xl px-4 py-3 pl-10 focus:outline-none placeholder:text-slate-400 font-medium shadow-xs"
-            />
-            <button
-              onClick={() => manualText.trim() && onAnalyzeCustom(undefined, manualText)}
-              className="absolute left-3 top-3 text-slate-400 hover:text-emerald-700 p-1 cursor-pointer"
-              title={isAr ? "بحث وتحليل" : "Search"}
-            >
-              <Search className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Quick Demo Samples Grid Section */}
-        <div className="space-y-4 pt-4 border-t border-slate-200">
-          <div className="flex items-center justify-between px-1">
-            <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-emerald-700" />
-              <span>{isAr ? "عينات للتجربة السريعة" : "Quick Demo Samples"}</span>
-            </h3>
-            <span className="text-xs text-emerald-800 font-extrabold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-              {isAr ? "اختر منتجاً للتجربة المباشرة بنقرة واحدة" : "One-click Demo Analysis"}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            {PRESET_SAMPLES.map((sample) => {
-              const isSelected = selectedSampleId === sample.id;
-              return (
-                <button
-                  key={sample.id}
-                  onClick={() => handleSampleClick(sample.id)}
-                  disabled={isAnalyzing}
-                  className={`flex flex-col items-center justify-center p-3 rounded-2xl border transition-all cursor-pointer text-center space-y-2 group ${
-                    isSelected
-                      ? "bg-emerald-50 border-emerald-600 shadow-md ring-2 ring-emerald-500/20"
-                      : "bg-white border-gray-200 hover:border-emerald-400 hover:bg-emerald-50/40"
-                  }`}
-                >
-                  <div className="w-14 h-14 rounded-2xl overflow-hidden shrink-0 bg-slate-100 border border-gray-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                    <img src={sample.sampleImage} alt={sample.name} className="w-full h-full object-cover" />
-                  </div>
-                  <div className="w-full">
-                    <h4 className="text-xs font-black text-slate-900 truncate">{sample.name}</h4>
-                    <span className="text-[10px] text-emerald-800 font-extrabold block truncate pt-0.5">
-                      {sample.badge}
-                    </span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+        {/* 4. BOTTOM BRAND LINE BANNER */}
+        <div className="max-w-7xl mx-auto pt-4 border-t border-slate-200 text-center">
+          <p className="text-xs font-black text-slate-500 tracking-wide">
+            {isAr ? "لا ترمِه... أعطه دَوْرًا آخر." : "Don't throw it away... Give it another round."}
+          </p>
         </div>
       </div>
     );
@@ -463,67 +651,85 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
   // Otherwise render Home View with Hero, How DAWR Works, Recent Decisions Grid, and Landing Sections
   return (
     <div className="w-full bg-white space-y-12 pb-12">
-      {/* 1. Full-Bleed 100% Width Hero Portal Banner (min-h-[85vh] Portal Height) */}
-      <section className="w-full relative min-h-[80vh] sm:min-h-[85vh] lg:min-h-[88vh] flex flex-col justify-center rounded-none overflow-hidden shadow-xl border-b border-emerald-800/40 bg-emerald-950 px-6 sm:px-12 md:px-20 py-16 sm:py-24">
-        {/* Vivid Sustainable Nature Background Image */}
+      {/* 1. Full-Bleed 100% Width SaaS AI Hero Section */}
+      <section className="w-full relative min-h-[75vh] sm:min-h-[82vh] flex flex-col justify-center rounded-none overflow-hidden shadow-xl border-b border-emerald-800/40 bg-emerald-950 px-6 sm:px-12 md:px-20 py-16 sm:py-20">
+        {/* Vivid Sustainable Nature Background */}
         <div 
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-95 transform scale-105"
         />
-        {/* Soft Light Overlay for Clear & Vivid Background View */}
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/45 via-emerald-900/30 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/85 via-emerald-950/70 to-emerald-900/40" />
 
-        {/* Right-Aligned Text & Action Buttons Container inside Max-W-7xl */}
-        <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col items-start text-right space-y-4">
-          {/* Brand Tagline Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/85 border border-emerald-400/40 text-emerald-200 text-xs font-black tracking-wide shadow-md backdrop-blur-xs">
-            <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{isAr ? "لا ترمِه... أعطه دَوْرًا آخر" : "Don't throw it away... Give it another round"}</span>
+        {/* 2-Column Hero Content Grid inside Max-W-7xl */}
+        <div className="w-full max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Right Column (RTL): Text & Primary CTA */}
+          <div className="lg:col-span-7 text-right space-y-5">
+            {/* AI Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/90 border border-emerald-400/40 text-emerald-200 text-xs font-black tracking-wide shadow-md backdrop-blur-xs">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{isAr ? "تحليل ذكي بالذكاء الاصطناعي" : "AI-Powered Circular Analysis"}</span>
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-md">
+              {isAr ? "اكتشف دور منتجك التالي" : "Discover Your Product's Next Round"}
+            </h1>
+
+            {/* Description */}
+            <p className="text-sm sm:text-base md:text-lg text-emerald-100/90 font-medium leading-relaxed max-w-2xl drop-shadow-sm">
+              {isAr
+                ? "صوّر أو ارفع صورة أي منتج، ودَع الذكاء الاصطناعي يحلل حالته وخامته ويقترح أفضل مسار دائري له قبل أن يتحول إلى نفايات."
+                : "Scan or upload any item. DAWR AI analyzes materials and condition to suggest the optimum circular path before it turns into waste."}
+            </p>
+
+            {/* Circular Pathways Pill List */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-bold text-emerald-100">
+              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة استخدام</span>
+              <span>•</span>
+              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إصلاح</span>
+              <span>•</span>
+              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تبرع</span>
+              <span>•</span>
+              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة بيع</span>
+              <span>•</span>
+              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تدوير</span>
+            </div>
+
+            {/* Action Buttons Row */}
+            <div className="flex flex-wrap items-center gap-3 pt-3">
+              <button
+                onClick={() => onNavigateToScan?.()}
+                className="py-4 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-600 hover:from-emerald-600 hover:to-teal-700 text-slate-950 font-black text-sm sm:text-base shadow-xl shadow-emerald-950/50 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 cursor-pointer border border-emerald-300"
+              >
+                <Camera className="w-5 h-5 text-slate-950 shrink-0" />
+                <span>{isAr ? "ابدأ الفحص الذكي" : "Start Smart Scan"}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="py-4 px-6 rounded-2xl bg-emerald-950/80 hover:bg-emerald-950 text-white border border-emerald-400/40 font-bold text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer backdrop-blur-xs"
+              >
+                <span>{isAr ? "شاهد كيف يعمل" : "See How It Works"}</span>
+                <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
+              </button>
+            </div>
           </div>
 
-          {/* Main Value Proposition Headline */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
-            {isAr ? "قبل أن ترميه... دَوْر يعرف قيمته" : "Before throwing it... DAWR knows its value"}
-          </h1>
-
-          {/* Explanatory Paragraph */}
-          <p className="text-sm sm:text-base md:text-lg text-white font-extrabold leading-relaxed max-w-2xl drop-shadow-md">
-            {isAr
-              ? "صوّر أي منتج، ودع الذكاء الاصطناعي يحلل حالته وخامته ويقترح أفضل مسار دائري له قبل أن يتحول إلى نفايات."
-              : "Scan any product with AI to analyze its condition and materials, discovering the optimum circular route."}
-          </p>
-
-          {/* Circular Pathways Pill List */}
-          <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-bold text-emerald-100">
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة استخدام</span>
-            <span>•</span>
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إصلاح</span>
-            <span>•</span>
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تبرع</span>
-            <span>•</span>
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة بيع</span>
-            <span>•</span>
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تدوير</span>
-          </div>
-
-          {/* Action Buttons Row */}
-          <div className="flex flex-wrap items-center gap-3 pt-3 w-full sm:w-auto">
-            <button
-              onClick={() => onNavigateToScan?.()}
-              className="py-3.5 px-7 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 hover:from-emerald-700 hover:to-teal-800 text-white font-black text-sm sm:text-base shadow-xl shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-400/40"
-            >
-              <Camera className="w-4 h-4 text-emerald-200 shrink-0" />
-              <span>{isAr ? "افحص منتجًا الآن" : "Scan Product Now"}</span>
-            </button>
-
-            <button
-              onClick={() => {
-                document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="py-3.5 px-6 rounded-2xl bg-emerald-950/80 hover:bg-emerald-950 text-white border border-emerald-400/40 font-bold text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer backdrop-blur-xs"
-            >
-              <span>{isAr ? "شاهد كيف يعمل" : "See How It Works"}</span>
-              <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
-            </button>
+          {/* Left Column: Photorealistic Product Composition Card */}
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="relative w-full max-w-md aspect-[4/3] rounded-3xl overflow-hidden bg-white border border-emerald-400/30 shadow-2xl p-1 group">
+              <img
+                src="/assets/dawr_hero_composition.jpg"
+                alt="DAWR AI Product Composition"
+                className="w-full h-full object-cover rounded-2xl group-hover:scale-103 transition-transform duration-500"
+              />
+              <div className="absolute top-3 right-3 bg-slate-950/85 text-emerald-300 text-[10px] sm:text-xs font-black px-3 py-1.5 rounded-full border border-emerald-400/40 backdrop-blur-md shadow-md flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <span>{isAr ? "تحليل ذكي بالذكاء الاصطناعي" : "AI Smart Vision"}</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -749,12 +955,46 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         </div>
       </section>
 
-      {/* 5. Landing Sections (Circular Economy Pillars, Ecosystem & Features) */}
+      {/* 5. Circular Economy Visual Highlight Banner (كل منتج له دور ثانٍ) */}
+      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
+        <div className="bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-emerald-700/60 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="space-y-4 max-w-2xl text-right z-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-800/80 border border-emerald-400/40 text-emerald-200 text-xs font-black">
+              <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{isAr ? "رؤية الاقتصاد الدائري" : "Circular Economy Vision"}</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
+              {isAr ? "كل منتج له دَوْر ثانٍ" : "Every Item Has a Second Round"}
+            </h2>
+            <p className="text-xs sm:text-sm md:text-base text-emerald-100 font-medium leading-relaxed">
+              {isAr
+                ? "في منصة دَوْر، نحول الأغراض المستعملة والزائدة عن الحاجة من نفايات هادرة إلى موارد قيمة معاد إدخالها في دورة الاقتصاد الوطني، لحفظ الموارد الطبيعية وتخفيض الانبعاثات."
+                : "At DAWR, we convert used items from waste into valuable assets re-introduced into the national circular economy loop to preserve natural resources."}
+            </p>
+            <button
+              onClick={() => onNavigateToScan?.()}
+              className="py-3.5 px-6 rounded-2xl bg-white text-emerald-950 hover:bg-emerald-50 font-black text-xs sm:text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all inline-flex items-center gap-2 cursor-pointer"
+            >
+              <span>{isAr ? "اكتشف دَوْر منتجك الآن" : "Discover Product Pathway"}</span>
+              <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
+            </button>
+          </div>
+
+          <div className="w-full md:w-72 h-44 rounded-2xl overflow-hidden border border-emerald-400/30 shadow-lg shrink-0 z-10">
+            <img
+              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&auto=format&fit=crop&q=80"
+              alt="Sustainable Circular Economy"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Landing Sections (Circular Economy Pillars, Ecosystem & Features) */}
       <LandingSections
         language={language}
-        onAnalyzeClick={() => onNavigateToScan?.()}
+        onStartClick={() => onNavigateToScan?.()}
       />
     </div>
   );
 };
-
