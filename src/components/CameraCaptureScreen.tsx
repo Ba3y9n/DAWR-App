@@ -250,24 +250,27 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
       <div className="w-full bg-slate-50/70 min-h-screen py-8 px-4 sm:px-6 lg:px-8 space-y-8 font-sans text-slate-900" dir={isAr ? "rtl" : "ltr"}>
         
         {/* 1. TOP HERO AREA FOR SMART SCAN PAGE */}
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
-          <div className="space-y-3 text-right flex-1">
+        <div className="max-w-7xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2.5 text-right flex-1">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black">
               <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-              <span>{isAr ? "تحليل ذكي بالذكاء الاصطناعي" : "AI Smart Analysis"}</span>
+              <span>{isAr ? "مدعوم بالذكاء الاصطناعي" : "AI-Powered"}</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              {isAr ? "افحص منتجك بذكاء" : "Scan Your Item Smartly"}
+              {isAr ? "الفحص الذكي" : "Smart Inspection"}
             </h1>
-            <p className="text-sm sm:text-base text-slate-600 font-medium max-w-xl leading-relaxed">
+            <h2 className="text-sm sm:text-base font-bold text-emerald-800">
+              {isAr ? "دع دور يحلل منتجك ويحدد أفضل مسار دائري له" : "Let DAWR analyze your item & determine its optimal circular path"}
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-2xl leading-relaxed pt-0.5">
               {isAr
-                ? "ارفع صورة منتجك أو استخدم الكاميرا، ودَع دور يحلل حالته ويقترح أفضل مسار دائري له."
-                : "Upload your item photo or use camera, and let DAWR analyze its condition to recommend the optimum circular path."}
+                ? "ارفع صورة المنتج أو استخدم الكاميرا، وسيقوم الذكاء الاصطناعي بتحليل حالته ومكوناته وقيمته المتبقية واقتراح أفضل خيار مستدام."
+                : "Upload an image or use camera. AI evaluates condition, components, residual value, and recommends the best sustainable option."}
             </p>
           </div>
 
-          {/* Decorative Photorealistic Composition */}
-          <div className="relative w-full md:w-80 h-40 sm:h-44 rounded-2xl overflow-hidden bg-white border border-emerald-100/90 shadow-xs flex items-center justify-center p-1 shrink-0 group">
+          {/* Decorative Photorealistic Composition Card */}
+          <div className="relative w-full md:w-80 h-36 sm:h-40 rounded-2xl overflow-hidden bg-white border border-emerald-100/90 shadow-2xs flex items-center justify-center p-1 shrink-0 group">
             <img 
               src="/assets/dawr_hero_composition.jpg" 
               alt="DAWR Circular Product Composition" 
@@ -380,13 +383,15 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                     
                     {/* Scanning Overlay when analyzing */}
                     {isAnalyzing && (
-                      <div className="absolute inset-0 bg-emerald-950/50 backdrop-blur-xs flex flex-col items-center justify-center p-6 text-center space-y-3 z-20">
+                      <div className="absolute inset-0 bg-emerald-950/70 backdrop-blur-xs flex flex-col items-center justify-center p-6 text-center space-y-3 z-20">
                         <div className="w-12 h-12 rounded-full border-4 border-emerald-400 border-t-transparent animate-spin" />
                         <div className="space-y-1">
-                          <p className="text-sm font-black text-white">{isAr ? "جاري تحليل الخامات بالذكاء الاصطناعي..." : "Analyzing with AI..."}</p>
-                          <div className="text-xs text-emerald-200 font-medium animate-pulse">
-                            <span>{isAr ? "نتعرف على المنتج ونحلل حالته ومواده..." : "Identifying product materials..."}</span>
-                          </div>
+                          <p className="text-sm sm:text-base font-black text-white">{isAr ? "جاري تحليل المنتج…" : "Analyzing Product…"}</p>
+                          <p className="text-xs text-emerald-200 font-medium leading-relaxed max-w-sm">
+                            {isAr
+                              ? "يقوم دور بفحص الصورة وتحديد نوع المنتج وحالته والمواد وأفضل مسار دائري."
+                              : "DAWR is analyzing product type, condition, materials, and optimal circular path."}
+                          </p>
                         </div>
                       </div>
                     )}
@@ -427,7 +432,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                     ) : (
                       <>
                         <Sparkles className="w-5 h-5 text-emerald-400" />
-                        <span>{isAr ? "ابدأ تحليل دَوْر بالذكاء الاصطناعي" : "Analyze Product with AI"}</span>
+                        <span>{isAr ? "بدء الفحص" : "Start Inspection"}</span>
                       </>
                     )}
                   </button>
@@ -436,21 +441,23 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                 /* CLEAN DESKTOP DEFAULT UPLOAD ZONE */
                 <div 
                   onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-slate-300 hover:border-emerald-500 bg-slate-50/70 hover:bg-emerald-50/20 rounded-2xl p-8 sm:p-12 flex flex-col items-center justify-center text-center space-y-4 transition-all cursor-pointer group"
+                  className="border-2 border-dashed border-emerald-300/80 hover:border-emerald-600 bg-[#F8FAF8] hover:bg-emerald-50/30 rounded-3xl p-8 sm:p-12 flex flex-col items-center justify-center text-center space-y-4 transition-all cursor-pointer group shadow-2xs"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-emerald-100/80 border border-emerald-200 flex items-center justify-center text-emerald-800 group-hover:scale-105 transition-transform shadow-2xs">
                     <Upload className="w-8 h-8" />
                   </div>
                   <div className="space-y-1">
                     <h3 className="text-lg font-black text-slate-900">
-                      {isAr ? "أضف صورة المنتج" : "Upload Product Image"}
+                      {isAr ? "أضف صورة المنتج" : "Add Product Image"}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 font-medium">
+                    <p className="text-xs sm:text-sm text-slate-600 font-medium">
                       {isAr ? "اسحب الصورة هنا أو اخترها من جهازك" : "Drag and drop or select file from your device"}
                     </p>
-                    <p className="text-[11px] text-slate-400 font-bold pt-1">
-                      {isAr ? "الصيغ المدعومة: JPG • PNG • WEBP" : "Supported formats: JPG • PNG • WEBP"}
-                    </p>
+                    <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] text-slate-400 font-bold pt-1">
+                      <span>{isAr ? "JPG • PNG • WEBP" : "JPG • PNG • WEBP"}</span>
+                      <span>•</span>
+                      <span className="text-emerald-700 font-extrabold">{isAr ? "الحد الأقصى لحجم الملف: 10MB" : "Max file size: 10MB"}</span>
+                    </div>
                   </div>
 
                   {/* Primary & Secondary Action CTAs */}

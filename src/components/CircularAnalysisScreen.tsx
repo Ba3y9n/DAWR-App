@@ -81,54 +81,87 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8 pb-28 bg-white">
-      {/* Top Header Back Navigation */}
-      <div className="flex items-center justify-between">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 pb-28 bg-white">
+      {/* Top Header Back Navigation & Result Title */}
+      <div className="flex items-center justify-between border-b border-slate-100 pb-4">
         <button
           onClick={onBackToCamera}
-          className="flex items-center gap-1.5 text-slate-800 hover:text-cyan-900 bg-white border border-gray-200 px-3 py-1.5 rounded-xl text-xs font-bold transition active:scale-95 cursor-pointer shadow-xs"
+          className="flex items-center gap-1.5 text-slate-800 hover:text-emerald-900 bg-white border border-slate-200 px-3.5 py-1.5 rounded-xl text-xs font-bold transition active:scale-95 cursor-pointer shadow-2xs"
         >
-          <ArrowRight className="w-4 h-4 text-cyan-600" />
-          <span>{isAr ? "الرجوع للكاميرا" : "Back to Camera"}</span>
+          <ArrowRight className="w-4 h-4 text-emerald-700" />
+          <span>{isAr ? "الرجوع للفحص" : "Back to Scan"}</span>
         </button>
 
-        <span className="text-xs font-bold text-cyan-900 bg-cyan-50 border border-cyan-200 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-xs">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
-          <span>
-            {analysis.isRealGeminiAnalysis !== false
-              ? (isAr ? "تحليل Gemini المباشر" : "Gemini AI Analysis")
-              : (isAr ? "تحليل القرار الدائري" : "Circular Analysis")}
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-black text-slate-900">{isAr ? "نتيجة الفحص" : "Inspection Result"}</span>
+          <span className="text-xs font-bold text-emerald-900 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+            <span>
+              {analysis.isRealGeminiAnalysis !== false
+                ? (isAr ? "مدعوم بالذكاء الاصطناعي" : "Gemini AI")
+                : (isAr ? "تحليل القرار الدائري" : "Circular Analysis")}
+            </span>
           </span>
-        </span>
+        </div>
+      </div>
+
+      {/* 4-Step Timeline Stepper Indicator */}
+      <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-3.5">
+        <div className="flex items-center justify-between gap-2 max-w-3xl mx-auto text-xs font-bold">
+          <div className="flex items-center gap-1.5 text-emerald-900 font-black">
+            <span className="w-5 h-5 rounded-full bg-emerald-800 text-white flex items-center justify-center text-[10px]">1</span>
+            <span>{isAr ? "المنتج" : "Item"}</span>
+          </div>
+          <div className="flex-1 h-0.5 bg-emerald-300" />
+          <div className="flex items-center gap-1.5 text-emerald-900 font-black">
+            <span className="w-5 h-5 rounded-full bg-emerald-800 text-white flex items-center justify-center text-[10px]">2</span>
+            <span>{isAr ? "التحليل" : "Analysis"}</span>
+          </div>
+          <div className="flex-1 h-0.5 bg-emerald-300" />
+          <div className="flex items-center gap-1.5 text-emerald-900 font-black">
+            <span className="w-5 h-5 rounded-full bg-emerald-800 text-white flex items-center justify-center text-[10px]">3</span>
+            <span>{isAr ? "المسار المقترح" : "Pathway"}</span>
+          </div>
+          <div className="flex-1 h-0.5 bg-emerald-300" />
+          <div className="flex items-center gap-1.5 text-emerald-900 font-black">
+            <span className="w-5 h-5 rounded-full bg-emerald-800 text-white flex items-center justify-center text-[10px]">4</span>
+            <span>{isAr ? "الإجراء المستدام" : "Action"}</span>
+          </div>
+        </div>
       </div>
 
       {/* Product Summary Card */}
-      <div className="bg-white border border-cyan-100 rounded-3xl p-4 shadow-sm space-y-3 relative overflow-hidden">
-        <div className="flex items-start gap-3">
+      <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-xs space-y-4 relative overflow-hidden">
+        <div className="flex items-start gap-4">
           {analysis.imagePreview ? (
             <img
               src={analysis.imagePreview}
               alt={analysis.productName || analysis.product}
-              className="w-16 h-16 rounded-2xl object-cover border border-gray-200 shrink-0"
+              className="w-20 h-20 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-2xs"
             />
           ) : (
-            <div className="w-16 h-16 rounded-2xl bg-cyan-50 border border-cyan-200 flex items-center justify-center shrink-0">
-              <Recycle className="w-8 h-8 text-cyan-600" />
+            <div className="w-20 h-20 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
+              <Recycle className="w-9 h-9 text-emerald-700" />
             </div>
           )}
 
-          <div className="space-y-1">
-            <h3 className="text-base font-black text-slate-900 leading-snug">
-              {analysis.productName || analysis.product}
-            </h3>
-            <div className="flex flex-wrap items-center gap-2 text-xs">
-              <span className="bg-cyan-50/60 text-slate-800 px-2.5 py-0.5 rounded-md border border-cyan-100 font-medium">
-                {isAr ? "الحالة: " : "Condition: "}
-                <strong className="text-cyan-900">{analysis.condition}</strong>
+          <div className="space-y-1.5 flex-1">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-black text-slate-900 tracking-tight">
+                {analysis.productName || analysis.product}
+              </h3>
+              <span className="text-xs font-black text-emerald-900 bg-emerald-100/80 border border-emerald-300 px-3 py-1 rounded-full">
+                {analysis.condition || (isAr ? "قابل لإعادة الاستخدام" : "Reusable")}
               </span>
-              <span className="bg-teal-50/60 text-slate-800 px-2.5 py-0.5 rounded-md border border-teal-100 font-medium">
-                {isAr ? "الخامة: " : "Material: "}
-                <strong className="text-teal-900">{analysis.material}</strong>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 text-xs pt-0.5">
+              <span className="bg-slate-100 text-slate-800 px-2.5 py-1 rounded-lg border border-slate-200 font-medium">
+                {isAr ? "الخامة / المكونات: " : "Material: "}
+                <strong className="text-slate-900">{analysis.material || (isAr ? "غير محدد" : "Unspecified")}</strong>
+              </span>
+              <span className="bg-emerald-50 text-emerald-900 px-2.5 py-1 rounded-lg border border-emerald-200 font-medium">
+                {isAr ? "القيمة المتبقية: " : "Residual Value: "}
+                <strong className="text-emerald-950">{analysis.scores?.reuse ? `${analysis.scores.reuse}%` : "85%"}</strong>
               </span>
             </div>
           </div>
@@ -488,22 +521,22 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
         </div>
       </div>
 
-      {/* Claim Points Button */}
+      {/* Claim Points Button — Start Next Step */}
       <div className="pt-2">
         <button
           onClick={handleClaim}
           disabled={claimed}
-          className={`w-full py-3.5 px-6 rounded-2xl font-black text-sm shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer ${
+          className={`w-full py-4 px-6 rounded-2xl font-black text-sm sm:text-base shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer ${
             claimed
-              ? "bg-emerald-900 text-white border border-emerald-700"
-              : "bg-emerald-800 hover:bg-emerald-900 text-white active:scale-95 shadow-emerald-950/30"
+              ? "bg-emerald-950 text-white border border-emerald-700"
+              : "bg-emerald-900 hover:bg-emerald-950 text-white active:scale-95 shadow-emerald-950/30"
           }`}
         >
           <CheckCircle2 className="w-5 h-5 text-emerald-300" />
           <span>
             {claimed
-              ? (isAr ? "تم اعتماد المسار وإضافة النقاط بنجاح!" : "Pathway Adopted & Points Added!")
-              : (isAr ? "اعتمد هذا المسار واكسب النقاط" : "Adopt Route & Claim Points")}
+              ? (isAr ? "تم تنفيذ الخطوة وإضافة النقاط بنجاح!" : "Step Completed & Points Added!")
+              : (isAr ? "ابدأ الخطوة التالية واكسب النقاط" : "Start Next Step & Claim Points")}
           </span>
         </button>
       </div>
