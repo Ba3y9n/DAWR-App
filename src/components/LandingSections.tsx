@@ -412,68 +412,48 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
           </div>
         </div>
       </section>
-
-      {/* 2. Key Features Grid Section (المميزات الرئيسية) - 3 in row 1, 3 in row 2 */}
-      <section className="px-4 space-y-4 pt-2">
-        <div className="text-center space-y-1">
-          <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-            {isAr ? "المميزات الرئيسية" : "Key Features"}
-          </h2>
-          <p className="text-xs text-slate-500 font-medium">
-            {isAr ? "كل ما تحتاجه لتصبح بطلاً في الاقتصاد الدائري" : "Everything You Need to Become an Eco Hero"}
-          </p>
-        </div>
-
-        {/* 3 cards per row Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-          {keyFeatures.map((feat) => {
-            const Icon = feat.icon;
-            return (
-              <div
-                key={feat.id}
-                onClick={() =>
-                  setActiveFeatureModal({
-                    title: feat.title,
-                    icon: Icon,
-                    color: feat.color,
-                    desc: feat.desc,
-                    details: feat.details
-                  })
-                }
-                className="bg-white border border-cyan-100 hover:border-cyan-400 p-4 rounded-2xl shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between space-y-3 group"
-              >
-                <div className="space-y-2">
-                  <div className="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-800 border border-cyan-200 flex items-center justify-center group-hover:scale-105 transition">
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  <h3 className="text-sm font-black text-slate-900 leading-tight">
-                    {feat.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-3">
-                    {feat.desc}
-                  </p>
-                </div>
-                <div className="pt-1 flex items-center justify-between text-xs font-bold text-teal-800 border-t border-slate-100">
-                  <span>{isAr ? "اقرأ المزيد" : "Read More"}</span>
-                  <Plus className="w-3.5 h-3.5" />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
       </div>
 
+      {/* 2. Full-Bleed 100% Width Main Features Strip (المميزات الرئيسية - شارات مبسطة) */}
+      <section className="w-full py-10 bg-gradient-to-r from-slate-950 via-teal-950 to-slate-950 text-white border-y border-teal-800/40 shadow-xl px-6 sm:px-12 md:px-20 rounded-none">
+        <div className="w-full max-w-7xl mx-auto space-y-6 text-center">
+          <div className="space-y-1">
+            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              {isAr ? "المميزات الرئيسية" : "Key Features"}
+            </h2>
+            <p className="text-xs sm:text-sm text-emerald-300 font-extrabold">
+              {isAr ? "كل ما تحتاجه لتصبح بطلاً في الاقتصاد الدائري" : "Everything You Need to Become an Eco Hero"}
+            </p>
+          </div>
+
+          {/* Single-Row Minimal Eco Badges Grid */}
+          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
+            {keyFeatures.map((feat) => {
+              const Icon = feat.icon;
+              return (
+                <div
+                  key={feat.id}
+                  className="inline-flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-extrabold text-xs sm:text-sm shadow-sm backdrop-blur-md transition-all duration-300 cursor-default hover:scale-105"
+                >
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0" />
+                  <span>{feat.title}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* 3. Official Full-Bleed Darker Teal Footer (أسفل الصفحة) */}
-      <footer className="w-full mt-16 border-t border-teal-900 bg-gradient-to-b from-teal-900 via-cyan-950 to-slate-950 text-white px-6 sm:px-12 md:px-20 pt-10 pb-24 shadow-xl space-y-8 rounded-none">
-        <div className="w-full max-w-7xl mx-auto space-y-6">
-          <div className="grid grid-cols-3 gap-4 text-start">
+      <footer className="w-full mt-16 border-t border-teal-900 bg-gradient-to-b from-teal-900 via-cyan-950 to-slate-950 text-white px-6 sm:px-12 md:px-20 pt-12 pb-24 shadow-xl space-y-8 rounded-none">
+        <div className="w-full max-w-7xl mx-auto space-y-8">
+          <div className="grid grid-cols-3 gap-6 text-start">
             {/* Column 1: الرئيسية */}
-            <div className="space-y-2">
-              <h4 className="text-xs font-black text-cyan-300 tracking-wider">
+            <div className="space-y-3">
+              <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
                 {isAr ? "الرئيسية" : "Home"}
               </h4>
-              <ul className="space-y-1.5 text-xs font-medium text-slate-300">
+              <ul className="space-y-2 text-sm font-bold text-white">
                 <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "عن المشروع" : "About Project"}</li>
                 <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "التطبيق" : "App Features"}</li>
                 <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "المساعدة" : "Help Center"}</li>
@@ -481,11 +461,11 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
             </div>
 
             {/* Column 2: المساعدة */}
-            <div className="space-y-2">
-              <h4 className="text-xs font-black text-cyan-300 tracking-wider">
+            <div className="space-y-3">
+              <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
                 {isAr ? "المساعدة" : "Support"}
               </h4>
-              <ul className="space-y-1.5 text-xs font-medium text-slate-300">
+              <ul className="space-y-2 text-sm font-bold text-white">
                 <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "الأسئلة الشائعة" : "FAQs"}</li>
                 <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "الدعم الفني" : "Technical Support"}</li>
                 <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "الشروط والأحكام" : "Terms & Conditions"}</li>
@@ -493,11 +473,11 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
             </div>
 
             {/* Column 3: تابعنا */}
-            <div className="space-y-2">
-              <h4 className="text-xs font-black text-cyan-300 tracking-wider">
+            <div className="space-y-3">
+              <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
                 {isAr ? "تابعنا" : "Follow Us"}
               </h4>
-              <ul className="space-y-1.5 text-xs font-medium text-slate-300">
+              <ul className="space-y-2 text-sm font-bold text-white">
                 <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "تويتر / X" : "Twitter / X"}</li>
                 <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "إنستجرام" : "Instagram"}</li>
                 <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "لينكدإن" : "LinkedIn"}</li>
@@ -505,8 +485,8 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
             </div>
           </div>
 
-          <div className="border-t border-teal-800/80 pt-4 text-center">
-            <p className="text-xs font-bold text-cyan-200/80">
+          <div className="border-t border-teal-800/80 pt-6 text-center">
+            <p className="text-sm font-bold text-cyan-200/90">
               {isAr ? "© 2026 DAWR - جميع الحقوق محفوظة" : "© 2026 DAWR - All rights reserved"}
             </p>
           </div>
