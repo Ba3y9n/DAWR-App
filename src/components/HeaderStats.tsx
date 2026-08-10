@@ -28,10 +28,30 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
 
   const navLinks = [
     { id: "home" as ActiveTab, labelAr: "الرئيسية", labelEn: "Home", action: () => onChangeTab?.("home") },
-    { id: "scan" as ActiveTab, labelAr: "الفحص الذكي", labelEn: "Smart Scan", action: () => onChangeTab?.("home") },
-    { id: "pathways" as ActiveTab, labelAr: "المسارات البيئية", labelEn: "Eco Pathways", action: () => onChangeTab?.("home") },
-    { id: "chat" as ActiveTab, labelAr: "مساعد دَوْر الذكي", labelEn: "DAWR Assistant", action: () => onChangeTab?.("chat") },
-    { id: "updates" as ActiveTab, labelAr: "عن المنصة", labelEn: "About Platform", action: () => onChangeTab?.("updates") },
+    { id: "scan" as ActiveTab, labelAr: "الفحص الذكي", labelEn: "Smart Scan", action: () => onChangeTab?.("scan") },
+    {
+      id: "howItWorks" as any,
+      labelAr: "كيف يعمل دَوْر؟",
+      labelEn: "How DAWR Works",
+      action: () => {
+        onChangeTab?.("home");
+        setTimeout(() => {
+          document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      },
+    },
+    {
+      id: "impact" as any,
+      labelAr: "الأثر الدائري",
+      labelEn: "Circular Impact",
+      action: () => {
+        onChangeTab?.("home");
+        setTimeout(() => {
+          document.getElementById("impact-section")?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      },
+    },
+    { id: "updates" as ActiveTab, labelAr: "التحديثات", labelEn: "Updates", action: () => onChangeTab?.("updates") },
   ];
 
   return (
@@ -99,9 +119,13 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
         {/* 3. Left Side: Tools, Points & Account */}
         <div className="flex items-center gap-2">
           {/* Sustainability Points Glass Badge */}
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50/90 text-emerald-950 border border-emerald-200/80 shadow-2xs font-black text-xs">
-            <Leaf className="w-3.5 h-3.5 text-emerald-600" />
-            <span>{userStats.points} {isAr ? "نقطة" : "pts"}</span>
+          <div 
+            onClick={() => onChangeTab?.("profile")}
+            className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-950 border border-emerald-200/90 shadow-2xs font-black text-xs cursor-pointer hover:border-emerald-400 transition-all"
+            title={isAr ? "نقاط الاستدامة المكتسبة" : "Earned Eco Points"}
+          >
+            <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+            <span>{userStats.points} {isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
           </div>
 
           {/* Language Switcher */}
@@ -116,11 +140,11 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
 
           {/* Olive Green Main CTA Action Button */}
           <button
-            onClick={() => onChangeTab?.("home")}
+            onClick={() => onChangeTab?.("scan")}
             className="hidden xs:flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 hover:from-emerald-900 hover:to-teal-900 text-white font-black text-xs shadow-md shadow-emerald-900/15 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
           >
             <Camera className="w-3.5 h-3.5 text-emerald-300" />
-            <span>{isAr ? "افحص منتجك الآن" : "Scan Product Now"}</span>
+            <span>{isAr ? "افحص منتجاً الآن" : "Scan Product Now"}</span>
           </button>
 
           {/* User Account Button */}
