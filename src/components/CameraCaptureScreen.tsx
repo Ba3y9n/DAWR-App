@@ -462,9 +462,9 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
 
   // Otherwise render Home View with Hero, How DAWR Works, Recent Decisions Grid, and Landing Sections
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-12 bg-white">
-      {/* 1. Full-Width Hero Portal Banner */}
-      <section className="w-full relative min-h-[46vh] sm:min-h-[52vh] flex flex-col justify-center rounded-3xl overflow-hidden shadow-xl border border-emerald-200/60 bg-emerald-950 px-6 sm:px-12 md:px-16 py-10 sm:py-14">
+    <div className="w-full bg-white space-y-12 pb-12">
+      {/* 1. Full-Bleed 100% Width Hero Portal Banner */}
+      <section className="w-full relative min-h-[48vh] sm:min-h-[54vh] flex flex-col justify-center rounded-none overflow-hidden shadow-xl border-b border-emerald-800/40 bg-emerald-950 px-6 sm:px-12 md:px-20 py-12 sm:py-16">
         {/* Vivid Sustainable Nature Background Image */}
         <div 
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-95 transform scale-105"
@@ -472,8 +472,8 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         {/* Soft Light Overlay for Clear & Vivid Background View */}
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/45 via-emerald-900/30 to-black/20" />
 
-        {/* Right-Aligned Text & Action Buttons Container */}
-        <div className="relative z-10 flex flex-col items-start text-right space-y-4 max-w-3xl">
+        {/* Right-Aligned Text & Action Buttons Container inside Max-W-7xl */}
+        <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col items-start text-right space-y-4">
           {/* Brand Tagline Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/85 border border-emerald-400/40 text-emerald-200 text-xs font-black tracking-wide shadow-md backdrop-blur-xs">
             <Leaf className="w-3.5 h-3.5 text-emerald-400" />
@@ -528,218 +528,223 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         </div>
       </section>
 
-      {/* 2. Phase 5 — How DAWR Works Stepper Section (كيف يعمل دَوْر؟) */}
-      <section id="how-it-works" className="space-y-6 pt-4 scroll-mt-24">
-        <div className="text-center space-y-1.5 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-            <span>{isAr ? "دليل الفحص" : "Scanning Guide"}</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            {isAr ? "كيف يعمل دَوْر؟" : "How DAWR Works"}
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 font-medium">
-            {isAr ? "4 خطوات ذكية للوصول إلى أفضل قرار دائري وحفظ قيمة المنتجات" : "4 simple AI-powered steps to make optimum circular decisions"}
-          </p>
-        </div>
-
-        {/* 4-Step Stepper Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
-            <div className="flex items-center justify-between">
-              <span className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-900 font-black text-xs flex items-center justify-center border border-emerald-300">
-                01
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
-                <Camera className="w-5 h-5" />
-              </div>
+      {/* Container for Middle Content Sections */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* 2. Phase 5 — How DAWR Works Stepper Section (كيف يعمل دَوْر؟) */}
+        <section id="how-it-works" className="space-y-6 pt-4 scroll-mt-24">
+          <div className="text-center space-y-1.5 max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{isAr ? "دليل الفحص" : "Scanning Guide"}</span>
             </div>
-            <div>
-              <h3 className="text-base font-black text-slate-900">{isAr ? "صوّر المنتج" : "Snap Item"}</h3>
-              <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
-                {isAr ? "التقط صورة بالكاميرا الحية أو ارفع ملف من جهازك." : "Take a live photo or upload an image file."}
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
-            <div className="flex items-center justify-between">
-              <span className="w-9 h-9 rounded-2xl bg-teal-100 text-teal-900 font-black text-xs flex items-center justify-center border border-teal-300">
-                02
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-600 shrink-0">
-                <Sparkles className="w-5 h-5" />
-              </div>
-            </div>
-            <div>
-              <h3 className="text-base font-black text-slate-900">{isAr ? "يحلله الذكاء الاصطناعي" : "AI Vision Analysis"}</h3>
-              <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
-                {isAr ? "نموذج Gemini يكتشف الخامات وحالة المنتج الدقيقة." : "Gemini Vision detects item materials and exact state."}
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
-            <div className="flex items-center justify-between">
-              <span className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-900 font-black text-xs flex items-center justify-center border border-emerald-300">
-                03
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
-                <Recycle className="w-5 h-5" />
-              </div>
-            </div>
-            <div>
-              <h3 className="text-base font-black text-slate-900">{isAr ? "دَوْر يقارن المسارات" : "Compare Pathways"}</h3>
-              <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
-                {isAr ? "مقارنة خيارات إعادة الاستخدام، الإصلاح، التبرع، والتدوير." : "Evaluates reuse, repair, donation, and recycling options."}
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
-            <div className="flex items-center justify-between">
-              <span className="w-9 h-9 rounded-2xl bg-amber-100 text-amber-900 font-black text-xs flex items-center justify-center border border-amber-300">
-                04
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
-                <Target className="w-5 h-5" />
-              </div>
-            </div>
-            <div>
-              <h3 className="text-base font-black text-slate-900">{isAr ? "تحصل على أفضل قرار" : "Get Best Decision"}</h3>
-              <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
-                {isAr ? "تنفيذ المسار الأنسب وحصد نقاط استدامة حسابك." : "Execute the recommended route & claim DAWR points."}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Phase 6 — Previous Decisions Section (آخر قراراتك الدائرية) */}
-      <section id="previous-decisions" className="space-y-5 pt-2">
-        <div className="flex items-center justify-between px-1">
-          <div>
-            <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-emerald-700" />
-              <span>{isAr ? "آخر قراراتك الدائرية" : "Your Recent Circular Decisions"}</span>
-            </h3>
-            <p className="text-xs text-slate-500 font-medium pt-0.5">
-              {isAr ? "قرارات ونماذج حقيقية لمؤشرات الاستدامة والمسارات البيئية المنفذة" : "Real examples of circular score indexes and executed eco routes"}
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              {isAr ? "كيف يعمل دَوْر؟" : "How DAWR Works"}
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium">
+              {isAr ? "4 خطوات ذكية للوصول إلى أفضل قرار دائري وحفظ قيمة المنتجات" : "4 simple AI-powered steps to make optimum circular decisions"}
             </p>
           </div>
-          <button
-            onClick={() => onNavigateToScan?.()}
-            className="text-xs font-black text-emerald-800 hover:text-emerald-900 flex items-center gap-1 hover:underline cursor-pointer"
-          >
-            <span>{isAr ? "تجربة فحص جديد" : "Scan New Item"}</span>
-            <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : "rotate-0"}`} />
-          </button>
-        </div>
 
-        {/* Modern Eco-Cards Responsive Grid for Recent Decisions */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-          {PRESET_SAMPLES.slice(0, 4).map((sample) => (
-            <div
-              key={sample.id}
-              onClick={() => handleSampleClick(sample.id)}
-              className="bg-white rounded-3xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer group p-4"
-            >
-              <div>
-                {/* Unified Aspect-Ratio Full Width Image with Badges */}
-                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 mb-3.5">
-                  <img
-                    src={sample.sampleImage}
-                    alt={sample.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Top Right Material Badge */}
-                  <span className="absolute top-2.5 right-2.5 text-[10px] sm:text-[11px] font-black px-3 py-1 rounded-full bg-slate-900/85 text-emerald-300 backdrop-blur-md border border-emerald-400/30 shadow-md">
-                    {sample.badge}
-                  </span>
-                  {/* Top Left Circular Score Glass Badge */}
-                  <span className="absolute top-2.5 left-2.5 text-[10px] sm:text-[11px] font-black px-2.5 py-1 rounded-full bg-emerald-950/90 text-white backdrop-blur-md border border-emerald-400/40 shadow-md flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-emerald-400" />
-                    <span>{sample.circularScore}</span>
-                  </span>
-                </div>
-
-                {/* Product Name & Pathway */}
-                <div className="space-y-1">
-                  <h4 className="text-base sm:text-lg font-black text-slate-900 tracking-tight group-hover:text-emerald-800 transition-colors">
-                    {sample.name}
-                  </h4>
-                  <p className="text-xs font-extrabold text-teal-800 flex items-center gap-1.5">
-                    <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>{sample.routeAr}</span>
-                  </p>
+          {/* 4-Step Stepper Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
+              <div className="flex items-center justify-between">
+                <span className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-900 font-black text-xs flex items-center justify-center border border-emerald-300">
+                  01
+                </span>
+                <div className="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+                  <Camera className="w-5 h-5" />
                 </div>
               </div>
-
-              {/* Action Button at Card Bottom */}
-              <div className="mt-4 pt-3 border-t border-slate-100">
-                <div className="w-full py-2.5 px-4 rounded-2xl bg-emerald-50 group-hover:bg-emerald-800 text-emerald-900 group-hover:text-white font-extrabold text-xs transition-all duration-300 flex items-center justify-between shadow-2xs group-hover:shadow-md border border-emerald-200/80 group-hover:border-emerald-700">
-                  <span>{isAr ? "عرض المسار البيئي" : "View Eco Pathway"}</span>
-                  <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180 group-hover:-translate-x-1" : "rotate-0 group-hover:translate-x-1"} transition-transform`} />
-                </div>
+              <div>
+                <h3 className="text-base font-black text-slate-900">{isAr ? "صوّر المنتج" : "Snap Item"}</h3>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                  {isAr ? "التقط صورة بالكاميرا الحية أو ارفع ملف من جهازك." : "Take a live photo or upload an image file."}
+                </p>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* 4. Full-Width Clean Impact Dashboard Banner (أثر قرارات الاستدامة) */}
+            <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
+              <div className="flex items-center justify-between">
+                <span className="w-9 h-9 rounded-2xl bg-teal-100 text-teal-900 font-black text-xs flex items-center justify-center border border-teal-300">
+                  02
+                </span>
+                <div className="w-10 h-10 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-600 shrink-0">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-base font-black text-slate-900">{isAr ? "يحلله الذكاء الاصطناعي" : "AI Vision Analysis"}</h3>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                  {isAr ? "نموذج Gemini يكتشف الخامات وحالة المنتج الدقيقة." : "Gemini Vision detects item materials and exact state."}
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
+              <div className="flex items-center justify-between">
+                <span className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-900 font-black text-xs flex items-center justify-center border border-emerald-300">
+                  03
+                </span>
+                <div className="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+                  <Recycle className="w-5 h-5" />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-base font-black text-slate-900">{isAr ? "دَوْر يقارن المسارات" : "Compare Pathways"}</h3>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                  {isAr ? "مقارنة خيارات إعادة الاستخدام، الإصلاح، التبرع، والتدوير." : "Evaluates reuse, repair, donation, and recycling options."}
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
+              <div className="flex items-center justify-between">
+                <span className="w-9 h-9 rounded-2xl bg-amber-100 text-amber-900 font-black text-xs flex items-center justify-center border border-amber-300">
+                  04
+                </span>
+                <div className="w-10 h-10 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
+                  <Target className="w-5 h-5" />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-base font-black text-slate-900">{isAr ? "تحصل على أفضل قرار" : "Get Best Decision"}</h3>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                  {isAr ? "تنفيذ المسار الأنسب وحصد نقاط استدامة حسابك." : "Execute the recommended route & claim DAWR points."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. Phase 6 — Previous Decisions Section (آخر قراراتك الدائرية) */}
+        <section id="previous-decisions" className="space-y-5 pt-2">
+          <div className="flex items-center justify-between px-1">
+            <div>
+              <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-emerald-700" />
+                <span>{isAr ? "آخر قراراتك الدائرية" : "Your Recent Circular Decisions"}</span>
+              </h3>
+              <p className="text-xs text-slate-500 font-medium pt-0.5">
+                {isAr ? "قرارات ونماذج حقيقية لمؤشرات الاستدامة والمسارات البيئية المنفذة" : "Real examples of circular score indexes and executed eco routes"}
+              </p>
+            </div>
+            <button
+              onClick={() => onNavigateToScan?.()}
+              className="text-xs font-black text-emerald-800 hover:text-emerald-900 flex items-center gap-1 hover:underline cursor-pointer"
+            >
+              <span>{isAr ? "تجربة فحص جديد" : "Scan New Item"}</span>
+              <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : "rotate-0"}`} />
+            </button>
+          </div>
+
+          {/* Modern Eco-Cards Responsive Grid for Recent Decisions */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+            {PRESET_SAMPLES.slice(0, 4).map((sample) => (
+              <div
+                key={sample.id}
+                onClick={() => handleSampleClick(sample.id)}
+                className="bg-white rounded-3xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer group p-4"
+              >
+                <div>
+                  {/* Unified Aspect-Ratio Full Width Image with Badges */}
+                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 mb-3.5">
+                    <img
+                      src={sample.sampleImage}
+                      alt={sample.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {/* Top Right Material Badge */}
+                    <span className="absolute top-2.5 right-2.5 text-[10px] sm:text-[11px] font-black px-3 py-1 rounded-full bg-slate-900/85 text-emerald-300 backdrop-blur-md border border-emerald-400/30 shadow-md">
+                      {sample.badge}
+                    </span>
+                    {/* Top Left Circular Score Glass Badge */}
+                    <span className="absolute top-2.5 left-2.5 text-[10px] sm:text-[11px] font-black px-2.5 py-1 rounded-full bg-emerald-950/90 text-white backdrop-blur-md border border-emerald-400/40 shadow-md flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-emerald-400" />
+                      <span>{sample.circularScore}</span>
+                    </span>
+                  </div>
+
+                  {/* Product Name & Pathway */}
+                  <div className="space-y-1">
+                    <h4 className="text-base sm:text-lg font-black text-slate-900 tracking-tight group-hover:text-emerald-800 transition-colors">
+                      {sample.name}
+                    </h4>
+                    <p className="text-xs font-extrabold text-teal-800 flex items-center gap-1.5">
+                      <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>{sample.routeAr}</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Action Button at Card Bottom */}
+                <div className="mt-4 pt-3 border-t border-slate-100">
+                  <div className="w-full py-2.5 px-4 rounded-2xl bg-emerald-50 group-hover:bg-emerald-800 text-emerald-900 group-hover:text-white font-extrabold text-xs transition-all duration-300 flex items-center justify-between shadow-2xs group-hover:shadow-md border border-emerald-200/80 group-hover:border-emerald-700">
+                    <span>{isAr ? "عرض المسار البيئي" : "View Eco Pathway"}</span>
+                    <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180 group-hover:-translate-x-1" : "rotate-0 group-hover:translate-x-1"} transition-transform`} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* 4. Full-Bleed 100% Width Clean Impact Dashboard Banner (أثر قرارات الاستدامة) */}
       <section 
         id="impact-section" 
-        className="w-full relative py-10 my-8 bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white shadow-xl border-y border-emerald-800/40 rounded-3xl overflow-hidden px-6 sm:px-10 space-y-8"
+        className="w-full relative py-12 my-8 bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white shadow-xl border-y border-emerald-800/40 rounded-none overflow-hidden px-6 sm:px-12 md:px-20"
       >
-        {/* Top Row: Section Title & Gamification Badge */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-300 bg-emerald-950/80 px-3.5 py-1 rounded-full border border-emerald-500/30">
-              <Leaf className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>{isAr ? "مؤشرات الأثر البيئي الوطنية" : "Environmental Impact Stats"}</span>
+        <div className="w-full max-w-7xl mx-auto space-y-8">
+          {/* Top Row: Section Title & Gamification Badge */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-300 bg-emerald-950/80 px-3.5 py-1 rounded-full border border-emerald-500/30">
+                <Leaf className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>{isAr ? "مؤشرات الأثر البيئي الوطنية" : "Environmental Impact Stats"}</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight pt-1">
+                {isAr ? "أثر قرارات الاستدامة في منصة دَوْر" : "Sustainability Impact Index"}
+              </h3>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight pt-1">
-              {isAr ? "أثر قرارات الاستدامة في منصة دَوْر" : "Sustainability Impact Index"}
-            </h3>
+
+            <div className="inline-flex items-center gap-2 bg-emerald-950/90 border border-emerald-400/30 px-4 py-2 rounded-2xl text-xs font-extrabold text-emerald-200 shadow-md backdrop-blur-xs">
+              <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>{isAr ? "تحصل على +50 نقطة دَوْر عند كل قرار دائري منفّذ" : "Earn +50 DAWR points per circular decision"}</span>
+            </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 bg-emerald-950/90 border border-emerald-400/30 px-4 py-2 rounded-2xl text-xs font-extrabold text-emerald-200 shadow-md backdrop-blur-xs">
-            <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
-            <span>{isAr ? "تحصل على +50 نقطة دَوْر عند كل قرار دائري منفّذ" : "Earn +50 DAWR points per circular decision"}</span>
-          </div>
-        </div>
+          {/* Clean Minimal Stats Row (3 Metrics with Vertical Dividers & No Inner Boxes) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 py-2">
+            {/* Stat 1: CO2 Avoided */}
+            <div className="flex flex-col items-center text-center space-y-1 md:border-l md:border-white/10 px-4">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight drop-shadow-md">
+                18.5 <span className="text-base sm:text-lg text-emerald-300 font-bold">{isAr ? "كجم CO2e" : "kg CO2e"}</span>
+              </span>
+              <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
+                {isAr ? "وفورات الانبعاثات الكربونية الحالية" : "CO2 Emissions Avoided"}
+              </span>
+            </div>
 
-        {/* Clean Minimal Stats Row (3 Metrics with Vertical Dividers & No Inner Boxes) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 py-2">
-          {/* Stat 1: CO2 Avoided */}
-          <div className="flex flex-col items-center text-center space-y-1 md:border-l md:border-white/10 px-4">
-            <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight drop-shadow-md">
-              18.5 <span className="text-base sm:text-lg text-emerald-300 font-bold">{isAr ? "كجم CO2e" : "kg CO2e"}</span>
-            </span>
-            <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
-              {isAr ? "وفورات الانبعاثات الكربونية الحالية" : "CO2 Emissions Avoided"}
-            </span>
-          </div>
+            {/* Stat 2: Products Saved */}
+            <div className="flex flex-col items-center text-center space-y-1 md:border-l md:border-white/10 px-4">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight drop-shadow-md">
+                15 <span className="text-base sm:text-lg text-emerald-300 font-bold">{isAr ? "منتجاً" : "items"}</span>
+              </span>
+              <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
+                {isAr ? "المنتجات المستفادة وتحويل مسارها" : "Products Saved & Diverted"}
+              </span>
+            </div>
 
-          {/* Stat 2: Products Saved */}
-          <div className="flex flex-col items-center text-center space-y-1 md:border-l md:border-white/10 px-4">
-            <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight drop-shadow-md">
-              15 <span className="text-base sm:text-lg text-emerald-300 font-bold">{isAr ? "منتجاً" : "items"}</span>
-            </span>
-            <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
-              {isAr ? "المنتجات المستفادة وتحويل مسارها" : "Products Saved & Diverted"}
-            </span>
-          </div>
-
-          {/* Stat 3: DAWR Points */}
-          <div className="flex flex-col items-center text-center space-y-1 px-4">
-            <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-300 tracking-tight drop-shadow-md">
-              270 <span className="text-base sm:text-lg text-white font-bold">{isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
-            </span>
-            <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
-              {isAr ? "رصيد نقاط دَوْر الاستدامة المكتسبة" : "Earned Sustainability DAWR Points"}
-            </span>
+            {/* Stat 3: DAWR Points */}
+            <div className="flex flex-col items-center text-center space-y-1 px-4">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-300 tracking-tight drop-shadow-md">
+                270 <span className="text-base sm:text-lg text-white font-bold">{isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
+              </span>
+              <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
+                {isAr ? "رصيد نقاط دَوْر الاستدامة المكتسبة" : "Earned Sustainability DAWR Points"}
+              </span>
+            </div>
           </div>
         </div>
       </section>
