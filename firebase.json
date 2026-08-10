@@ -1,0 +1,8 @@
+{
+  "firestore": {
+    "databaseId": "ai-studio-dawr-c0b36ae2-2468-4644-8493-fc6e89d4e666",
+    "rules": "firestore.rules",
+    "edition": "ENTERPRISE",
+    "dataAccessMode": "FIRESTORE_NATIVE"
+  }
+}
