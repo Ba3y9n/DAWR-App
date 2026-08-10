@@ -249,29 +249,29 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
     return (
       <div className="w-full bg-slate-50/70 min-h-screen py-8 px-4 sm:px-6 lg:px-8 space-y-8 font-sans text-slate-900" dir={isAr ? "rtl" : "ltr"}>
         
-        {/* 1. TOP HERO AREA WITH DECORATIVE PRODUCT STORY COMPOSITION */}
+        {/* 1. TOP HERO AREA FOR SMART SCAN PAGE */}
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
           <div className="space-y-3 text-right flex-1">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black">
               <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-              <span>{isAr ? "فحص منتجات بالذكاء الاصطناعي" : "AI Product Scanner"}</span>
+              <span>{isAr ? "تحليل ذكي بالذكاء الاصطناعي" : "AI Smart Analysis"}</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              {isAr ? "اكتشف دَوْر منتجك التالي" : "Discover Your Product's Next Round"}
+              {isAr ? "افحص منتجك بذكاء" : "Scan Your Item Smartly"}
             </h1>
             <p className="text-sm sm:text-base text-slate-600 font-medium max-w-xl leading-relaxed">
               {isAr
-                ? "أضف صورة، ودَع الذكاء الاصطناعي يحدد أفضل مسار دائري له."
-                : "Add a photo, and let AI determine its best circular pathway."}
+                ? "ارفع صورة منتجك أو استخدم الكاميرا، ودَع دور يحلل حالته ويقترح أفضل مسار دائري له."
+                : "Upload your item photo or use camera, and let DAWR analyze its condition to recommend the optimum circular path."}
             </p>
           </div>
 
-          {/* Decorative Photorealistic Product Story Composition Image (Wooden Chair, Cotton Shirt, Coffee Machine, Glass Container, PET Bottle, Smartphone & Emerald Flow Ring) */}
-          <div className="relative w-full md:w-96 h-48 sm:h-56 rounded-3xl overflow-hidden bg-white border border-emerald-100/90 shadow-sm flex items-center justify-center p-1 shrink-0 group">
+          {/* Decorative Photorealistic Composition */}
+          <div className="relative w-full md:w-80 h-40 sm:h-44 rounded-2xl overflow-hidden bg-white border border-emerald-100/90 shadow-xs flex items-center justify-center p-1 shrink-0 group">
             <img 
               src="/assets/dawr_hero_composition.jpg" 
               alt="DAWR Circular Product Composition" 
-              className="w-full h-full object-cover rounded-2xl group-hover:scale-102 transition-transform duration-500"
+              className="w-full h-full object-cover rounded-xl group-hover:scale-102 transition-transform duration-500"
             />
           </div>
         </div>
@@ -651,85 +651,67 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
   // Otherwise render Home View with Hero, How DAWR Works, Recent Decisions Grid, and Landing Sections
   return (
     <div className="w-full bg-white space-y-12 pb-12">
-      {/* 1. Full-Bleed 100% Width SaaS AI Hero Section */}
-      <section className="w-full relative min-h-[75vh] sm:min-h-[82vh] flex flex-col justify-center rounded-none overflow-hidden shadow-xl border-b border-emerald-800/40 bg-emerald-950 px-6 sm:px-12 md:px-20 py-16 sm:py-20">
-        {/* Vivid Sustainable Nature Background */}
+      {/* 1. Full-Bleed 100% Width Hero Portal Banner (min-h-[85vh] Portal Height) */}
+      <section className="w-full relative min-h-[80vh] sm:min-h-[85vh] lg:min-h-[88vh] flex flex-col justify-center rounded-none overflow-hidden shadow-xl border-b border-emerald-800/40 bg-emerald-950 px-6 sm:px-12 md:px-20 py-16 sm:py-24">
+        {/* Vivid Sustainable Nature Background Image */}
         <div 
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-95 transform scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/85 via-emerald-950/70 to-emerald-900/40" />
+        {/* Soft Light Overlay for Clear & Vivid Background View */}
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/45 via-emerald-900/30 to-black/20" />
 
-        {/* 2-Column Hero Content Grid inside Max-W-7xl */}
-        <div className="w-full max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          {/* Right Column (RTL): Text & Primary CTA */}
-          <div className="lg:col-span-7 text-right space-y-5">
-            {/* AI Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/90 border border-emerald-400/40 text-emerald-200 text-xs font-black tracking-wide shadow-md backdrop-blur-xs">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-              <span>{isAr ? "تحليل ذكي بالذكاء الاصطناعي" : "AI-Powered Circular Analysis"}</span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-md">
-              {isAr ? "اكتشف دور منتجك التالي" : "Discover Your Product's Next Round"}
-            </h1>
-
-            {/* Description */}
-            <p className="text-sm sm:text-base md:text-lg text-emerald-100/90 font-medium leading-relaxed max-w-2xl drop-shadow-sm">
-              {isAr
-                ? "صوّر أو ارفع صورة أي منتج، ودَع الذكاء الاصطناعي يحلل حالته وخامته ويقترح أفضل مسار دائري له قبل أن يتحول إلى نفايات."
-                : "Scan or upload any item. DAWR AI analyzes materials and condition to suggest the optimum circular path before it turns into waste."}
-            </p>
-
-            {/* Circular Pathways Pill List */}
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-bold text-emerald-100">
-              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة استخدام</span>
-              <span>•</span>
-              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إصلاح</span>
-              <span>•</span>
-              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تبرع</span>
-              <span>•</span>
-              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة بيع</span>
-              <span>•</span>
-              <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تدوير</span>
-            </div>
-
-            {/* Action Buttons Row */}
-            <div className="flex flex-wrap items-center gap-3 pt-3">
-              <button
-                onClick={() => onNavigateToScan?.()}
-                className="py-4 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-600 hover:from-emerald-600 hover:to-teal-700 text-slate-950 font-black text-sm sm:text-base shadow-xl shadow-emerald-950/50 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 cursor-pointer border border-emerald-300"
-              >
-                <Camera className="w-5 h-5 text-slate-950 shrink-0" />
-                <span>{isAr ? "ابدأ الفحص الذكي" : "Start Smart Scan"}</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="py-4 px-6 rounded-2xl bg-emerald-950/80 hover:bg-emerald-950 text-white border border-emerald-400/40 font-bold text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer backdrop-blur-xs"
-              >
-                <span>{isAr ? "شاهد كيف يعمل" : "See How It Works"}</span>
-                <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
-              </button>
-            </div>
+        {/* Right-Aligned Text & Action Buttons Container inside Max-W-7xl */}
+        <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col items-start text-right space-y-4">
+          {/* Brand Tagline Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/85 border border-emerald-400/40 text-emerald-200 text-xs font-black tracking-wide shadow-md backdrop-blur-xs">
+            <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+            <span>{isAr ? "لا ترمِه... أعطه دَوْرًا آخر" : "Don't throw it away... Give it another round"}</span>
           </div>
 
-          {/* Left Column: Photorealistic Product Composition Card */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-md aspect-[4/3] rounded-3xl overflow-hidden bg-white border border-emerald-400/30 shadow-2xl p-1 group">
-              <img
-                src="/assets/dawr_hero_composition.jpg"
-                alt="DAWR AI Product Composition"
-                className="w-full h-full object-cover rounded-2xl group-hover:scale-103 transition-transform duration-500"
-              />
-              <div className="absolute top-3 right-3 bg-slate-950/85 text-emerald-300 text-[10px] sm:text-xs font-black px-3 py-1.5 rounded-full border border-emerald-400/40 backdrop-blur-md shadow-md flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                <span>{isAr ? "تحليل ذكي بالذكاء الاصطناعي" : "AI Smart Vision"}</span>
-              </div>
-            </div>
+          {/* Main Value Proposition Headline */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
+            {isAr ? "قبل أن ترميه... دَوْر يعرف قيمته" : "Before throwing it... DAWR knows its value"}
+          </h1>
+
+          {/* Explanatory Paragraph */}
+          <p className="text-sm sm:text-base md:text-lg text-white font-extrabold leading-relaxed max-w-2xl drop-shadow-md">
+            {isAr
+              ? "صوّر أي منتج، ودع الذكاء الاصطناعي يحلل حالته وخامته ويقترح أفضل مسار دائري له قبل أن يتحول إلى نفايات."
+              : "Scan any product with AI to analyze its condition and materials, discovering the optimum circular route."}
+          </p>
+
+          {/* Circular Pathways Pill List */}
+          <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-bold text-emerald-100">
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة استخدام</span>
+            <span>•</span>
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إصلاح</span>
+            <span>•</span>
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تبرع</span>
+            <span>•</span>
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة بيع</span>
+            <span>•</span>
+            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تدوير</span>
+          </div>
+
+          {/* Action Buttons Row */}
+          <div className="flex flex-wrap items-center gap-3 pt-3 w-full sm:w-auto">
+            <button
+              onClick={() => onNavigateToScan?.()}
+              className="py-3.5 px-7 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 hover:from-emerald-700 hover:to-teal-800 text-white font-black text-sm sm:text-base shadow-xl shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-400/40"
+            >
+              <Camera className="w-4 h-4 text-emerald-200 shrink-0" />
+              <span>{isAr ? "افحص منتجًا الآن" : "Scan Product Now"}</span>
+            </button>
+
+            <button
+              onClick={() => {
+                document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="py-3.5 px-6 rounded-2xl bg-emerald-950/80 hover:bg-emerald-950 text-white border border-emerald-400/40 font-bold text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer backdrop-blur-xs"
+            >
+              <span>{isAr ? "شاهد كيف يعمل" : "See How It Works"}</span>
+              <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
+            </button>
           </div>
         </div>
       </section>
@@ -955,46 +937,12 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         </div>
       </section>
 
-      {/* 5. Circular Economy Visual Highlight Banner (كل منتج له دور ثانٍ) */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
-        <div className="bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-emerald-700/60 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-4 max-w-2xl text-right z-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-800/80 border border-emerald-400/40 text-emerald-200 text-xs font-black">
-              <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-              <span>{isAr ? "رؤية الاقتصاد الدائري" : "Circular Economy Vision"}</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
-              {isAr ? "كل منتج له دَوْر ثانٍ" : "Every Item Has a Second Round"}
-            </h2>
-            <p className="text-xs sm:text-sm md:text-base text-emerald-100 font-medium leading-relaxed">
-              {isAr
-                ? "في منصة دَوْر، نحول الأغراض المستعملة والزائدة عن الحاجة من نفايات هادرة إلى موارد قيمة معاد إدخالها في دورة الاقتصاد الوطني، لحفظ الموارد الطبيعية وتخفيض الانبعاثات."
-                : "At DAWR, we convert used items from waste into valuable assets re-introduced into the national circular economy loop to preserve natural resources."}
-            </p>
-            <button
-              onClick={() => onNavigateToScan?.()}
-              className="py-3.5 px-6 rounded-2xl bg-white text-emerald-950 hover:bg-emerald-50 font-black text-xs sm:text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all inline-flex items-center gap-2 cursor-pointer"
-            >
-              <span>{isAr ? "اكتشف دَوْر منتجك الآن" : "Discover Product Pathway"}</span>
-              <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
-            </button>
-          </div>
-
-          <div className="w-full md:w-72 h-44 rounded-2xl overflow-hidden border border-emerald-400/30 shadow-lg shrink-0 z-10">
-            <img
-              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&auto=format&fit=crop&q=80"
-              alt="Sustainable Circular Economy"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Landing Sections (Circular Economy Pillars, Ecosystem & Features) */}
+      {/* 5. Landing Sections (Circular Economy Pillars, Ecosystem & Features) */}
       <LandingSections
         language={language}
-        onStartClick={() => onNavigateToScan?.()}
+        onAnalyzeClick={() => onNavigateToScan?.()}
       />
     </div>
   );
 };
+
