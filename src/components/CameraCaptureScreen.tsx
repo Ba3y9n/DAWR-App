@@ -280,45 +280,47 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
             </p>
           </div>
 
-          {/* Decorative Photorealistic Composition Card in Circular Soft Backdrop */}
-          <div className="relative w-full md:w-88 h-40 sm:h-44 rounded-3xl overflow-hidden bg-emerald-50/70 border border-emerald-200/80 shadow-xs flex items-center justify-center p-2 shrink-0 group">
+          {/* Decorative Photorealistic Composition Card in Expanded Container */}
+          <div className="relative w-full md:w-96 lg:w-[420px] h-48 sm:h-56 md:h-60 rounded-3xl overflow-hidden bg-white/90 border border-emerald-200/90 shadow-md flex items-center justify-center p-2 shrink-0 group">
             <img 
               src="/assets/dawr_hero_composition.jpg" 
               alt="DAWR Circular Product Composition" 
-              className="w-full h-full object-cover rounded-2xl group-hover:scale-102 transition-transform duration-500 shadow-2xs"
+              className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-500"
             />
           </div>
         </div>
 
-        {/* 2. PROGRESS STEPS (1 أضف المنتج ➔ 2 تحليل دَوْر ➔ 3 القرار الدائري) */}
-        <div className="max-w-7xl mx-auto bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-xs">
-          <div className="flex items-center justify-between gap-3 max-w-3xl mx-auto">
+        {/* 2. ENLARGED & GLOWING PROGRESS STEPS (1 أضف المنتج ➔ 2 تحليل دَوْر ➔ 3 القرار الدائري) */}
+        <div className="max-w-7xl mx-auto bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm">
+          <div className="flex items-center justify-between gap-4 max-w-4xl mx-auto">
             {/* Step 1 */}
-            <div className={`flex items-center gap-2.5 ${capturedImage ? "text-emerald-800 font-bold" : "text-emerald-950 font-black"}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shadow-2xs ${capturedImage ? "bg-emerald-100 text-emerald-800 border border-emerald-300" : "bg-emerald-800 text-white"}`}>
+            <div className={`flex items-center gap-3 ${capturedImage ? "text-emerald-900 font-bold" : "text-emerald-950 font-black"}`}>
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-sm sm:text-base font-black shadow-md border-2 border-emerald-500 transition-all ${capturedImage ? "bg-emerald-100 text-emerald-900 border-emerald-400" : "bg-emerald-900 text-white ring-4 ring-emerald-200/70 scale-105"}`}>
                 1
               </div>
-              <span className="text-xs sm:text-sm font-extrabold">{isAr ? "أضف المنتج" : "Add Product"}</span>
+              <span className="text-sm sm:text-base font-extrabold">{isAr ? "أضف المنتج" : "Add Product"}</span>
             </div>
 
-            <div className={`flex-1 h-0.5 ${capturedImage ? "bg-emerald-600" : "bg-slate-200"}`} />
+            {/* Glowing Animated Progress Line 1 */}
+            <div className={`flex-1 h-1.5 rounded-full transition-all duration-500 ${capturedImage ? "bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600 shadow-[0_0_12px_#10b981] animate-pulse" : "bg-slate-200"}`} />
 
             {/* Step 2 */}
-            <div className={`flex items-center gap-2.5 ${isAnalyzing ? "text-emerald-950 font-black" : capturedImage ? "text-slate-800 font-bold" : "text-slate-500"}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shadow-2xs ${isAnalyzing ? "bg-emerald-800 text-white animate-pulse" : capturedImage ? "bg-emerald-100 text-emerald-800 border border-emerald-300" : "bg-slate-100 text-slate-500 border border-slate-200"}`}>
+            <div className={`flex items-center gap-3 ${isAnalyzing ? "text-emerald-950 font-black" : capturedImage ? "text-slate-900 font-bold" : "text-slate-500"}`}>
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-sm sm:text-base font-black shadow-sm border-2 transition-all ${isAnalyzing ? "bg-emerald-900 text-white animate-pulse border-emerald-400 ring-4 ring-emerald-200/70 scale-105" : capturedImage ? "bg-emerald-100 text-emerald-900 border-emerald-400" : "bg-slate-100 text-slate-500 border-slate-200"}`}>
                 2
               </div>
-              <span className="text-xs sm:text-sm font-extrabold">{isAr ? "تحليل دَوْر" : "DAWR Analysis"}</span>
+              <span className="text-sm sm:text-base font-extrabold">{isAr ? "تحليل دَوْر" : "DAWR Analysis"}</span>
             </div>
 
-            <div className="flex-1 h-0.5 bg-slate-200" />
+            {/* Glowing Animated Progress Line 2 */}
+            <div className={`flex-1 h-1.5 rounded-full transition-all duration-500 ${isAnalyzing ? "bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600 shadow-[0_0_12px_#10b981] animate-pulse" : "bg-slate-200"}`} />
 
             {/* Step 3 */}
-            <div className="flex items-center gap-2.5 text-slate-500">
-              <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 text-slate-500 flex items-center justify-center text-xs font-black shadow-2xs">
+            <div className="flex items-center gap-3 text-slate-500">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-100 border-2 border-slate-200 text-slate-500 flex items-center justify-center text-sm sm:text-base font-black shadow-2xs">
                 3
               </div>
-              <span className="text-xs sm:text-sm font-extrabold">{isAr ? "القرار الدائري" : "Circular Decision"}</span>
+              <span className="text-sm sm:text-base font-extrabold">{isAr ? "القرار الدائري" : "Circular Decision"}</span>
             </div>
           </div>
         </div>
@@ -591,57 +593,57 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
           {/* RIGHT COLUMN: SIDEBAR (HOW IT WORKS & PRIVACY TRUST BADGE) (5 Columns) */}
           <div className="lg:col-span-5 space-y-6">
 
-            {/* HOW DAWR WORKS SIDE PANEL */}
-            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xs p-6 space-y-5">
-              <h3 className="text-base font-extrabold text-emerald-950 border-b border-slate-100 pb-3 flex items-center gap-2">
-                <Leaf className="w-4 h-4 text-emerald-700 shrink-0" />
+            {/* HOW DAWR WORKS SIDE PANEL (COMPACT VERTICAL EXTENSION) */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-5 sm:p-6 space-y-5 max-w-sm sm:max-w-md mx-auto w-full">
+              <h3 className="text-base font-extrabold text-emerald-950 border-b border-slate-100 pb-3 flex items-center justify-center gap-2 text-center">
+                <Leaf className="w-4.5 h-4.5 text-emerald-700 shrink-0" />
                 <span>{isAr ? "كيف يعمل دَوْر؟ 🍃" : "How DAWR Works 🍃"}</span>
               </h3>
 
-              <div className="space-y-4">
-                <div className="flex items-start gap-3 bg-slate-50/60 p-3 rounded-2xl border border-slate-100">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-900 font-black text-xs shrink-0 shadow-2xs">
+              <div className="space-y-3.5">
+                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-emerald-50/40 border border-emerald-100/90 space-y-2">
+                  <div className="w-9 h-9 rounded-2xl bg-emerald-800 text-white font-black text-xs flex items-center justify-center shadow-md border border-emerald-400/40 ring-2 ring-emerald-100 shrink-0">
                     1
                   </div>
                   <div className="space-y-0.5">
-                    <h4 className="text-xs font-extrabold text-slate-900">{isAr ? "أضف صورة المنتج" : "Add Product Photo"}</h4>
-                    <p className="text-[11px] text-slate-600 font-bold leading-relaxed">
+                    <h4 className="text-xs sm:text-sm font-extrabold text-emerald-950">{isAr ? "أضف صورة المنتج" : "Add Product Photo"}</h4>
+                    <p className="text-xs text-slate-700 font-bold leading-relaxed max-w-xs mx-auto">
                       {isAr ? "التقط صورة واضحة للمنتج أو اخترها من معرض الصور." : "Take a photo or pick an image."}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 bg-slate-50/60 p-3 rounded-2xl border border-slate-100">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-900 font-black text-xs shrink-0 shadow-2xs">
+                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-emerald-50/40 border border-emerald-100/90 space-y-2">
+                  <div className="w-9 h-9 rounded-2xl bg-emerald-800 text-white font-black text-xs flex items-center justify-center shadow-md border border-emerald-400/40 ring-2 ring-emerald-100 shrink-0">
                     2
                   </div>
                   <div className="space-y-0.5">
-                    <h4 className="text-xs font-extrabold text-slate-900">{isAr ? "التحليل الذكي" : "AI Smart Analysis"}</h4>
-                    <p className="text-[11px] text-slate-600 font-bold leading-relaxed">
+                    <h4 className="text-xs sm:text-sm font-extrabold text-emerald-950">{isAr ? "التحليل الذكي" : "AI Smart Analysis"}</h4>
+                    <p className="text-xs text-slate-700 font-bold leading-relaxed max-w-xs mx-auto">
                       {isAr ? "نفهم المنتج، حالته، مواده وقابليته للاستدامة." : "AI identifies materials and exact condition."}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 bg-slate-50/60 p-3 rounded-2xl border border-slate-100">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-900 font-black text-xs shrink-0 shadow-2xs">
+                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-emerald-50/40 border border-emerald-100/90 space-y-2">
+                  <div className="w-9 h-9 rounded-2xl bg-emerald-800 text-white font-black text-xs flex items-center justify-center shadow-md border border-emerald-400/40 ring-2 ring-emerald-100 shrink-0">
                     3
                   </div>
                   <div className="space-y-0.5">
-                    <h4 className="text-xs font-extrabold text-slate-900">{isAr ? "توصية المسار الأفضل" : "Optimal Pathway"}</h4>
-                    <p className="text-[11px] text-slate-600 font-bold leading-relaxed">
+                    <h4 className="text-xs sm:text-sm font-extrabold text-emerald-950">{isAr ? "توصية المسار الأفضل" : "Optimal Pathway"}</h4>
+                    <p className="text-xs text-slate-700 font-bold leading-relaxed max-w-xs mx-auto">
                       {isAr ? "نقترح أفضل قرار دائري يحافظ على قيمة المنتج." : "Recommends best reuse, repair, donation, or recycling route."}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 bg-slate-50/60 p-3 rounded-2xl border border-slate-100">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-900 font-black text-xs shrink-0 shadow-2xs">
+                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-emerald-50/40 border border-emerald-100/90 space-y-2">
+                  <div className="w-9 h-9 rounded-2xl bg-emerald-800 text-white font-black text-xs flex items-center justify-center shadow-md border border-emerald-400/40 ring-2 ring-emerald-100 shrink-0">
                     4
                   </div>
                   <div className="space-y-0.5">
-                    <h4 className="text-xs font-extrabold text-slate-900">{isAr ? "تعرّف على الأثر" : "Environmental Impact"}</h4>
-                    <p className="text-[11px] text-slate-600 font-bold leading-relaxed">
+                    <h4 className="text-xs sm:text-sm font-extrabold text-emerald-950">{isAr ? "تعرّف على الأثر" : "Environmental Impact"}</h4>
+                    <p className="text-xs text-slate-700 font-bold leading-relaxed max-w-xs mx-auto">
                       {isAr ? "اعرف أثر قرارك البيئي بطريقة واضحة." : "View CO2 saved and sustainability score."}
                     </p>
                   </div>
