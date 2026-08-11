@@ -382,13 +382,14 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
               </div>
             </div>
 
-            {/* Direct Primary Action Button */}
+            {/* Direct Primary Interactive Action Button */}
             <button
               onClick={onStartClick}
-              className="w-full sm:w-auto py-2.5 px-6 rounded-xl bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 hover:from-emerald-900 hover:to-teal-900 text-white font-black text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto py-3 px-7 rounded-2xl bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-800 hover:from-emerald-800 hover:to-teal-800 text-white font-black text-xs sm:text-sm shadow-lg shadow-emerald-950/20 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer border border-emerald-400/30 group"
             >
+              <Sparkles className="w-4 h-4 text-emerald-300 group-hover:rotate-12 transition-transform" />
               <span>{isAr ? "افحص منتجك الآن" : "Scan Item for this Route"}</span>
-              <ArrowLeft className={`w-4 h-4 ${isAr ? "rotate-0" : "rotate-180"}`} />
+              <ArrowLeft className={`w-4 h-4 ${isAr ? "rotate-0 group-hover:-translate-x-1" : "rotate-180 group-hover:translate-x-1"} transition-transform`} />
             </button>
           </div>
 

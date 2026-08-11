@@ -30,6 +30,17 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
   const [manualText, setManualText] = useState<string>("");
   const [selectedSampleId, setSelectedSampleId] = useState<string | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
+  const [scanningCardId, setScanningCardId] = useState<string | null>(null);
+
+  const handleCardScan = (sampleId: string) => {
+    if (scanningCardId) return;
+    setScanningCardId(sampleId);
+    setTimeout(() => {
+      setScanningCardId(null);
+      handleSampleClick(sampleId);
+      onNavigateToScan?.();
+    }, 1800);
+  };
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -835,52 +846,93 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
 
           {/* Modern Eco-Cards Responsive Grid for Recent Decisions */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-            {PRESET_SAMPLES.slice(0, 4).map((sample) => (
-              <div
-                key={sample.id}
-                onClick={() => handleSampleClick(sample.id)}
-                className="bg-white rounded-3xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer group p-4"
-              >
-                <div>
-                  {/* Unified Aspect-Ratio Full Width Image with Badges */}
-                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 mb-3.5">
-                    <img
-                      src={sample.sampleImage}
-                      alt={sample.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    {/* Top Right Material Badge */}
-                    <span className="absolute top-2.5 right-2.5 text-[10px] sm:text-[11px] font-black px-3 py-1 rounded-full bg-slate-900/85 text-emerald-300 backdrop-blur-md border border-emerald-400/30 shadow-md">
-                      {sample.badge}
-                    </span>
-                    {/* Top Left Circular Score Glass Badge */}
-                    <span className="absolute top-2.5 left-2.5 text-[10px] sm:text-[11px] font-black px-2.5 py-1 rounded-full bg-emerald-950/90 text-white backdrop-blur-md border border-emerald-400/40 shadow-md flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 text-emerald-400" />
-                      <span>{sample.circularScore}</span>
-                    </span>
+            {PRESET_SAMPLES.slice(0, 4).map((sample) => {
+              const isScanningThisCard = scanningCardId === sample.id;
+              return (
+                <div
+                  key={sample.id}
+                  onClick={() => handleCardScan(sample.id)}
+                  className={`bg-white rounded-3xl border shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer group p-4 relative ${
+                    isScanningThisCard ? "border-emerald-500 ring-2 ring-emerald-400/40" : "border-slate-200/90 hover:border-emerald-500"
+                  }`}
+                >
+                  <div>
+                    {/* Unified Aspect-Ratio Full Width Image with Badges & Scanning Overlay */}
+                    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 mb-3.5">
+                      <img
+                        src={sample.sampleImage}
+                        alt={sample.name}
+                        className={`w-full h-full object-cover transition-transform duration-500 ${
+                          isScanningThisCard ? "scale-110 blur-[1px]" : "group-hover:scale-105"
+                        }`}
+                      />
+
+                      {/* Laser Scanning Animation Overlay */}
+                      {isScanningThisCard && (
+                        <>
+                          {/* Laser Scanning Moving Line */}
+                          <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 shadow-[0_0_15px_#34d399] z-30 animate-scan pointer-events-none" />
+                          
+                          {/* Dark Glassmorphism Overlay */}
+                          <div className="absolute inset-0 bg-slate-950/75 backdrop-blur-xs z-20 flex flex-col items-center justify-center text-center p-3 transition-all duration-300">
+                            <div className="w-10 h-10 rounded-2xl bg-emerald-900/90 border border-emerald-400/50 flex items-center justify-center text-emerald-300 shadow-xl animate-pulse mb-2">
+                              <Sparkles className="w-5 h-5 animate-spin" />
+                            </div>
+                            <span className="text-[11px] font-black text-white bg-emerald-950/90 px-3 py-1 rounded-full border border-emerald-400/40 shadow-md flex items-center gap-1.5">
+                              <span>{isAr ? "جاري قراءة المسار البيئي..." : "Scanning route..."}</span>
+                            </span>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Top Right Material Badge */}
+                      <span className="absolute top-2.5 right-2.5 text-[10px] sm:text-[11px] font-black px-3 py-1 rounded-full bg-slate-900/85 text-emerald-300 backdrop-blur-md border border-emerald-400/30 shadow-md z-10">
+                        {sample.badge}
+                      </span>
+                      {/* Top Left Circular Score Glass Badge */}
+                      <span className="absolute top-2.5 left-2.5 text-[10px] sm:text-[11px] font-black px-2.5 py-1 rounded-full bg-emerald-950/90 text-white backdrop-blur-md border border-emerald-400/40 shadow-md flex items-center gap-1 z-10">
+                        <Sparkles className="w-3 h-3 text-emerald-400" />
+                        <span>{sample.circularScore}</span>
+                      </span>
+                    </div>
+
+                    {/* Product Name & Pathway */}
+                    <div className="space-y-1">
+                      <h4 className="text-base sm:text-lg font-black text-slate-900 tracking-tight group-hover:text-emerald-800 transition-colors">
+                        {sample.name}
+                      </h4>
+                      <p className="text-xs font-extrabold text-teal-800 flex items-center gap-1.5">
+                        <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span>{sample.routeAr}</span>
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Product Name & Pathway */}
-                  <div className="space-y-1">
-                    <h4 className="text-base sm:text-lg font-black text-slate-900 tracking-tight group-hover:text-emerald-800 transition-colors">
-                      {sample.name}
-                    </h4>
-                    <p className="text-xs font-extrabold text-teal-800 flex items-center gap-1.5">
-                      <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      <span>{sample.routeAr}</span>
-                    </p>
+                  {/* Action Button at Card Bottom */}
+                  <div className="mt-4 pt-3 border-t border-slate-100">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCardScan(sample.id);
+                      }}
+                      disabled={isScanningThisCard}
+                      className={`w-full py-2.5 px-4 rounded-2xl font-extrabold text-xs transition-all duration-300 flex items-center justify-between shadow-2xs group-hover:shadow-md border cursor-pointer ${
+                        isScanningThisCard
+                          ? "bg-emerald-900 text-white border-emerald-700"
+                          : "bg-emerald-50 group-hover:bg-emerald-800 text-emerald-900 group-hover:text-white border-emerald-200/80 group-hover:border-emerald-700 active:scale-95"
+                      }`}
+                    >
+                      <span>
+                        {isScanningThisCard
+                          ? (isAr ? "جاري الفحص..." : "Scanning...")
+                          : (isAr ? "عرض المسار البيئي" : "View Eco Pathway")}
+                      </span>
+                      <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180 group-hover:-translate-x-1" : "rotate-0 group-hover:translate-x-1"} transition-transform`} />
+                    </button>
                   </div>
                 </div>
-
-                {/* Action Button at Card Bottom */}
-                <div className="mt-4 pt-3 border-t border-slate-100">
-                  <div className="w-full py-2.5 px-4 rounded-2xl bg-emerald-50 group-hover:bg-emerald-800 text-emerald-900 group-hover:text-white font-extrabold text-xs transition-all duration-300 flex items-center justify-between shadow-2xs group-hover:shadow-md border border-emerald-200/80 group-hover:border-emerald-700">
-                    <span>{isAr ? "عرض المسار البيئي" : "View Eco Pathway"}</span>
-                    <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180 group-hover:-translate-x-1" : "rotate-0 group-hover:translate-x-1"} transition-transform`} />
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       </div>
