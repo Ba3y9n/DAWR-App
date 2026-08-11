@@ -189,8 +189,8 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
               className="h-6 xs:h-7 sm:h-8 md:h-9 lg:h-11 w-auto object-contain select-none"
             />
             <img 
-              src="/assets/logo_ai_year.png" 
-              alt="Year of AI 2026" 
+              src="/assets/logo_google.png" 
+              alt="Google Developers" 
               className="h-6 xs:h-7 sm:h-8 md:h-9 lg:h-11 w-auto object-contain select-none"
             />
             <img 
