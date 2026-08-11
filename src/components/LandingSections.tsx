@@ -408,13 +408,11 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
             </ul>
           </div>
         </div>
-      </section>
-      </div>
+        </section>
 
-      {/* 2. Main Features Section (المميزات الرئيسية) */}
-      <section id="features" className="w-full py-12 bg-white text-slate-900 px-4 sm:px-6 lg:px-8 scroll-mt-24 border-t border-slate-100">
-        <div className="w-full max-w-7xl mx-auto space-y-6 text-center">
-          <div className="space-y-1.5 max-w-2xl mx-auto">
+        {/* 2. Main Features Section (المميزات الرئيسية) */}
+        <section id="features" className="space-y-6 scroll-mt-24">
+          <div className="space-y-1.5 max-w-2xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               {isAr ? "المميزات الرئيسية" : "Key Features"}
             </h2>
@@ -447,82 +445,119 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
               );
             })}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
+      <footer id="updates" className="w-full mt-16 border-t border-emerald-900/60 bg-gradient-to-b from-[#04291e] via-emerald-950 to-slate-950 text-white px-6 sm:px-12 md:px-16 pt-14 pb-10 shadow-xl rounded-none scroll-mt-24">
+        <div className="w-full max-w-7xl mx-auto space-y-10">
 
+          {/* ── 4-Column Grid ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-start">
 
-      {/* 3. Official Full-Bleed Darker Teal Footer (التحديثات والروابط) */}
-      <footer id="updates" className="w-full mt-16 border-t border-teal-900 bg-gradient-to-b from-teal-900 via-cyan-950 to-slate-950 text-white px-6 sm:px-12 md:px-20 pt-12 pb-24 shadow-xl space-y-8 rounded-none scroll-mt-24">
-        <div className="w-full max-w-7xl mx-auto space-y-8">
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-start">
-            {/* Column 1: الشعار والرئيسية */}
+            {/* Column 1: Brand Identity */}
             <div className="space-y-4">
-              <img src="/assets/dawr_logo_new.png" alt="DAWR Logo" className="h-10 w-auto object-contain bg-white/90 p-1.5 rounded-xl shadow-xs" />
-              <div className="space-y-3 pt-1">
-                <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
-                  {isAr ? "الرئيسية" : "Home"}
-                </h4>
-                <ul className="space-y-2 text-sm font-bold text-white">
-                  <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "عن المشروع" : "About Project"}</li>
-                  <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "التطبيق" : "App Features"}</li>
-                  <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "المساعدة" : "Help Center"}</li>
-                </ul>
-              </div>
+              <img src="/assets/dawr_logo_new.png" alt="DAWR Logo" className="h-11 w-auto object-contain bg-white/90 p-1.5 rounded-xl shadow-sm" />
+              <p className="text-sm font-semibold text-slate-300 leading-relaxed max-w-xs">
+                {isAr
+                  ? "التحليل الدائري الذكي للمنتجات وتعزيز حلول الاستدامة."
+                  : "Smart circular analysis for products and sustainable solutions."}
+              </p>
             </div>
 
-            {/* Column 2: المساعدة */}
-            <div className="space-y-3 md:pt-14">
-              <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
-                {isAr ? "المساعدة" : "Support"}
+            {/* Column 2: Quick Links */}
+            <div className="space-y-4">
+              <h4 className="text-sm font-bold text-emerald-400 tracking-wider uppercase">
+                {isAr ? "روابط سريعة" : "Quick Links"}
               </h4>
-              <ul className="space-y-2 text-sm font-bold text-white">
-                <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "الأسئلة الشائعة" : "FAQs"}</li>
-                <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "الدعم الفني" : "Technical Support"}</li>
-                <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "الشروط والأحكام" : "Terms & Conditions"}</li>
+              <ul className="space-y-2.5">
+                {[
+                  { ar: "الرئيسية",          en: "Home" },
+                  { ar: "الفحص الذكي",       en: "Smart Scan" },
+                  { ar: "كيف يعمل دَوْر؟",   en: "How DAWR Works" },
+                  { ar: "الأثر البيئي",       en: "Circular Impact" },
+                ].map((link) => (
+                  <li key={link.en}>
+                    <span className="text-sm text-slate-300 hover:text-emerald-400 cursor-pointer transition-colors duration-150 font-medium">
+                      {isAr ? link.ar : link.en}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* Column 3: تابعنا */}
-            <div className="space-y-3 md:pt-14">
-              <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
-                {isAr ? "تابعنا" : "Follow Us"}
+            {/* Column 3: Help & Policies */}
+            <div className="space-y-4">
+              <h4 className="text-sm font-bold text-emerald-400 tracking-wider uppercase">
+                {isAr ? "المساعدة والسياسات" : "Help & Legal"}
               </h4>
-              <ul className="space-y-2 text-sm font-bold text-white">
-                <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "تويتر / X" : "Twitter / X"}</li>
-                <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "إنستجرام" : "Instagram"}</li>
-                <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "لينكدإن" : "LinkedIn"}</li>
+              <ul className="space-y-2.5">
+                {[
+                  { ar: "الأسئلة الشائعة",          en: "FAQs" },
+                  { ar: "سياسة الخصوصية",            en: "Privacy Policy" },
+                  { ar: "الشروط والأحكام",            en: "Terms & Conditions" },
+                  { ar: "سياسة الاستخدام العادل",    en: "Fair Use Policy" },
+                ].map((link) => (
+                  <li key={link.en}>
+                    <span className="text-sm text-slate-300 hover:text-emerald-400 cursor-pointer transition-colors duration-150 font-medium">
+                      {isAr ? link.ar : link.en}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
+
+            {/* Column 4: Contact & Social */}
+            <div className="space-y-4">
+              <h4 className="text-sm font-bold text-emerald-400 tracking-wider uppercase">
+                {isAr ? "تواصل معنا" : "Contact Us"}
+              </h4>
+              <ul className="space-y-2.5">
+                {[
+                  { ar: "تويتر / X",     en: "Twitter / X" },
+                  { ar: "إنستغرام",      en: "Instagram" },
+                  { ar: "لينكدإن",       en: "LinkedIn" },
+                  { ar: "الدعم الفني",   en: "Technical Support" },
+                ].map((link) => (
+                  <li key={link.en}>
+                    <span className="text-sm text-slate-300 hover:text-emerald-400 cursor-pointer transition-colors duration-150 font-medium">
+                      {isAr ? link.ar : link.en}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
 
-          <div className="border-t border-teal-800/80 pt-6 text-center space-y-4">
-            <p className="text-sm font-bold text-cyan-200/90">
+          {/* ── Green Separator + Copyright + Team Badges ── */}
+          <div className="border-t border-emerald-800/50 pt-7 space-y-5 text-center">
+            <p className="text-sm font-bold text-slate-400">
               {isAr ? "© 2026 DAWR - جميع الحقوق محفوظة" : "© 2026 DAWR - All rights reserved"}
             </p>
 
-            {/* Development Team Badges with Hover Zoom & Glassmorphism */}
-            <div className="pt-2 space-y-2">
-              <span className="text-xs font-black text-emerald-300 uppercase tracking-widest block">
+            {/* Development Team Badges */}
+            <div className="space-y-3">
+              <span className="text-xs font-black text-emerald-400 uppercase tracking-widest block">
                 {isAr ? "فريق التطوير" : "Development Team"}
               </span>
-              <div className="flex flex-wrap items-center justify-center gap-2.5 max-w-2xl mx-auto pt-1">
-                <span className="bg-emerald-900/40 border border-emerald-500/30 text-emerald-100 hover:scale-105 hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all duration-200 cursor-default backdrop-blur-xs">
-                  {isAr ? "بيان المطيري" : "Bayan Almutiri"}
-                </span>
-                <span className="bg-emerald-900/40 border border-emerald-500/30 text-emerald-100 hover:scale-105 hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all duration-200 cursor-default backdrop-blur-xs">
-                  {isAr ? "متعب القرني" : "Mutaeb Alqarni"}
-                </span>
-                <span className="bg-emerald-900/40 border border-emerald-500/30 text-emerald-100 hover:scale-105 hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all duration-200 cursor-default backdrop-blur-xs">
-                  {isAr ? "عبدالعزيز الشمري" : "Abdulaziz Alshammari"}
-                </span>
-                <span className="bg-emerald-900/40 border border-emerald-500/30 text-emerald-100 hover:scale-105 hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all duration-200 cursor-default backdrop-blur-xs">
-                  {isAr ? "فيصل ال عبدالله" : "Faisal Al Abdullah"}
-                </span>
+              <div className="flex flex-wrap items-center justify-center gap-2.5 max-w-2xl mx-auto">
+                {[
+                  { ar: "بيان المطيري",       en: "Bayan Almutiri" },
+                  { ar: "متعب القرني",         en: "Mutaeb Alqarni" },
+                  { ar: "عبدالعزيز الشمري",   en: "Abdulaziz Alshammari" },
+                  { ar: "فيصل ال عبدالله",    en: "Faisal Al Abdullah" },
+                ].map((member) => (
+                  <span
+                    key={member.en}
+                    className="bg-emerald-900/40 border border-emerald-500/30 text-emerald-100 hover:scale-105 hover:border-emerald-400 hover:text-white px-4 py-1.5 rounded-full text-xs font-black shadow-sm transition-all duration-200 cursor-default backdrop-blur-sm"
+                  >
+                    {isAr ? member.ar : member.en}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
+
         </div>
       </footer>
 
