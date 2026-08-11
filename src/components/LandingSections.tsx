@@ -205,8 +205,8 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
     <div className="w-full bg-white space-y-12 pt-2 pb-0">
       {/* Container for Middle Content Sections */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* 1. DAWR Interactive Circular Journey (مسار دَوْر التفاعلي) */}
-        <section id="pathways-section" className="space-y-6 scroll-mt-24">
+        {/* 1. DAWR Interactive Circular Journey (كيف يعمل دَوْر؟) */}
+        <section id="how-it-works" className="space-y-6 scroll-mt-24">
         {/* Section Header */}
         <div className="text-center space-y-1.5 max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
@@ -411,8 +411,8 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
       </section>
       </div>
 
-      {/* 2. Main Features Section (المميزات الرئيسية - خلفية بيضاء وبطاقات ناعمة بنصوص سوداء) */}
-      <section id="ideas-section" className="w-full py-12 bg-white text-slate-900 px-4 sm:px-6 lg:px-8 scroll-mt-24">
+      {/* 2. Main Features Section (الأثر الدائري) */}
+      <section id="circular-impact" className="w-full py-12 bg-white text-slate-900 px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="w-full max-w-7xl mx-auto space-y-6 text-center">
           <div className="space-y-1.5 max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
@@ -420,7 +420,7 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
               <span>{isAr ? "خصائص المنصة" : "Platform Features"}</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              {isAr ? "المميزات الرئيسية" : "Key Features"}
+              {isAr ? "الأثر الدائري والخصائص" : "Circular Impact & Features"}
             </h2>
             <p className="text-xs sm:text-sm text-emerald-800 font-extrabold">
               {isAr ? "كل ما تحتاجه لتصبح بطلاً في الاقتصاد الدائري" : "Everything You Need to Become an Eco Hero"}
@@ -454,8 +454,8 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
         </div>
       </section>
 
-      {/* 3. Official Full-Bleed Darker Teal Footer (أسفل الصفحة) */}
-      <footer id="stores-section" className="w-full mt-16 border-t border-teal-900 bg-gradient-to-b from-teal-900 via-cyan-950 to-slate-950 text-white px-6 sm:px-12 md:px-20 pt-12 pb-24 shadow-xl space-y-8 rounded-none scroll-mt-24">
+      {/* 3. Official Full-Bleed Darker Teal Footer (التحديثات والروابط) */}
+      <footer id="updates" className="w-full mt-16 border-t border-teal-900 bg-gradient-to-b from-teal-900 via-cyan-950 to-slate-950 text-white px-6 sm:px-12 md:px-20 pt-12 pb-24 shadow-xl space-y-8 rounded-none scroll-mt-24">
         <div className="w-full max-w-7xl mx-auto space-y-8">
           <div className="flex items-center justify-between border-b border-teal-800/60 pb-6">
             <img src="/assets/dawr_logo_new.png" alt="DAWR Logo" className="h-10 w-auto object-contain bg-white/90 p-1.5 rounded-xl shadow-xs" />

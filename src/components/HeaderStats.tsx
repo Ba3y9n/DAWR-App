@@ -27,17 +27,35 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { id: "home" as ActiveTab, labelAr: "الرئيسية", labelEn: "Home", action: () => onChangeTab?.("home") },
-    { id: "scan" as ActiveTab, labelAr: "الفحص الذكي", labelEn: "Smart Scan", action: () => onChangeTab?.("scan") },
+    { 
+      id: "home" as ActiveTab, 
+      labelAr: "الرئيسية", 
+      labelEn: "Home", 
+      action: () => {
+        onChangeTab?.("home");
+        if (onBack) onBack();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } 
+    },
+    { 
+      id: "scan" as ActiveTab, 
+      labelAr: "الفحص الذكي", 
+      labelEn: "Smart Scan", 
+      action: () => {
+        onChangeTab?.("scan");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } 
+    },
     {
       id: "howItWorks" as any,
-      labelAr: "كيف يعمل دَوْر؟",
+      labelAr: "كيف يعمل دور؟",
       labelEn: "How DAWR Works",
       action: () => {
         onChangeTab?.("home");
+        if (onBack) onBack();
         setTimeout(() => {
           document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+        }, 120);
       },
     },
     {
@@ -46,12 +64,24 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
       labelEn: "Circular Impact",
       action: () => {
         onChangeTab?.("home");
+        if (onBack) onBack();
         setTimeout(() => {
-          document.getElementById("impact-section")?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+          document.getElementById("circular-impact")?.scrollIntoView({ behavior: "smooth" });
+        }, 120);
       },
     },
-    { id: "updates" as ActiveTab, labelAr: "التحديثات", labelEn: "Updates", action: () => onChangeTab?.("updates") },
+    {
+      id: "updates" as any,
+      labelAr: "التحديثات",
+      labelEn: "Updates",
+      action: () => {
+        onChangeTab?.("home");
+        if (onBack) onBack();
+        setTimeout(() => {
+          document.getElementById("updates")?.scrollIntoView({ behavior: "smooth" });
+        }, 120);
+      },
+    },
   ];
 
   return (

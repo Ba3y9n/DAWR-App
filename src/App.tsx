@@ -229,7 +229,12 @@ export default function App() {
           }}
           cameraReady={!isAnalyzing}
           activeTab={activeTab}
-          onChangeTab={setActiveTab}
+          onChangeTab={(tab) => {
+            setActiveTab(tab);
+            if (tab === "home") {
+              setAnalysisData(null);
+            }
+          }}
         />
 
         {/* Main Tab View Controller */}
