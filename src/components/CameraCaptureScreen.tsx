@@ -690,10 +690,10 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/45 via-emerald-900/30 to-black/20" />
 
         {/* 2-Column Grid Hero Container (Right: Main Value Headline & Text, Left: Futuristic Circular HUD Loop) */}
-        <div className="w-full max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="w-full max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
           
-          {/* Right Column: Text & Primary Action Buttons (7 Columns) */}
-          <div className="lg:col-span-7 flex flex-col items-start text-right space-y-5">
+          {/* Right Column: Text & Primary Action Buttons (7 Columns) — order-2 on mobile (below circle) */}
+          <div className="lg:col-span-7 flex flex-col items-start text-right space-y-5 order-2 lg:order-1">
             {/* Main Value Proposition Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
               {isAr ? "قبل أن ترميه... دَوْر يعرف قيمته" : "Before throwing it... DAWR knows its value"}
@@ -718,12 +718,15 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
             </div>
           </div>
 
-          {/* Left Column: Hero Interactive Circular HUD Loop (5 Columns) */}
-          <div className="lg:col-span-5 flex items-center justify-center pt-6 lg:pt-0">
-            <CircularHudLoop
-              language={language}
-              onSelectPathway={() => onNavigateToScan?.()}
-            />
+          {/* Left Column: Hero Interactive Circular HUD Loop — order-1 on mobile (shown first) */}
+          <div className="lg:col-span-5 flex items-center justify-center pt-2 lg:pt-0 order-1 lg:order-2">
+            {/* Wrapper shrinks the circle on mobile only */}
+            <div className="w-full max-w-[240px] sm:max-w-none">
+              <CircularHudLoop
+                language={language}
+                onSelectPathway={() => onNavigateToScan?.()}
+              />
+            </div>
           </div>
         </div>
       </section>

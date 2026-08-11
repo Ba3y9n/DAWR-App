@@ -219,8 +219,8 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
             <span>{isAr ? "افحص منتجاً الآن" : "Scan Product Now"}</span>
           </button>
 
-          {/* User Account Button */}
-          <div className="relative">
+          {/* User Account Button — hidden on mobile, visible md+ */}
+          <div className="relative hidden md:block">
             <button
               onClick={handleAccountClick}
               className={`px-3 py-2 rounded-xl border transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 ${
