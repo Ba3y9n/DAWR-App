@@ -713,24 +713,14 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                 : "Scan any product with AI to analyze its condition and materials, discovering the optimum circular route."}
             </p>
 
-            {/* Action Buttons Row */}
-            <div className="flex flex-wrap items-center gap-3 pt-3 w-full sm:w-auto">
+            {/* Action Button */}
+            <div className="pt-3 w-full sm:w-auto">
               <button
                 onClick={() => onNavigateToScan?.()}
-                className="py-3.5 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-700 hover:from-emerald-600 hover:to-teal-700 text-slate-950 font-black text-sm sm:text-base shadow-xl shadow-emerald-950/50 hover:scale-[1.03] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-300/50"
+                className="py-4 px-9 rounded-2xl bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black text-sm sm:text-base shadow-xl shadow-emerald-950/60 hover:scale-[1.03] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 cursor-pointer border-2 border-white"
               >
                 <Camera className="w-5 h-5 text-slate-950 shrink-0" />
                 <span>{isAr ? "افحص منتجًا الآن" : "Scan Product Now"}</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="py-3.5 px-6 rounded-2xl bg-emerald-950/80 hover:bg-emerald-900 text-white border border-emerald-400/40 font-bold text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer backdrop-blur-xs"
-              >
-                <span>{isAr ? "شاهد كيف يعمل" : "See How It Works"}</span>
-                <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
               </button>
             </div>
           </div>
