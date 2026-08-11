@@ -282,15 +282,15 @@ export const CircularImpactDashboard: React.FC<CircularImpactDashboardProps> = (
                   href="https://www.wbcsd.org/actions/circular-transition-indicators/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-4 rounded-2xl bg-emerald-950/80 border border-emerald-700/60 hover:border-emerald-400 transition flex items-center justify-between text-right cursor-pointer group"
+                  className="p-5 rounded-2xl bg-emerald-950/80 border border-emerald-700/60 hover:border-emerald-400 hover:bg-emerald-900/60 transition-all duration-200 flex items-center justify-between text-right cursor-pointer group gap-4"
                 >
-                  <div>
-                    <h5 className="text-xs font-black text-white group-hover:text-emerald-300">
+                  <div className="space-y-1.5 min-w-0">
+                    <h5 className="text-base sm:text-lg font-black text-white group-hover:text-emerald-300 transition-colors leading-snug">
                       Circular Transition Indicators (CTI)
                     </h5>
-                    <span className="text-[11px] font-bold text-emerald-300">WBCSD</span>
+                    <span className="block text-sm font-semibold text-emerald-100 group-hover:text-emerald-200 transition-colors">WBCSD</span>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                  <ExternalLink className="w-6 h-6 text-emerald-400 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all shrink-0" />
                 </a>
 
                 {/* Reference 2: MCI */}
@@ -298,15 +298,15 @@ export const CircularImpactDashboard: React.FC<CircularImpactDashboardProps> = (
                   href="https://www.ellenmacarthurfoundation.org/material-circularity-indicator"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-4 rounded-2xl bg-emerald-950/80 border border-emerald-700/60 hover:border-emerald-400 transition flex items-center justify-between text-right cursor-pointer group"
+                  className="p-5 rounded-2xl bg-emerald-950/80 border border-emerald-700/60 hover:border-emerald-400 hover:bg-emerald-900/60 transition-all duration-200 flex items-center justify-between text-right cursor-pointer group gap-4"
                 >
-                  <div>
-                    <h5 className="text-xs font-black text-white group-hover:text-emerald-300">
+                  <div className="space-y-1.5 min-w-0">
+                    <h5 className="text-base sm:text-lg font-black text-white group-hover:text-emerald-300 transition-colors leading-snug">
                       Material Circularity Indicator (MCI)
                     </h5>
-                    <span className="text-[11px] font-bold text-emerald-300">Ellen MacArthur Foundation</span>
+                    <span className="block text-sm font-semibold text-emerald-100 group-hover:text-emerald-200 transition-colors">Ellen MacArthur Foundation</span>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                  <ExternalLink className="w-6 h-6 text-emerald-400 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all shrink-0" />
                 </a>
               </div>
 
