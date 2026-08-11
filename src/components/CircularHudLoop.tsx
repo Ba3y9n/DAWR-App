@@ -44,7 +44,7 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
   ];
 
   return (
-    <div className="relative w-full max-w-[480px] sm:max-w-[520px] aspect-square mx-auto flex items-center justify-center select-none" dir={isAr ? "rtl" : "ltr"}>
+    <div className="relative w-full max-w-[300px] sm:max-w-[480px] lg:max-w-[520px] aspect-square mx-auto flex items-center justify-center select-none" dir={isAr ? "rtl" : "ltr"}>
       
       {/* 1. Ambient Outer Glowing Background Halo */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-400/20 to-emerald-400/30 blur-3xl animate-pulse pointer-events-none" />
