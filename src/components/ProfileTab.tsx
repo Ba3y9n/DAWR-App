@@ -110,16 +110,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
       </div>
 
       {/* 2. Responsive Stats Overview Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white border border-slate-200/90 rounded-3xl p-5 text-center space-y-1.5 shadow-2xs">
-          <span className="text-xs font-bold text-slate-600 block">{isAr ? "نقاط الاقتصاد الدائري" : "Circular Points"}</span>
-          <span className="text-2xl sm:text-3xl font-black text-emerald-950 block">
-            +{currentUserProfile?.points ?? userStats.points}
-          </span>
-          <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md inline-block">
-            {isAr ? "رصيد فعال" : "Active Balance"}
-          </span>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
 
         <div className="bg-white border border-slate-200/90 rounded-3xl p-5 text-center space-y-1.5 shadow-2xs">
           <span className="text-xs font-bold text-slate-600 block">{isAr ? "المنتجات المحفوظة" : "Diverted Items"}</span>

@@ -155,6 +155,20 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
               className="h-20 sm:h-24 max-h-24 w-auto object-contain flex-shrink-0 group-hover:scale-105 transition-transform duration-300 drop-shadow-2xs"
             />
           </div>
+
+          {/* Sustainability Points Glass Badge next to Logo */}
+          <div 
+            onClick={(e) => {
+              e.stopPropagation();
+              onChangeTab?.("profile");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 text-emerald-950 border border-emerald-200/90 shadow-3xs font-black text-[10px] sm:text-xs cursor-pointer hover:border-emerald-400 transition-all select-none shrink-0"
+            title={isAr ? "نقاط الاستدامة المكتسبة" : "Earned Eco Points"}
+          >
+            <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+            <span>{currentUserProfile?.points ?? userStats.points} {isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
+          </div>
         </div>
 
         {/* 2. Center: Quick Navigation Links (Desktop) */}
@@ -196,16 +210,6 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
               alt="Saudi Vision 2030" 
               className="h-6 xs:h-7 sm:h-8 md:h-9 lg:h-11 w-auto object-contain select-none"
             />
-          </div>
-
-          {/* Sustainability Points Glass Badge */}
-          <div 
-            onClick={() => onChangeTab?.("profile")}
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-950 border border-emerald-200/90 shadow-2xs font-black text-xs cursor-pointer hover:border-emerald-400 transition-all"
-            title={isAr ? "نقاط الاستدامة المكتسبة" : "Earned Eco Points"}
-          >
-            <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-            <span>{currentUserProfile?.points ?? userStats.points} {isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
           </div>
 
           {/* Language Switcher */}
@@ -286,22 +290,6 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
                     onChangeTab?.("profile");
                     setAccountDropdownOpen(false);
                   }}
-                  className="w-full text-right py-2 px-3 rounded-xl hover:bg-emerald-50 text-xs font-black text-slate-800 flex items-center justify-between cursor-pointer"
-                >
-                  <span className="flex items-center gap-2">
-                    <Leaf className="w-4 h-4 text-emerald-600" />
-                    <span>{isAr ? "النقاط" : "Eco Points"}</span>
-                  </span>
-                  <span className="text-xs font-black text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md">
-                    {currentUserProfile.points ?? userStats.points}
-                  </span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    onChangeTab?.("profile");
-                    setAccountDropdownOpen(false);
-                  }}
                   className="w-full text-right py-2 px-3 rounded-xl hover:bg-emerald-50 text-xs font-black text-slate-800 flex items-center gap-2 cursor-pointer"
                 >
                   <Settings className="w-4 h-4 text-slate-600" />
@@ -337,17 +325,13 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
       {/* 4. Mobile Menu Dropdown Overlay */}
       {mobileMenuOpen && (
         <div className="md:hidden w-full bg-white border-b border-slate-200 px-4 py-4 space-y-3 shadow-lg">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-900 font-extrabold text-xs">
-              <Leaf className="w-4 h-4 text-emerald-600" />
-              <span>{currentUserProfile?.points ?? userStats.points} {isAr ? "نقطة استدامة" : "points"}</span>
-            </div>
+          <div className="flex items-center justify-center pb-2 border-b border-slate-100">
             <button
               onClick={() => {
                 onChangeTab?.("home");
                 setMobileMenuOpen(false);
               }}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-800 text-white font-black text-xs shadow-sm"
+              className="w-full flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-800 text-white font-black text-xs shadow-sm"
             >
               <Camera className="w-3.5 h-3.5" />
               <span>{isAr ? "افحص منتجك الآن" : "Scan Product"}</span>

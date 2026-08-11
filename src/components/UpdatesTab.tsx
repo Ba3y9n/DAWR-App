@@ -531,11 +531,6 @@ export const UpdatesTab: React.FC<UpdatesTabProps> = ({
             <Flame className="w-4 h-4 text-emerald-600" />
             <span>{isAr ? "يومان متتاليان" : "2-Day Streak"}</span>
           </div>
-          <div className="w-1 h-1 rounded-full bg-slate-300" />
-          <div className="flex items-center gap-1.5">
-            <Star className="w-4 h-4 text-emerald-600" />
-            <span>{totalDisplayPoints} {isAr ? "نقطة دَوْر" : "DAWR Pts"}</span>
-          </div>
         </div>
 
         {/* Badge List */}
