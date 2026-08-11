@@ -271,99 +271,143 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
         </div>
 
         <div className="space-y-4 text-xs">
-          <div className="space-y-1.5">
-            <div className="flex justify-between font-bold text-slate-900">
-              <span className="flex items-center gap-2">
-                <RotateCcw className="w-4 h-4 text-emerald-700" />
-                <span>{isAr ? "إعادة الاستخدام" : "Reuse Option"}</span>
-              </span>
-              <span className="text-emerald-950 font-black text-sm">90%</span>
-            </div>
-            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
-              <div className="bg-gradient-to-r from-emerald-600 to-teal-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: "90%" }} />
-            </div>
-          </div>
+          {/* Reuse */}
+          {(() => {
+            const reuseVal = analysis.breakdown?.reuse ?? analysis.scores?.reuse ?? 80;
+            return (
+              <div className="space-y-1.5">
+                <div className="flex justify-between font-bold text-slate-900">
+                  <span className="flex items-center gap-2">
+                    <RotateCcw className="w-4 h-4 text-emerald-700" />
+                    <span>{isAr ? "إعادة الاستخدام" : "Reuse Option"}</span>
+                  </span>
+                  <span className="text-emerald-950 font-black text-sm">
+                    {reuseVal <= 10 ? (isAr ? "0% (غير مناسب)" : "0% (Unsuitable)") : `${reuseVal}%`}
+                  </span>
+                </div>
+                <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+                  <div className="bg-gradient-to-r from-emerald-600 to-teal-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: `${Math.max(2, reuseVal)}%` }} />
+                </div>
+              </div>
+            );
+          })()}
 
-          <div className="space-y-1.5">
-            <div className="flex justify-between font-bold text-slate-900">
-              <span className="flex items-center gap-2">
-                <Recycle className="w-4 h-4 text-teal-700" />
-                <span>{isAr ? "إعادة التدوير" : "Recycling Option"}</span>
-              </span>
-              <span className="text-emerald-950 font-black text-sm">82%</span>
-            </div>
-            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
-              <div className="bg-gradient-to-r from-teal-600 to-emerald-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: "82%" }} />
-            </div>
-          </div>
+          {/* Recycling */}
+          {(() => {
+            const recyclingVal = analysis.breakdown?.recycling ?? analysis.scores?.recycling ?? 70;
+            return (
+              <div className="space-y-1.5">
+                <div className="flex justify-between font-bold text-slate-900">
+                  <span className="flex items-center gap-2">
+                    <Recycle className="w-4 h-4 text-teal-700" />
+                    <span>{isAr ? "إعادة التدوير" : "Recycling Option"}</span>
+                  </span>
+                  <span className="text-emerald-950 font-black text-sm">{recyclingVal}%</span>
+                </div>
+                <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+                  <div className="bg-gradient-to-r from-teal-600 to-emerald-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: `${Math.max(2, recyclingVal)}%` }} />
+                </div>
+              </div>
+            );
+          })()}
 
-          <div className="space-y-1.5">
-            <div className="flex justify-between font-bold text-slate-900">
-              <span className="flex items-center gap-2">
-                <Wrench className="w-4 h-4 text-cyan-700" />
-                <span>{isAr ? "إعادة التصنيع / الإصلاح" : "Upcycling & Repair"}</span>
-              </span>
-              <span className="text-cyan-950 font-black text-sm">65%</span>
-            </div>
-            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
-              <div className="bg-gradient-to-r from-cyan-600 to-teal-400 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: "65%" }} />
-            </div>
-          </div>
+          {/* Repair */}
+          {(() => {
+            const repairVal = analysis.breakdown?.repair ?? analysis.scores?.repair ?? 50;
+            return (
+              <div className="space-y-1.5">
+                <div className="flex justify-between font-bold text-slate-900">
+                  <span className="flex items-center gap-2">
+                    <Wrench className="w-4 h-4 text-cyan-700" />
+                    <span>{isAr ? "إعادة التصنيع / الإصلاح" : "Upcycling & Repair"}</span>
+                  </span>
+                  <span className="text-cyan-950 font-black text-sm">{repairVal}%</span>
+                </div>
+                <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+                  <div className="bg-gradient-to-r from-cyan-600 to-teal-400 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: `${Math.max(2, repairVal)}%` }} />
+                </div>
+              </div>
+            );
+          })()}
 
-          <div className="space-y-1.5">
-            <div className="flex justify-between font-bold text-slate-900">
-              <span className="flex items-center gap-2">
-                <HeartHandshake className="w-4 h-4 text-emerald-700" />
-                <span>{isAr ? "التبرع والإهداء" : "Donation Potential"}</span>
-              </span>
-              <span className="text-emerald-950 font-black text-sm">95%</span>
-            </div>
-            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
-              <div className="bg-gradient-to-r from-emerald-700 to-teal-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: "95%" }} />
-            </div>
-          </div>
+          {/* Donation */}
+          {(() => {
+            const donationVal = analysis.breakdown?.donation ?? analysis.scores?.donation ?? 60;
+            return (
+              <div className="space-y-1.5">
+                <div className="flex justify-between font-bold text-slate-900">
+                  <span className="flex items-center gap-2">
+                    <HeartHandshake className="w-4 h-4 text-emerald-700" />
+                    <span>{isAr ? "التبرع والإهداء" : "Donation Potential"}</span>
+                  </span>
+                  <span className="text-emerald-950 font-black text-sm">
+                    {donationVal === 0 ? (isAr ? "0% (غير قابل للتبرع)" : "0% (Not Donatable)") : `${donationVal}%`}
+                  </span>
+                </div>
+                <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+                  <div className="bg-gradient-to-r from-emerald-700 to-teal-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: `${Math.max(2, donationVal)}%` }} />
+                </div>
+              </div>
+            );
+          })()}
 
-          <div className="space-y-1.5">
-            <div className="flex justify-between font-bold text-slate-900">
-              <span className="flex items-center gap-2">
-                <Coins className="w-4 h-4 text-amber-600" />
-                <span>{isAr ? "القيمة المتبقية" : "Residual Value Score"}</span>
-              </span>
-              <span className="text-amber-950 font-black text-sm">84%</span>
-            </div>
-            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
-              <div className="bg-gradient-to-r from-amber-500 to-emerald-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: "84%" }} />
-            </div>
-          </div>
+          {/* Residual Value */}
+          {(() => {
+            const residualVal = Math.max(5, Math.round(score * 0.9));
+            return (
+              <div className="space-y-1.5">
+                <div className="flex justify-between font-bold text-slate-900">
+                  <span className="flex items-center gap-2">
+                    <Coins className="w-4 h-4 text-amber-600" />
+                    <span>{isAr ? "القيمة المتبقية" : "Residual Value Score"}</span>
+                  </span>
+                  <span className="text-amber-950 font-black text-sm">{residualVal}%</span>
+                </div>
+                <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+                  <div className="bg-gradient-to-r from-amber-500 to-emerald-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: `${residualVal}%` }} />
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </div>
 
       {/* 4️⃣ PROPOSED CIRCULAR DECISION CARD */}
-      <div className="bg-emerald-50/80 border-2 border-emerald-300 rounded-3xl p-6 shadow-sm space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-200/90 pb-3">
+      <div className={`border-2 rounded-3xl p-6 shadow-sm space-y-3 ${
+        score < 50 ? "bg-amber-50/80 border-amber-300" : "bg-emerald-50/80 border-emerald-300"
+      }`}>
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/90 pb-3">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-2xl bg-emerald-800 text-white flex items-center justify-center font-black shadow-xs">
+            <div className={`w-9 h-9 rounded-2xl text-white flex items-center justify-center font-black shadow-xs ${
+              score < 50 ? "bg-amber-700" : "bg-emerald-800"
+            }`}>
               ♻️
             </div>
-            <h3 className="text-base font-extrabold text-emerald-950">
+            <h3 className={`text-base font-extrabold ${score < 50 ? "text-amber-950" : "text-emerald-950"}`}>
               {isAr ? "القرار الدائري المقترح" : "Recommended Circular Decision"}
             </h3>
           </div>
-          <span className="text-xs font-black text-emerald-900 bg-white border border-emerald-300 px-3.5 py-1 rounded-full">
+          <span className={`text-xs font-black bg-white border px-3.5 py-1 rounded-full ${
+            score < 50 ? "text-amber-950 border-amber-300" : "text-emerald-950 border-emerald-300"
+          }`}>
             {topPathway.title}
           </span>
         </div>
 
         <p className="text-xs sm:text-sm text-slate-800 font-bold leading-relaxed pt-1">
-          {isAr
-            ? `المنتج (${analysis.productName || analysis.product}) ما زال قابلًا للاستخدام، لذلك يُنصح بإعادة استخدامه أو توجيهه إلى جهة تستفيد منه بدلاً من التخلص منه.`
-            : `The product is in good condition, so it is recommended to reuse or donate it instead of disposal.`}
+          {analysis.assessmentText || analysis.environmentalImpact || (isAr
+            ? `المنتج (${analysis.productName || analysis.product}) تم تقييمه بناءً على حالته الظاهرة وخامته لاستخلاص القرار الدائري الأمثل.`
+            : `The product has been visually evaluated to extract the optimal circular decision.`)}
         </p>
 
-        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-black text-emerald-950">
-          <span className="bg-white border border-emerald-200 px-3 py-1 rounded-xl shadow-2xs">
+        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-black text-slate-900">
+          <span className="bg-white border border-slate-200 px-3 py-1 rounded-xl shadow-2xs">
             {isAr ? "أولوية المسار: " : "Priority: "}
-            <strong className="text-emerald-900">إعادة الاستخدام ← التبرع ← إعادة التدوير</strong>
+            <strong className={score < 50 ? "text-amber-900" : "text-emerald-900"}>
+              {score < 50
+                ? (isAr ? "إعادة التدوير ← معالجة متخصصة ← تخلص آمن" : "Recycling → Specialized Processing → Safe Disposal")
+                : (isAr ? "إعادة الاستخدام ← التبرع ← إعادة التدوير" : "Reuse → Donation → Recycling")}
+            </strong>
           </span>
         </div>
       </div>

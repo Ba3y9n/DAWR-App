@@ -85,22 +85,41 @@ export default async function handler(req: any, res: any) {
     }
 
     const systemInstruction = `
-أنت خبير تدقيق وتحليل منتجات واقتصاد دائري استثماري. قم بفحص الصورة المرفقة بدقة متناهية واستخرج البيانات التالية بصيغة JSON حصرية:
-1. productName: اسم المنتج الدقيق والمتخصص من واقع الصورة.
-2. condition: حالة المنتج الواقعية الحقيقية بدقة.
-3. material: الخامات والمواد المصنوع منها المنتج بدقة.
-4. circularScore: مؤشر القرار الدائري الاستدامي من 100 بناءً على حالة المنتج الحقيقية.
-5. metrics: حساب حقيقي ودقيق للمؤشرات (savedCo2, savedWater, landfillDiverted).
-6. breakdown: نسب مئوية واقعية للمسارات المقترحة (reuse, repair, donation, recycling).
-7. assessmentText: شرح وتوجيه تفصيلي واحترافي يوضح اسم المنتج ولماذا تم اختيار هذا المسار.
-8. recommended_pathways: مسارات عملية مرتبة بحسب الأولوية (rank, badge, title, category, description, points, suitability).
+أنت خبير تدقيق وتفتيش فني واقتصاد دائري استثماري صارم. قم بفحص الصورة المرفقة بدقة متناهية وبصريات دقيقة، واستخرج البيانات التالية بصيغة JSON حصرية:
+
+⚠️ القواعد الصارمة والحيادية في التقييم:
+1. لا تفترض أبدًا أن المنتج صالح أو ممتاز. يمنع منعا باتا إعطاء تقييم مرتفع للمنتجات التالفة أو المحروقة أو المكسورة.
+2. حدد "حالة المنتج" (condition) بدقة من القائمة التالية فقط:
+   - ممتاز
+   - جيد
+   - متوسط
+   - تالف
+   - تالف بشدة
+   - محروق
+   - مكسور
+   - غير صالح للاستخدام
+   - غير واضح / لا يمكن تحديد الحالة
+3. إذا كانت حالة المنتج (تالف / تالف بشدة / محروق / مكسور / غير صالح للاستخدام):
+   - يجب أن يكون circularScore منخفضاً جداً (بين 5 و 40 فقط).
+   - نسبة إعادة الاستخدام (breakdown.reuse) تكون بين 0% و 10% فقط (غير مناسب لإعادة الاستخدام).
+   - نسبة التبرع (breakdown.donation) تكون 0% (غير مناسب إطلاقاً للتبرع).
+   - القرار المقترح (recommended_action) يكون حتماً "recycling" (إعادة تدوير منسوجات/إلكترونيات/مواد) أو "disposal" (تخلص آمن / معالجة متخصصة).
+   - سبب القرار (assessmentText) يجب أن يوضح العيب والتلف الظاهر بدقة (مثال: "المنتج يظهر عليه تلف واحتراق واضح، مما يجعله غير مناسب لإعادة الاستخدام المباشر.").
+4. إذا كانت الصورة غير واضحة أو مظلمة أو غير مفهومة:
+   - ضع condition: "غير واضح / لا يمكن تحديد الحالة".
+   - ضع confidenceScore: 40.
+   - ضع assessmentText: "تعذر تحديد حالة المنتج بدقة نظراً لعدم وضوح الصورة المرفقة."
+5. افصل تماماً بين "نوع المنتج" (productName) و"حالة المنتج" (condition).
+   - قميص محروق ➔ النوع: قميص قطني، الحالة: محروق ومتضرر بشدة، التقييم: منخفض جداً، المسار: إعادة تدوير المنسوجات.
+6. قيم جميع المسارات الممكنة بحسب الحالة الفعلية (reuse, repair, donation, recycling).
+7. حدد confidenceScore من 0 إلى 100 يعبر عن دقة التعرف والتحليل البصري للصورة.
 
 جميع المخرجات باللغة العربية ومطابقة للمخطط بدون إيموجي.
 `;
 
     const userText = targetPrompt
-      ? `حلل الصورة المرفقة بصفتك خبير اقتصاد دائري. ملاحظة المستخدم: ${targetPrompt}`
-      : `أنت خبير تدقيق وتحليل منتجات واقتصاد دائري استثماري. قم بفحص الصورة المرفقة واستخرج البيانات بصيغة JSON.`;
+      ? `حلل الصورة المرفقة بصفتك خبير تدقيق وتحليل منتجات واقتصاد دائري. ملاحظة المستخدم: ${targetPrompt}`
+      : `أنت خبير تدقيق وتفتيش فني واقتصاد دائري. قم بفحص الصورة المرفقة بدقة واستخرج البيانات بصيغة JSON.`;
 
     const contents: any[] = [{ inlineData }, { text: userText }];
 
@@ -116,6 +135,7 @@ export default async function handler(req: any, res: any) {
             productName: { type: Type.STRING },
             condition: { type: Type.STRING },
             material: { type: Type.STRING },
+            confidenceScore: { type: Type.INTEGER },
             circularScore: { type: Type.INTEGER },
             scoreLabel: { type: Type.STRING },
             assessmentText: { type: Type.STRING },
@@ -156,7 +176,7 @@ export default async function handler(req: any, res: any) {
               }
             }
           },
-          required: ["productName", "condition", "material", "circularScore", "metrics", "breakdown", "assessmentText", "recommended_pathways"]
+          required: ["productName", "condition", "material", "confidenceScore", "circularScore", "metrics", "breakdown", "assessmentText", "recommended_pathways"]
         }
       }
     });
