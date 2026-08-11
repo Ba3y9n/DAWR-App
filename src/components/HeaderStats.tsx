@@ -33,7 +33,9 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
 
-  const displayName = currentUserProfile?.fullName || (isAr ? "مستكشف دَوْر" : "DAWR Explorer");
+  const displayName = currentUserProfile?.fullName?.trim() 
+    || currentUserProfile?.email?.split('@')[0] 
+    || (isAr ? "عضو دَوْر" : "DAWR Member");
 
   const navLinks = [
     { 

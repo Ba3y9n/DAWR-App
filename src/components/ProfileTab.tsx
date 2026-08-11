@@ -42,7 +42,9 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
         },
       ];
 
-  const displayName = currentUserProfile?.fullName || (isAr ? "مستكشف دَوْر" : "DAWR Explorer");
+  const displayName = currentUserProfile?.fullName?.trim() 
+    || currentUserProfile?.email?.split('@')[0] 
+    || (isAr ? "عضو دَوْر" : "DAWR Member");
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 pb-32 bg-[#F8FAF9] font-sans text-slate-900" dir={isAr ? "rtl" : "ltr"}>

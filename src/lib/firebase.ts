@@ -87,7 +87,7 @@ export async function getOrCreateDirectFirestoreUser(email: string, fullName?: s
       const data = snap.data();
       return {
         uid: cleanId,
-        fullName: data.fullName || fullName || "مستخدم دَوْر",
+        fullName: data.fullName || fullName || email.split('@')[0],
         email: data.email || email,
         points: data.points ?? 200,
         savedProductsCount: data.savedProductsCount ?? 3,
@@ -101,7 +101,7 @@ export async function getOrCreateDirectFirestoreUser(email: string, fullName?: s
     } else {
       const newProfile: UserProfile = {
         uid: cleanId,
-        fullName: fullName || "مستخدم دَوْر",
+        fullName: fullName || email.split('@')[0],
         email: email,
         points: 220,
         savedProductsCount: 3,
@@ -143,7 +143,7 @@ export async function ensureUserProfile(user: User, customFullName?: string): Pr
       const data = snap.data();
       return {
         uid: user.uid,
-        fullName: data.fullName || user.displayName || customFullName || "مستخدم دَوْر",
+        fullName: data.fullName || customFullName || user.displayName || user.email?.split('@')[0] || "عضو دَوْر",
         email: data.email || user.email || "",
         points: data.points ?? 200,
         savedProductsCount: data.savedProductsCount ?? 3,
@@ -157,7 +157,7 @@ export async function ensureUserProfile(user: User, customFullName?: string): Pr
     } else {
       const newProfile: UserProfile = {
         uid: user.uid,
-        fullName: customFullName || user.displayName || "مستخدم دَوْر",
+        fullName: customFullName || user.displayName || user.email?.split('@')[0] || "عضو دَوْر",
         email: user.email || "",
         points: 200,
         savedProductsCount: 3,
@@ -207,7 +207,7 @@ export function listenUserProfile(userId: string, callback: (profile: UserProfil
         const data = snap.data();
         callback({
           uid: userId,
-          fullName: data.fullName || "مستخدم دَوْر",
+          fullName: data.fullName || data.email?.split('@')[0] || "عضو دَوْر",
           email: data.email || "",
           points: data.points ?? 200,
           savedProductsCount: data.savedProductsCount ?? 0,
