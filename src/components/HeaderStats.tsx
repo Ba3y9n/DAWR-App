@@ -179,6 +179,25 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
 
         {/* 3. Left Side: Tools, Points & Account */}
         <div className="flex items-center gap-2 relative">
+          {/* Official Partner Logos (Tuwaiq -> AI Year -> Vision 2030) */}
+          <div className="flex items-center gap-1.5 xs:gap-2.5 sm:gap-3 md:gap-3.5 border-l border-slate-200/80 pl-2 xs:pl-3 sm:pl-3.5 mr-1 xs:mr-2 shrink-0">
+            <img 
+              src="/assets/logo_tuwaiq.png" 
+              alt="Tuwaiq Academy" 
+              className="h-6 xs:h-7 sm:h-8 md:h-9 lg:h-11 w-auto object-contain select-none"
+            />
+            <img 
+              src="/assets/logo_ai_year.png" 
+              alt="Year of AI 2026" 
+              className="h-6 xs:h-7 sm:h-8 md:h-9 lg:h-11 w-auto object-contain select-none"
+            />
+            <img 
+              src="/assets/logo_vision2030.png" 
+              alt="Saudi Vision 2030" 
+              className="h-6 xs:h-7 sm:h-8 md:h-9 lg:h-11 w-auto object-contain select-none"
+            />
+          </div>
+
           {/* Sustainability Points Glass Badge */}
           <div 
             onClick={() => onChangeTab?.("profile")}
