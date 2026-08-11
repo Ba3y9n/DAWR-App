@@ -679,13 +679,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/45 via-emerald-900/30 to-black/20" />
 
         {/* Right-Aligned Text & Action Buttons Container inside Max-W-7xl */}
-        <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col items-start text-right space-y-4">
-          {/* Brand Tagline Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/85 border border-emerald-400/40 text-emerald-200 text-xs font-black tracking-wide shadow-md backdrop-blur-xs">
-            <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{isAr ? "لا ترمِه... أعطه دَوْرًا آخر" : "Don't throw it away... Give it another round"}</span>
-          </div>
-
+        <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col items-start text-right space-y-4 pt-2 sm:pt-4">
           {/* Main Value Proposition Headline */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
             {isAr ? "قبل أن ترميه... دَوْر يعرف قيمته" : "Before throwing it... DAWR knows its value"}
@@ -943,19 +937,16 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         className="w-full relative py-12 my-8 bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white shadow-xl border-y border-emerald-800/40 rounded-none overflow-hidden px-6 sm:px-12 md:px-20"
       >
         <div className="w-full max-w-7xl mx-auto space-y-8">
-          {/* Top Row: Section Title & Gamification Badge */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
-            <div className="space-y-1">
-              <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-300 bg-emerald-950/80 px-3.5 py-1 rounded-full border border-emerald-500/30">
-                <Leaf className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>{isAr ? "مؤشرات الأثر البيئي الوطنية" : "Environmental Impact Stats"}</span>
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight pt-1">
-                {isAr ? "أثر قرارات الاستدامة في منصة دَوْر" : "Sustainability Impact Index"}
-              </h3>
+          {/* Top Row: Centered Section Title & Gamification Badge */}
+          <div className="flex flex-col items-center justify-center text-center space-y-3 border-b border-white/10 pb-6 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-300 bg-emerald-950/80 px-3.5 py-1 rounded-full border border-emerald-500/30">
+              <Leaf className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span>{isAr ? "مؤشرات الأثر البيئي الوطنية" : "Environmental Impact Stats"}</span>
             </div>
-
-            <div className="inline-flex items-center gap-2 bg-emerald-950/90 border border-emerald-400/30 px-4 py-2 rounded-2xl text-xs font-extrabold text-emerald-200 shadow-md backdrop-blur-xs">
+            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight pt-0.5">
+              {isAr ? "أثر قرارات الاستدامة في منصة دَوْر" : "Sustainability Impact Index"}
+            </h3>
+            <div className="inline-flex items-center gap-2 bg-emerald-950/90 border border-emerald-400/30 px-4 py-1.5 rounded-2xl text-xs font-extrabold text-emerald-200 shadow-md backdrop-blur-xs">
               <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>{isAr ? "تحصل على +50 نقطة دَوْر عند كل قرار دائري منفّذ" : "Earn +50 DAWR points per circular decision"}</span>
             </div>

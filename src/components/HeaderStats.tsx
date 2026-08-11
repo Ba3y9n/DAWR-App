@@ -76,12 +76,12 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
 
           <div 
             onClick={() => onChangeTab?.("home")}
-            className="flex items-center gap-3 cursor-pointer group py-1"
+            className="flex items-center gap-3 cursor-pointer group py-0.5"
           >
             <img 
               src="/assets/dawr_logo_new.png" 
               alt="DAWR Logo" 
-              className="h-14 sm:h-16 max-h-16 w-auto object-contain flex-shrink-0 group-hover:scale-105 transition-transform duration-300 drop-shadow-2xs"
+              className="h-16 sm:h-20 max-h-20 w-auto object-contain flex-shrink-0 group-hover:scale-105 transition-transform duration-300 drop-shadow-2xs"
             />
           </div>
         </div>

@@ -209,10 +209,6 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
         <section id="pathways-section" className="space-y-6 scroll-mt-24">
         {/* Section Header */}
         <div className="text-center space-y-1.5 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
-            <Recycle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-            <span>{isAr ? "دورة حيوية استدامة" : "Circular Journey"}</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
             {isAr ? "لكل منتج دَوْر آخر" : "Every Item Has Another Round"}
           </h2>
@@ -506,10 +502,31 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
             </div>
           </div>
 
-          <div className="border-t border-teal-800/80 pt-6 text-center">
+          <div className="border-t border-teal-800/80 pt-6 text-center space-y-4">
             <p className="text-sm font-bold text-cyan-200/90">
               {isAr ? "© 2026 DAWR - جميع الحقوق محفوظة" : "© 2026 DAWR - All rights reserved"}
             </p>
+
+            {/* Development Team Badges */}
+            <div className="pt-2 space-y-2">
+              <span className="text-xs font-black text-emerald-300 uppercase tracking-widest block">
+                {isAr ? "فريق التطوير" : "Development Team"}
+              </span>
+              <div className="flex flex-wrap items-center justify-center gap-2.5 max-w-2xl mx-auto pt-1">
+                <span className="bg-teal-900/70 border border-teal-600/50 text-cyan-200 hover:text-white hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all cursor-default backdrop-blur-xs">
+                  {isAr ? "بيان المطيري" : "Bayan Almutiri"}
+                </span>
+                <span className="bg-teal-900/70 border border-teal-600/50 text-cyan-200 hover:text-white hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all cursor-default backdrop-blur-xs">
+                  {isAr ? "متعب القرني" : "Mutaeb Alqarni"}
+                </span>
+                <span className="bg-teal-900/70 border border-teal-600/50 text-cyan-200 hover:text-white hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all cursor-default backdrop-blur-xs">
+                  {isAr ? "عبدالعزيز الشمري" : "Abdulaziz Alshammari"}
+                </span>
+                <span className="bg-teal-900/70 border border-teal-600/50 text-cyan-200 hover:text-white hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all cursor-default backdrop-blur-xs">
+                  {isAr ? "فيصل ال عبدالله" : "Faisal Al Abdullah"}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
