@@ -696,11 +696,6 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
           
           {/* Right Column: Text & Primary Action Buttons (7 Columns) */}
           <div className="lg:col-span-7 flex flex-col items-start text-right space-y-5">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/80 text-emerald-300 border border-emerald-400/40 text-xs font-black shadow-md backdrop-blur-md">
-              <Sparkles className="w-4 h-4 text-emerald-300 shrink-0" />
-              <span>{isAr ? "تحليل اصطناعي لمسارات الاستدامة" : "AI Circular Intelligence Engine"}</span>
-            </div>
-
             {/* Main Value Proposition Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
               {isAr ? "قبل أن ترميه... دَوْر يعرف قيمته" : "Before throwing it... DAWR knows its value"}
@@ -709,8 +704,8 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
             {/* Explanatory Paragraph */}
             <p className="text-sm sm:text-base md:text-lg text-white font-extrabold leading-relaxed max-w-2xl drop-shadow-md">
               {isAr
-                ? "صوّر أي منتج، ودع الذكاء الاصطناعي يحلل حالته وخامته ويقترح أفضل مسار دائري له قبل أن يتحول إلى نفايات."
-                : "Scan any product with AI to analyze its condition and materials, discovering the optimum circular route."}
+                ? "صوّر منتجك، ودع الذكاء الاصطناعي يحدد أفضل مسار دائري له."
+                : "Snap a photo of your item, and let AI determine its best circular route."}
             </p>
 
             {/* Action Button */}
@@ -740,10 +735,6 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         {/* 2. Phase 5 — How DAWR Works Stepper Section (كيف يعمل دَوْر؟) */}
         <section id="how-it-works" className="space-y-6 pt-4 scroll-mt-24">
           <div className="text-center space-y-1.5 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-              <span>{isAr ? "دليل الفحص" : "Scanning Guide"}</span>
-            </div>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               {isAr ? "كيف يعمل دَوْر؟" : "How DAWR Works"}
             </h2>

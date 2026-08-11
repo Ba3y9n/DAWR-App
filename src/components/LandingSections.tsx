@@ -415,10 +415,6 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
       <section id="features" className="w-full py-12 bg-white text-slate-900 px-4 sm:px-6 lg:px-8 scroll-mt-24 border-t border-slate-100">
         <div className="w-full max-w-7xl mx-auto space-y-6 text-center">
           <div className="space-y-1.5 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-              <span>{isAr ? "خصائص المنصة" : "Platform Features"}</span>
-            </div>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               {isAr ? "المميزات الرئيسية" : "Key Features"}
             </h2>
@@ -461,9 +457,6 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
         <div className="w-full max-w-7xl mx-auto space-y-8">
           <div className="flex items-center justify-between border-b border-teal-800/60 pb-6">
             <img src="/assets/dawr_logo_new.png" alt="DAWR Logo" className="h-10 w-auto object-contain bg-white/90 p-1.5 rounded-xl shadow-xs" />
-            <span className="text-xs font-bold text-teal-200">
-              {isAr ? "منصة الاقتصاد الدائري الذكية في المملكة" : "Saudi Smart Circular Economy Platform"}
-            </span>
           </div>
 
           <div className="grid grid-cols-3 gap-6 text-start">
