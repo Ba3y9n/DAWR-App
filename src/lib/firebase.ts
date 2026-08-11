@@ -141,9 +141,15 @@ export async function ensureUserProfile(user: User, customFullName?: string): Pr
     const snap = await getDoc(userRef);
     if (snap.exists()) {
       const data = snap.data();
+      const resolvedName = customFullName || data.fullName || user.displayName || user.email?.split('@')[0] || "عضو دَوْر";
+      
+      if (customFullName && data.fullName !== customFullName) {
+        await updateDoc(userRef, { fullName: customFullName, updatedAt: serverTimestamp() });
+      }
+
       return {
         uid: user.uid,
-        fullName: data.fullName || customFullName || user.displayName || user.email?.split('@')[0] || "عضو دَوْر",
+        fullName: resolvedName,
         email: data.email || user.email || "",
         points: data.points ?? 200,
         savedProductsCount: data.savedProductsCount ?? 3,
@@ -155,9 +161,10 @@ export async function ensureUserProfile(user: User, customFullName?: string): Pr
         updatedAt: data.updatedAt,
       };
     } else {
+      const resolvedName = customFullName || user.displayName || user.email?.split('@')[0] || "عضو دَوْر";
       const newProfile: UserProfile = {
         uid: user.uid,
-        fullName: customFullName || user.displayName || user.email?.split('@')[0] || "عضو دَوْر",
+        fullName: resolvedName,
         email: user.email || "",
         points: 200,
         savedProductsCount: 3,

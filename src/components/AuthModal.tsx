@@ -177,31 +177,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </button>
         </div>
 
-        {/* Fast Demo Accounts Bar */}
-        <div className="mb-4 bg-emerald-50/80 border border-emerald-200/80 p-3 rounded-2xl space-y-2">
-          <span className="text-[11px] font-extrabold text-emerald-900 block text-center">
-            {isAr ? "⚡ تجربة فورية باسم المستخدم الحقيقي:" : "⚡ Fast Demo Account Login:"}
-          </span>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => handleDemoLogin("بيان", "bayan@dawr.app")}
-              className="py-2 px-3 rounded-xl bg-white border border-emerald-300 text-slate-900 text-xs font-black hover:bg-emerald-100 transition shadow-2xs cursor-pointer flex items-center justify-center gap-1.5"
-            >
-              <User className="w-3.5 h-3.5 text-emerald-700" />
-              <span>{isAr ? "بيان" : "Bayan"}</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => handleDemoLogin("متعب القرني", "mutaeb@dawr.app")}
-              className="py-2 px-3 rounded-xl bg-white border border-emerald-300 text-slate-900 text-xs font-black hover:bg-emerald-100 transition shadow-2xs cursor-pointer flex items-center justify-center gap-1.5"
-            >
-              <User className="w-3.5 h-3.5 text-emerald-700" />
-              <span>{isAr ? "متعب القرني" : "Mutaeb"}</span>
-            </button>
-          </div>
-        </div>
-
         {/* Error Banner */}
         {errorMsg && (
           <div className="mb-4 p-3 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs font-bold flex items-center gap-2">
