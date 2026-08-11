@@ -1,6 +1,6 @@
 import React from "react";
 import { ActiveTab, Language } from "../types";
-import { Camera, Recycle, Bell, User } from "lucide-react";
+import { Camera, Recycle, Bell, User, MapPin } from "lucide-react";
 
 interface BottomNavProps {
   activeTab: ActiveTab;
@@ -23,6 +23,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onChangeTab, la
       labelAr: "الفحص الذكي",
       labelEn: "Smart Scan",
       icon: Camera,
+    },
+    {
+      id: "map" as ActiveTab,
+      labelAr: "خريطة دور",
+      labelEn: "Map",
+      icon: MapPin,
     },
     {
       id: "updates" as ActiveTab,

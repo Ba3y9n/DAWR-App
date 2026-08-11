@@ -105,6 +105,34 @@ export interface CharityPlatform {
   acceptedItems: string[];
 }
 
-export type ActiveTab = "home" | "scan" | "updates" | "profile";
+export interface AcceptedMaterialStatus {
+  material: string;
+  accepted: boolean;
+}
+
+export interface SustainabilityHub {
+  id: string;
+  name: string;
+  category: "textiles" | "electronics" | "plastics" | "paper" | "furniture" | "appliances" | "metals" | "glass" | "batteries" | string;
+  categoryAr: string;
+  type: "recycling" | "ngo" | "donation" | "repair" | "reuse" | "secondhand" | "collection" | string;
+  typeAr: string;
+  acceptedMaterials: string[];
+  materialsStatus: AcceptedMaterialStatus[];
+  latitude: number;
+  longitude: number;
+  address: string;
+  city: string;
+  phone?: string;
+  website?: string;
+  googleMapsUrl: string;
+  openingHours: string;
+  verified: boolean;
+  rating?: number;
+  distanceKm?: number;
+  source?: string;
+}
+
+export type ActiveTab = "home" | "scan" | "map" | "updates" | "profile";
 export type Language = "ar" | "en";
 export type ThemeMode = "light" | "dark";

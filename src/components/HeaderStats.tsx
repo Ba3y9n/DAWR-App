@@ -57,6 +57,15 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
         window.scrollTo({ top: 0, behavior: "smooth" });
       } 
     },
+    { 
+      id: "map" as ActiveTab, 
+      labelAr: "خريطة دور", 
+      labelEn: "DAWR Map", 
+      action: () => {
+        onChangeTab?.("map");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } 
+    },
     {
       id: "howItWorks" as any,
       labelAr: "كيف يعمل دور؟",

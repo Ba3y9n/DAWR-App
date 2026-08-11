@@ -427,6 +427,28 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
             </div>
           ))}
         </div>
+
+        {/* Direct Link to Standalone DAWR Map */}
+        <div className="pt-2">
+          <button
+            onClick={() => {
+              const cat = analysis.material.includes("قطن") || analysis.material.includes("ملابس") || analysis.material.includes("نسيج")
+                ? "textiles"
+                : analysis.material.includes("إلكترون") || analysis.material.includes("حاسوب") || analysis.material.includes("هاتف")
+                ? "electronics"
+                : analysis.material.includes("بلاستيك") || analysis.material.includes("PET")
+                ? "plastics"
+                : analysis.material.includes("ورق") || analysis.material.includes("كرتون")
+                ? "paper"
+                : "all";
+              if (onOpenMapModal) onOpenMapModal(cat);
+            }}
+            className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 hover:from-emerald-900 hover:to-teal-900 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:scale-[1.01] active:scale-[0.98] transition cursor-pointer border border-emerald-700"
+          >
+            <MapPin className="w-4.5 h-4.5 text-emerald-300 shrink-0" />
+            <span>{isAr ? "📍 اعثر على أقرب جهة مناسبة في خريطة دور" : "📍 Find Nearest Recommended Hub on DAWR Map"}</span>
+          </button>
+        </div>
       </div>
 
       {/* ⑩ CLAIM POINTS / SUCCESS STATE CARD (إضافة النقاط) */}

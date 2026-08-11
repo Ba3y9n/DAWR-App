@@ -16,6 +16,7 @@ import { PRESET_SAMPLES } from "./data/presetSamples";
 import { Smartphone, Laptop } from "lucide-react";
 import { auth, listenUserProfile, addScanAndRewardToUser, signOutUser, ensureUserProfile } from "./lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { DawrMapScreen } from "./components/DawrMapScreen";
 
 export default function App() {
   // Language State (Pure White Theme enforced)
@@ -27,6 +28,7 @@ export default function App() {
 
   // Navigation Tab State
   const [activeTab, setActiveTab] = useState<ActiveTab>("home");
+  const [selectedMapCategory, setSelectedMapCategory] = useState<string | null>(null);
 
   // User Stats State
   const [userStats, setUserStats] = useState<UserStats>({
@@ -259,7 +261,11 @@ export default function App() {
                   analysis={analysisData}
                   onBackToCamera={() => setAnalysisData(null)}
                   onOpenCreativeIdeas={() => setIsCreativeModalOpen(true)}
-                  onOpenMapModal={() => setIsMapModalOpen(true)}
+                  onOpenMapModal={(categoryFilter) => {
+                    setSelectedMapCategory(categoryFilter || null);
+                    setActiveTab("map");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
                   onOpenAiChat={() => setIsAiChatModalOpen(true)}
                   onClaimPoints={handleClaimPoints}
                   language={language}
@@ -285,13 +291,26 @@ export default function App() {
                   analysis={analysisData}
                   onBackToCamera={() => setAnalysisData(null)}
                   onOpenCreativeIdeas={() => setIsCreativeModalOpen(true)}
-                  onOpenMapModal={() => setIsMapModalOpen(true)}
+                  onOpenMapModal={(categoryFilter) => {
+                    setSelectedMapCategory(categoryFilter || null);
+                    setActiveTab("map");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
                   onOpenAiChat={() => setIsAiChatModalOpen(true)}
                   onClaimPoints={handleClaimPoints}
                   language={language}
                 />
               )}
             </>
+          )}
+
+          {activeTab === "map" && (
+            <DawrMapScreen
+              language={language}
+              selectedCategoryFilter={selectedMapCategory}
+              onClearCategoryFilter={() => setSelectedMapCategory(null)}
+              onNavigateToScan={() => setActiveTab("scan")}
+            />
           )}
 
           {activeTab === "updates" && (
