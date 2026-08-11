@@ -205,12 +205,14 @@ export const CircularImpactDashboard: React.FC<CircularImpactDashboardProps> = (
         {isMethodologyExpanded && (
           <div className="bg-emerald-900/50 border border-emerald-700/60 rounded-3xl p-6 sm:p-8 space-y-6 animate-in fade-in slide-in-from-top-4 duration-200">
             <div className="space-y-3 border-b border-emerald-800/60 pb-4">
-              <div className="flex flex-col items-center justify-center text-center gap-2">
-                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              <div className="flex flex-col items-center justify-center text-center gap-2 mx-auto max-w-2xl">
+                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center w-full">
                   {isAr ? "منهجية قياس الأثر" : "Impact Measurement Methodology"}
                 </h3>
-                <p className="text-sm sm:text-base font-bold text-emerald-200/90 max-w-2xl leading-6">
-                  {isAr ? "من المنتج إلى أثر تقديري قابل للتتبع" : "From product to traceable estimated impact"}
+                <p className="text-sm sm:text-base font-bold text-emerald-200/90 max-w-2xl leading-6 text-center">
+                  {isAr
+                    ? "تقدّر دَوْر الأثر وفق خصائص المنتج وحالته والمسار الدائري المختار."
+                    : "DAWR estimates impact based on product properties, condition, and selected circular pathway."}
                 </p>
               </div>
             </div>
@@ -308,7 +310,7 @@ export const CircularImpactDashboard: React.FC<CircularImpactDashboardProps> = (
                 </a>
               </div>
 
-              <p className="text-[11px] text-emerald-200/80 font-bold leading-relaxed pt-2">
+              <p className="text-[11px] text-emerald-200/80 font-bold leading-relaxed pt-2 text-center mx-auto max-w-2xl">
                 {isAr
                   ? "تسترشد منهجية دَوْر بمبادئ وأطر دولية لقياس الدائرية، ولا تمثل المؤشرات المعروضة تقييم CTI أو MCI رسميًا."
                   : "DAWR's methodology is guided by international circularity frameworks and does not constitute an official CTI or MCI evaluation."}
