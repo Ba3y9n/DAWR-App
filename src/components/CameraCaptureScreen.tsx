@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Camera, Upload, RefreshCw, Sparkles, Zap, Search, HelpCircle, AlertCircle, CheckCircle2, ArrowRight, Recycle, Leaf, Target } from "lucide-react";
+import { Camera, Upload, RefreshCw, Sparkles, Zap, Search, HelpCircle, AlertCircle, CheckCircle2, ArrowRight, Recycle, Leaf, Target, ShieldCheck } from "lucide-react";
 import { PRESET_SAMPLES } from "../data/presetSamples";
 import { Language, ActiveTab } from "../types";
 import { LandingSections } from "./LandingSections";
@@ -260,18 +260,18 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
     return (
       <div className="w-full bg-slate-50/70 min-h-screen py-8 px-4 sm:px-6 lg:px-8 space-y-8 font-sans text-slate-900" dir={isAr ? "rtl" : "ltr"}>
         
-        {/* 1. TOP HERO AREA FOR SMART SCAN PAGE */}
-        <div className="max-w-7xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2.5 text-right flex-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+        {/* 1. TOP HERO AREA FOR SMART SCAN PAGE (2-Column Layout) */}
+        <div className="max-w-7xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="space-y-3 text-right flex-1">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-900 text-xs font-black shadow-2xs">
+              <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>{isAr ? "مدعوم بالذكاء الاصطناعي" : "AI-Powered"}</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              {isAr ? "الفحص الذكي" : "Smart Inspection"}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-950 tracking-tight leading-tight">
+              {isAr ? "اكتشف دَوْر منتجك التالي" : "Discover Your Item's Next Round"}
             </h1>
-            <h2 className="text-sm sm:text-base font-bold text-emerald-800">
-              {isAr ? "دع دور يحلل منتجك ويحدد أفضل مسار دائري له" : "Let DAWR analyze your item & determine its optimal circular path"}
+            <h2 className="text-base sm:text-lg font-bold text-slate-700 leading-relaxed">
+              {isAr ? "أضف صورة، ودع الذكاء الاصطناعي يحدد أفضل مسار دائري له." : "Add a photo, and let AI determine its optimal circular path."}
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-2xl leading-relaxed pt-0.5">
               {isAr
@@ -280,33 +280,33 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
             </p>
           </div>
 
-          {/* Decorative Photorealistic Composition Card */}
-          <div className="relative w-full md:w-80 h-36 sm:h-40 rounded-2xl overflow-hidden bg-white border border-emerald-100/90 shadow-2xs flex items-center justify-center p-1 shrink-0 group">
+          {/* Decorative Photorealistic Composition Card in Circular Soft Backdrop */}
+          <div className="relative w-full md:w-88 h-40 sm:h-44 rounded-3xl overflow-hidden bg-emerald-50/70 border border-emerald-200/80 shadow-xs flex items-center justify-center p-2 shrink-0 group">
             <img 
               src="/assets/dawr_hero_composition.jpg" 
               alt="DAWR Circular Product Composition" 
-              className="w-full h-full object-cover rounded-xl group-hover:scale-102 transition-transform duration-500"
+              className="w-full h-full object-cover rounded-2xl group-hover:scale-102 transition-transform duration-500 shadow-2xs"
             />
           </div>
         </div>
 
-        {/* 2. PROGRESS STEPS (01 أضف المنتج ➔ 02 تحليل دَوْر ➔ 03 القرار الدائري) */}
-        <div className="max-w-7xl mx-auto bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs">
-          <div className="flex items-center justify-between gap-2 max-w-3xl mx-auto">
+        {/* 2. PROGRESS STEPS (1 أضف المنتج ➔ 2 تحليل دَوْر ➔ 3 القرار الدائري) */}
+        <div className="max-w-7xl mx-auto bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-xs">
+          <div className="flex items-center justify-between gap-3 max-w-3xl mx-auto">
             {/* Step 1 */}
-            <div className={`flex items-center gap-2 ${capturedImage ? "text-emerald-700 font-bold" : "text-emerald-950 font-black"}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${capturedImage ? "bg-emerald-100 text-emerald-800" : "bg-emerald-900 text-white"}`}>
-                01
+            <div className={`flex items-center gap-2.5 ${capturedImage ? "text-emerald-800 font-bold" : "text-emerald-950 font-black"}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shadow-2xs ${capturedImage ? "bg-emerald-100 text-emerald-800 border border-emerald-300" : "bg-emerald-800 text-white"}`}>
+                1
               </div>
               <span className="text-xs sm:text-sm font-extrabold">{isAr ? "أضف المنتج" : "Add Product"}</span>
             </div>
 
-            <div className={`flex-1 h-0.5 ${capturedImage ? "bg-emerald-500" : "bg-slate-200"}`} />
+            <div className={`flex-1 h-0.5 ${capturedImage ? "bg-emerald-600" : "bg-slate-200"}`} />
 
             {/* Step 2 */}
-            <div className={`flex items-center gap-2 ${isAnalyzing ? "text-emerald-950 font-black" : capturedImage ? "text-slate-800 font-bold" : "text-slate-400"}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${isAnalyzing ? "bg-emerald-900 text-white animate-pulse" : capturedImage ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-400"}`}>
-                02
+            <div className={`flex items-center gap-2.5 ${isAnalyzing ? "text-emerald-950 font-black" : capturedImage ? "text-slate-800 font-bold" : "text-slate-500"}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shadow-2xs ${isAnalyzing ? "bg-emerald-800 text-white animate-pulse" : capturedImage ? "bg-emerald-100 text-emerald-800 border border-emerald-300" : "bg-slate-100 text-slate-500 border border-slate-200"}`}>
+                2
               </div>
               <span className="text-xs sm:text-sm font-extrabold">{isAr ? "تحليل دَوْر" : "DAWR Analysis"}</span>
             </div>
@@ -314,9 +314,9 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
             <div className="flex-1 h-0.5 bg-slate-200" />
 
             {/* Step 3 */}
-            <div className="flex items-center gap-2 text-slate-400">
-              <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-xs font-black">
-                03
+            <div className="flex items-center gap-2.5 text-slate-500">
+              <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 text-slate-500 flex items-center justify-center text-xs font-black shadow-2xs">
+                3
               </div>
               <span className="text-xs sm:text-sm font-extrabold">{isAr ? "القرار الدائري" : "Circular Decision"}</span>
             </div>
@@ -330,7 +330,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
           <div className="lg:col-span-7 space-y-6">
 
             {/* MOBILE SPECIFIC CAMERA-FIRST ACTION BAR */}
-            <div className="block sm:hidden bg-emerald-900 text-white rounded-2xl p-4 text-center space-y-3">
+            <div className="block sm:hidden bg-emerald-950 text-white rounded-2xl p-4 text-center space-y-3 shadow-md">
               <h3 className="text-base font-black">{isAr ? "صوّر منتجك واكتشف دَوْره التالي" : "Scan item for circular path"}</h3>
               <div className="flex items-center gap-2">
                 <button
@@ -344,7 +344,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex-1 py-3 px-3 rounded-xl bg-emerald-800 text-white border border-emerald-600 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                  className="flex-1 py-3 px-3 rounded-xl bg-emerald-900 text-white border border-emerald-700 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
                 >
                   <Upload className="w-4 h-4" />
                   <span>{isAr ? "اختيار من الصور" : "Pick Photo"}</span>
@@ -449,46 +449,54 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                   </button>
                 </div>
               ) : (
-                /* CLEAN DESKTOP DEFAULT UPLOAD ZONE */
-                <div 
-                  onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-emerald-300/80 hover:border-emerald-600 bg-[#F8FAF8] hover:bg-emerald-50/30 rounded-3xl p-8 sm:p-12 flex flex-col items-center justify-center text-center space-y-4 transition-all cursor-pointer group shadow-2xs"
-                >
-                  <div className="w-16 h-16 rounded-2xl bg-emerald-100/80 border border-emerald-200 flex items-center justify-center text-emerald-800 group-hover:scale-105 transition-transform shadow-2xs">
-                    <Upload className="w-8 h-8" />
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-black text-slate-900">
-                      {isAr ? "أضف صورة المنتج" : "Add Product Image"}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 font-medium">
-                      {isAr ? "اسحب الصورة هنا أو اخترها من جهازك" : "Drag and drop or select file from your device"}
-                    </p>
-                    <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] text-slate-400 font-bold pt-1">
-                      <span>{isAr ? "JPG • PNG • WEBP" : "JPG • PNG • WEBP"}</span>
-                      <span>•</span>
-                      <span className="text-emerald-700 font-extrabold">{isAr ? "الحد الأقصى لحجم الملف: 10MB" : "Max file size: 10MB"}</span>
+                /* EXPANDED DESKTOP DEFAULT DRAG & DROP UPLOAD ZONE */
+                <div className="space-y-4">
+                  <div 
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-full min-h-[360px] sm:min-h-[390px] border-2 border-dashed border-emerald-300/90 hover:border-emerald-600 bg-emerald-50/20 hover:bg-emerald-50/40 rounded-3xl p-8 sm:p-12 flex flex-col items-center justify-center text-center space-y-4 transition-all cursor-pointer group shadow-2xs"
+                  >
+                    <div className="w-18 h-18 rounded-3xl bg-emerald-100/90 border border-emerald-200 flex items-center justify-center text-emerald-800 group-hover:scale-105 transition-transform shadow-2xs">
+                      <Upload className="w-9 h-9" />
+                    </div>
+                    <div className="space-y-1.5">
+                      <h3 className="text-xl font-extrabold text-emerald-950">
+                        {isAr ? "أضف صورة المنتج" : "Add Product Image"}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-700 font-bold">
+                        {isAr ? "اسحب الصورة هنا أو اخترها من جهازك" : "Drag and drop or select file from your device"}
+                      </p>
+                      <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 font-extrabold pt-1">
+                        <span>{isAr ? "الحد الأقصى 10MB • JPG, PNG" : "Max 10MB • JPG, PNG"}</span>
+                      </div>
+                    </div>
+
+                    {/* Primary & Secondary Action CTAs */}
+                    <div className="flex items-center gap-3 pt-3" onClick={(e) => e.stopPropagation()}>
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="py-3.5 px-7 rounded-2xl bg-emerald-900 hover:bg-emerald-950 text-white font-black text-xs sm:text-sm flex items-center gap-2 shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                      >
+                        <Upload className="w-4 h-4" />
+                        <span>{isAr ? "⬆️ رفع صورة" : "⬆️ Upload Image"}</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setUseLiveCamera(true)}
+                        className="py-3.5 px-6 rounded-2xl bg-white hover:bg-emerald-50 text-emerald-900 border border-emerald-300 font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xs hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                      >
+                        <Camera className="w-4 h-4 text-emerald-700" />
+                        <span>{isAr ? "📷 استخدام الكاميرا" : "📷 Use Camera"}</span>
+                      </button>
                     </div>
                   </div>
 
-                  {/* Primary & Secondary Action CTAs */}
-                  <div className="flex items-center gap-3 pt-2" onClick={(e) => e.stopPropagation()}>
-                    <button
-                      type="button"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="py-3 px-6 rounded-xl bg-emerald-900 hover:bg-emerald-950 text-white font-black text-xs sm:text-sm flex items-center gap-2 shadow-xs cursor-pointer"
-                    >
-                      <Upload className="w-4 h-4" />
-                      <span>{isAr ? "رفع صورة" : "Upload Image"}</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setUseLiveCamera(true)}
-                      className="py-3 px-5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 font-bold text-xs sm:text-sm flex items-center gap-2 cursor-pointer"
-                    >
-                      <Camera className="w-4 h-4 text-emerald-700" />
-                      <span>{isAr ? "استخدام الكاميرا" : "Use Camera"}</span>
-                    </button>
+                  {/* Security Disclaimer */}
+                  <div className="text-center pt-1">
+                    <p className="text-xs font-bold text-slate-500 flex items-center justify-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
+                      <span>{isAr ? "صورتك آمنة وتستخدم للتحليل فقط" : "Your image is secure and used strictly for analysis"}</span>
+                    </p>
                   </div>
                 </div>
               )}
@@ -585,55 +593,55 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
 
             {/* HOW DAWR WORKS SIDE PANEL */}
             <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xs p-6 space-y-5">
-              <h3 className="text-base font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-emerald-700" />
-                <span>{isAr ? "كيف يعمل دَوْر؟" : "How DAWR Works"}</span>
+              <h3 className="text-base font-extrabold text-emerald-950 border-b border-slate-100 pb-3 flex items-center gap-2">
+                <Leaf className="w-4 h-4 text-emerald-700 shrink-0" />
+                <span>{isAr ? "كيف يعمل دَوْر؟ 🍃" : "How DAWR Works 🍃"}</span>
               </h3>
 
               <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-black text-xs shrink-0">
+                <div className="flex items-start gap-3 bg-slate-50/60 p-3 rounded-2xl border border-slate-100">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-900 font-black text-xs shrink-0 shadow-2xs">
                     1
                   </div>
                   <div className="space-y-0.5">
-                    <h4 className="text-xs font-black text-slate-900">{isAr ? "أضف صورة المنتج" : "Add Product Photo"}</h4>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                    <h4 className="text-xs font-extrabold text-slate-900">{isAr ? "أضف صورة المنتج" : "Add Product Photo"}</h4>
+                    <p className="text-[11px] text-slate-600 font-bold leading-relaxed">
                       {isAr ? "التقط صورة واضحة للمنتج أو اخترها من معرض الصور." : "Take a photo or pick an image."}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-black text-xs shrink-0">
+                <div className="flex items-start gap-3 bg-slate-50/60 p-3 rounded-2xl border border-slate-100">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-900 font-black text-xs shrink-0 shadow-2xs">
                     2
                   </div>
                   <div className="space-y-0.5">
-                    <h4 className="text-xs font-black text-slate-900">{isAr ? "التحليل الذكي" : "AI Smart Analysis"}</h4>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                    <h4 className="text-xs font-extrabold text-slate-900">{isAr ? "التحليل الذكي" : "AI Smart Analysis"}</h4>
+                    <p className="text-[11px] text-slate-600 font-bold leading-relaxed">
                       {isAr ? "نفهم المنتج، حالته، مواده وقابليته للاستدامة." : "AI identifies materials and exact condition."}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-black text-xs shrink-0">
+                <div className="flex items-start gap-3 bg-slate-50/60 p-3 rounded-2xl border border-slate-100">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-900 font-black text-xs shrink-0 shadow-2xs">
                     3
                   </div>
                   <div className="space-y-0.5">
-                    <h4 className="text-xs font-black text-slate-900">{isAr ? "توصية المسار الأفضل" : "Optimal Pathway"}</h4>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                    <h4 className="text-xs font-extrabold text-slate-900">{isAr ? "توصية المسار الأفضل" : "Optimal Pathway"}</h4>
+                    <p className="text-[11px] text-slate-600 font-bold leading-relaxed">
                       {isAr ? "نقترح أفضل قرار دائري يحافظ على قيمة المنتج." : "Recommends best reuse, repair, donation, or recycling route."}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-black text-xs shrink-0">
+                <div className="flex items-start gap-3 bg-slate-50/60 p-3 rounded-2xl border border-slate-100">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-900 font-black text-xs shrink-0 shadow-2xs">
                     4
                   </div>
                   <div className="space-y-0.5">
-                    <h4 className="text-xs font-black text-slate-900">{isAr ? "تعرّف على الأثر" : "Environmental Impact"}</h4>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                    <h4 className="text-xs font-extrabold text-slate-900">{isAr ? "تعرّف على الأثر" : "Environmental Impact"}</h4>
+                    <p className="text-[11px] text-slate-600 font-bold leading-relaxed">
                       {isAr ? "اعرف أثر قرارك البيئي بطريقة واضحة." : "View CO2 saved and sustainability score."}
                     </p>
                   </div>
@@ -642,25 +650,27 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
             </div>
 
             {/* PRIVACY MESSAGE TRUST CARD */}
-            <div className="bg-emerald-950 text-white rounded-3xl p-5 space-y-2.5 border border-emerald-800/50 shadow-xs">
-              <div className="flex items-center gap-2 text-emerald-400 font-black text-xs">
-                <CheckCircle2 className="w-4 h-4" />
+            <div className="bg-emerald-50 border border-emerald-200 rounded-3xl p-5 space-y-2 text-emerald-950 shadow-2xs">
+              <div className="flex items-center gap-2 text-emerald-900 font-black text-xs">
+                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
                 <span>{isAr ? "خصوصيتك مهمة" : "Your Privacy Matters"}</span>
               </div>
-              <p className="text-xs text-emerald-100 font-medium leading-relaxed">
+              <p className="text-xs text-slate-700 font-bold leading-relaxed">
                 {isAr
-                  ? "تُستخدم صورتك للتحليل الفوري فقط وفق سياسة المنصة والأنظمة المعتمدة."
-                  : "Your image is used strictly for instant AI analysis in compliance with platform policies."}
+                  ? "لا نشارك صورك مع أي جهة خارج دَوْر."
+                  : "We do not share your images with any third party outside DAWR."}
               </p>
             </div>
           </div>
         </div>
 
-        {/* 4. BOTTOM BRAND LINE BANNER */}
-        <div className="max-w-7xl mx-auto pt-4 border-t border-slate-200 text-center">
-          <p className="text-xs font-black text-slate-500 tracking-wide">
-            {isAr ? "لا ترمِه... أعطه دَوْرًا آخر." : "Don't throw it away... Give it another round."}
-          </p>
+        {/* 4. BOTTOM BRAND LINE BANNER (Full-Bleed Soft Glass Banner) */}
+        <div className="max-w-7xl mx-auto pt-6 border-t border-slate-200 text-center">
+          <div className="bg-emerald-50/80 border border-emerald-200/80 rounded-2xl p-3.5 shadow-2xs">
+            <p className="text-xs sm:text-sm font-extrabold text-emerald-950 tracking-wide">
+              {isAr ? "💡 كل منتج له دَوْر، ودَوْر لكل منتج." : "💡 Every product has a role, and DAWR for every product."}
+            </p>
+          </div>
         </div>
       </div>
     );
