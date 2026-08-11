@@ -679,7 +679,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/45 via-emerald-900/30 to-black/20" />
 
         {/* Right-Aligned Text & Action Buttons Container inside Max-W-7xl */}
-        <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col items-start text-right space-y-4 pt-2 sm:pt-4">
+        <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col items-start text-right space-y-5 pt-0 sm:pt-2 -mt-4 sm:-mt-6">
           {/* Main Value Proposition Headline */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
             {isAr ? "قبل أن ترميه... دَوْر يعرف قيمته" : "Before throwing it... DAWR knows its value"}

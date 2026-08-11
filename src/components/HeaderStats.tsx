@@ -81,7 +81,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
             <img 
               src="/assets/dawr_logo_new.png" 
               alt="DAWR Logo" 
-              className="h-16 sm:h-20 max-h-20 w-auto object-contain flex-shrink-0 group-hover:scale-105 transition-transform duration-300 drop-shadow-2xs"
+              className="h-20 sm:h-24 max-h-24 w-auto object-contain flex-shrink-0 group-hover:scale-105 transition-transform duration-300 drop-shadow-2xs"
             />
           </div>
         </div>
