@@ -411,8 +411,8 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
       </section>
       </div>
 
-      {/* 2. Main Features Section (الأثر الدائري) */}
-      <section id="circular-impact" className="w-full py-12 bg-white text-slate-900 px-4 sm:px-6 lg:px-8 scroll-mt-24">
+      {/* 2. Main Features Section (المميزات الرئيسية) */}
+      <section id="features" className="w-full py-12 bg-white text-slate-900 px-4 sm:px-6 lg:px-8 scroll-mt-24 border-t border-slate-100">
         <div className="w-full max-w-7xl mx-auto space-y-6 text-center">
           <div className="space-y-1.5 max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
@@ -420,14 +420,14 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
               <span>{isAr ? "خصائص المنصة" : "Platform Features"}</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              {isAr ? "الأثر الدائري والخصائص" : "Circular Impact & Features"}
+              {isAr ? "المميزات الرئيسية" : "Key Features"}
             </h2>
             <p className="text-xs sm:text-sm text-emerald-800 font-extrabold">
               {isAr ? "كل ما تحتاجه لتصبح بطلاً في الاقتصاد الدائري" : "Everything You Need to Become an Eco Hero"}
             </p>
           </div>
 
-          {/* Minimal Clean Eco Badges Grid with White/Light Background & Black Text */}
+          {/* Minimal Clean Eco Badges Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 pt-2">
             {keyFeatures.map((feat) => {
               const Icon = feat.icon;
@@ -450,6 +450,65 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Circular Impact Section (أثر قرارات الاستدامة لمنصة دور) */}
+      <section id="circular-impact" className="w-full py-12 bg-slate-50 text-slate-900 px-4 sm:px-6 lg:px-8 scroll-mt-24 border-t border-slate-200/80">
+        <div className="w-full max-w-7xl mx-auto space-y-6 text-center">
+          <div className="space-y-1.5 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-900 bg-emerald-100/80 px-3.5 py-1 rounded-full border border-emerald-300 shadow-2xs">
+              <Leaf className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+              <span>{isAr ? "النتائج والاستدامة" : "Impact & Results"}</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-emerald-950 tracking-tight">
+              {isAr ? "أثر قرارات الاستدامة لمنصة دور" : "Impact of DAWR Sustainability Decisions"}
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-700 font-extrabold leading-relaxed">
+              {isAr 
+                ? "ثمار اتخاذ القرارات والمسارات الدائرية المستدامة على البيئة والمجتمع في المملكة."
+                : "Real-world environmental and social impact achieved through circular decisions."}
+            </p>
+          </div>
+
+          {/* Real Impact Metrics Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 text-center space-y-2 shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-900 mx-auto flex items-center justify-center font-black text-xl">
+                ♻️
+              </div>
+              <span className="text-3xl font-black text-emerald-950 block">+1,250</span>
+              <h4 className="text-xs font-black text-slate-900">{isAr ? "منتج وُجّه لمسار دائري" : "Items Diverted to Circular Paths"}</h4>
+              <p className="text-[11px] text-slate-600 font-bold">{isAr ? "حُفظت من التخلص المباشر في المرادم" : "Diverted away from direct landfills"}</p>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 text-center space-y-2 shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-teal-100 text-teal-900 mx-auto flex items-center justify-center font-black text-xl">
+                🌿
+              </div>
+              <span className="text-3xl font-black text-teal-950 block">2.5 kg</span>
+              <h4 className="text-xs font-black text-slate-900">{isAr ? "وفر الانبعاثات لكل منتج" : "Saved CO2 Emissions per Item"}</h4>
+              <p className="text-[11px] text-slate-600 font-bold">{isAr ? "تقليل الأثر الكربوني الناتج عن التدوير" : "Reduced carbon footprint via smart reuse"}</p>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 text-center space-y-2 shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-900 mx-auto flex items-center justify-center font-black text-xl">
+                ✨
+              </div>
+              <span className="text-3xl font-black text-cyan-950 block">98%</span>
+              <h4 className="text-xs font-black text-slate-900">{isAr ? "دقة التعرف ونقاط التدوير" : "Recycling Route & Material Accuracy"}</h4>
+              <p className="text-[11px] text-slate-600 font-bold">{isAr ? "توجيه دقيق للجمعيات ونقاط الفرز" : "Accurate hub & charity matching"}</p>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 text-center space-y-2 shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-900 mx-auto flex items-center justify-center font-black text-xl">
+                🏆
+              </div>
+              <span className="text-3xl font-black text-emerald-950 block">+850</span>
+              <h4 className="text-xs font-black text-slate-900">{isAr ? "قرار دائري ناجح" : "Successful Circular Decisions"}</h4>
+              <p className="text-[11px] text-slate-600 font-bold">{isAr ? "إعادة استخدام، تبرع، وإعادة تدوير" : "Reuse, repair, donate, and recycle"}</p>
+            </div>
           </div>
         </div>
       </section>

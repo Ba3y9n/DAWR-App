@@ -59,6 +59,18 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
       },
     },
     {
+      id: "features" as any,
+      labelAr: "المميزات الرئيسية",
+      labelEn: "Key Features",
+      action: () => {
+        onChangeTab?.("home");
+        if (onBack) onBack();
+        setTimeout(() => {
+          document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+        }, 120);
+      },
+    },
+    {
       id: "impact" as any,
       labelAr: "الأثر الدائري",
       labelEn: "Circular Impact",
