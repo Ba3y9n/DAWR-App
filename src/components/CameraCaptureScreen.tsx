@@ -460,28 +460,28 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                     className="w-full min-h-[360px] sm:min-h-[390px] border-2 border-dashed border-emerald-300/90 hover:border-emerald-600 bg-emerald-50/20 hover:bg-emerald-50/40 rounded-3xl p-8 sm:p-12 flex flex-col items-center justify-center text-center space-y-4 transition-all cursor-pointer group shadow-2xs"
                   >
                     <div className="w-18 h-18 rounded-3xl bg-emerald-100/90 border border-emerald-200 flex items-center justify-center text-emerald-800 group-hover:scale-105 transition-transform shadow-2xs">
-                      <Upload className="w-9 h-9" />
+                      <Upload className="w-10 h-10" />
                     </div>
-                    <div className="space-y-1.5">
-                      <h3 className="text-xl font-extrabold text-emerald-950">
+                    <div className="space-y-3">
+                      <h3 className="text-2xl font-black text-emerald-950">
                         {isAr ? "أضف صورة المنتج" : "Add Product Image"}
                       </h3>
-                      <p className="text-xs sm:text-sm text-slate-700 font-bold">
+                      <p className="text-sm sm:text-lg text-slate-700 font-bold max-w-sm">
                         {isAr ? "اسحب الصورة هنا أو اخترها من جهازك" : "Drag and drop or select file from your device"}
                       </p>
-                      <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 font-extrabold pt-1">
+                      <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-slate-500 font-extrabold pt-1">
                         <span>{isAr ? "الحد الأقصى 10MB • JPG, PNG" : "Max 10MB • JPG, PNG"}</span>
                       </div>
                     </div>
 
                     {/* Primary & Secondary Action CTAs */}
-                    <div className="flex items-center gap-3 pt-3" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex flex-col sm:flex-row items-center gap-3 pt-4 w-full justify-center" onClick={(e) => e.stopPropagation()}>
                       <button
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
-                        className="py-3.5 px-7 rounded-2xl bg-emerald-900 hover:bg-emerald-950 text-white font-black text-xs sm:text-sm flex items-center gap-2 shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                        className="w-full sm:w-auto py-4 px-8 rounded-2xl bg-emerald-900 hover:bg-emerald-950 text-white font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                       >
-                        <Upload className="w-4 h-4" />
+                        <Upload className="w-5 h-5" />
                         <span>{isAr ? "⬆️ رفع صورة" : "⬆️ Upload Image"}</span>
                       </button>
                       <button
@@ -551,18 +551,18 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
             </div>
 
             {/* DEMO SAMPLES QUICK PRESETS GRID */}
-            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xs p-5 space-y-3">
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xs p-5 space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-xs font-black text-slate-900 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
+                <h3 className="text-sm font-black text-slate-900 flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-emerald-700" />
                   <span>{isAr ? "عينات سريعة للتجربة" : "Quick Presets"}</span>
                 </h3>
-                <span className="text-[10px] text-emerald-800 font-extrabold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                <span className="text-xs text-emerald-800 font-extrabold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
                   {isAr ? "نقرة واحدة للتحليل" : "One-click Demo"}
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {PRESET_SAMPLES.map((sample) => {
                   const isSelected = selectedSampleId === sample.id;
                   return (
@@ -570,18 +570,18 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                       key={sample.id}
                       onClick={() => handleSampleClick(sample.id)}
                       disabled={isAnalyzing}
-                      className={`flex flex-col items-center p-2.5 rounded-2xl border transition-all cursor-pointer text-center space-y-1.5 group ${
+                      className={`flex flex-col items-center p-3 rounded-2xl border transition-all cursor-pointer text-center space-y-2 group ${
                         isSelected
                           ? "bg-emerald-50 border-emerald-600 shadow-xs"
                           : "bg-white border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30"
                       }`}
                     >
-                      <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200 flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200 flex items-center justify-center">
                         <img src={sample.sampleImage} alt={sample.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                       </div>
-                      <div className="w-full">
-                        <h4 className="text-[11px] font-black text-slate-900 truncate">{sample.name}</h4>
-                        <span className="text-[9px] text-emerald-800 font-extrabold block truncate">
+                      <div className="w-full space-y-0.5">
+                        <h4 className="text-xs font-black text-slate-900 truncate">{sample.name}</h4>
+                        <span className="text-[10px] text-emerald-800 font-extrabold block truncate">
                           {sample.badge}
                         </span>
                       </div>
@@ -597,69 +597,66 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
 
             {/* HOW DAWR WORKS SIDE PANEL (COMPACT VERTICAL EXTENSION) */}
             <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-5 sm:p-6 space-y-5 max-w-sm sm:max-w-md mx-auto w-full">
-              <h3 className="text-base font-extrabold text-emerald-950 border-b border-slate-100 pb-3 flex items-center justify-center gap-2 text-center">
-                <Leaf className="w-4.5 h-4.5 text-emerald-700 shrink-0" />
+              <h3 className="text-lg font-black text-emerald-950 border-b border-slate-100 pb-3 flex items-center justify-center gap-2 text-center">
+                <Leaf className="w-5 h-5 text-emerald-700 shrink-0" />
                 <span>{isAr ? "كيف يعمل دَوْر؟ 🍃" : "How DAWR Works 🍃"}</span>
               </h3>
 
               <div className="space-y-3.5">
-                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-emerald-50/40 border border-emerald-100/90 space-y-2">
-                  <div className="w-9 h-9 rounded-2xl bg-emerald-800 text-white font-black text-xs flex items-center justify-center shadow-md border border-emerald-400/40 ring-2 ring-emerald-100 shrink-0">
-                    1
+                {[
+                  {
+                    num: 1,
+                    titleAr: "أضف صورة المنتج",
+                    titleEn: "Add Product Photo",
+                    descAr: "التقط صورة واضحة للمنتج أو اخترها من معرض الصور.",
+                    descEn: "Take a photo or pick an image from your gallery."
+                  },
+                  {
+                    num: 2,
+                    titleAr: "التحليل الذكي",
+                    titleEn: "AI Smart Analysis",
+                    descAr: "نفهم المنتج، حالته، مواده وقابليته للاستدامة.",
+                    descEn: "AI identifies materials, exact condition and sustainability potential."
+                  },
+                  {
+                    num: 3,
+                    titleAr: "توصية المسار الأفضل",
+                    titleEn: "Optimal Pathway",
+                    descAr: "نقترح أفضل قرار دائري يحافظ على قيمة المنتج.",
+                    descEn: "Recommends best reuse, repair, donation, or recycling route."
+                  },
+                  {
+                    num: 4,
+                    titleAr: "تعرّف على الأثر",
+                    titleEn: "Environmental Impact",
+                    descAr: "اعرف أثر قرارك البيئي بطريقة واضحة.",
+                    descEn: "View CO2 saved and your sustainability score."
+                  },
+                ].map((step) => (
+                  <div key={step.num} className="flex flex-col items-center text-center p-4 rounded-2xl bg-emerald-50/40 border border-emerald-100/90 space-y-2.5">
+                    <div className="w-10 h-10 rounded-2xl bg-emerald-800 text-white font-black text-sm flex items-center justify-center shadow-md border border-emerald-400/40 ring-2 ring-emerald-100 shrink-0">
+                      {step.num}
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="text-sm sm:text-base font-bold text-emerald-950">
+                        {isAr ? step.titleAr : step.titleEn}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed max-w-xs mx-auto">
+                        {isAr ? step.descAr : step.descEn}
+                      </p>
+                    </div>
                   </div>
-                  <div className="space-y-0.5">
-                    <h4 className="text-xs sm:text-sm font-extrabold text-emerald-950">{isAr ? "أضف صورة المنتج" : "Add Product Photo"}</h4>
-                    <p className="text-xs text-slate-700 font-bold leading-relaxed max-w-xs mx-auto">
-                      {isAr ? "التقط صورة واضحة للمنتج أو اخترها من معرض الصور." : "Take a photo or pick an image."}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-emerald-50/40 border border-emerald-100/90 space-y-2">
-                  <div className="w-9 h-9 rounded-2xl bg-emerald-800 text-white font-black text-xs flex items-center justify-center shadow-md border border-emerald-400/40 ring-2 ring-emerald-100 shrink-0">
-                    2
-                  </div>
-                  <div className="space-y-0.5">
-                    <h4 className="text-xs sm:text-sm font-extrabold text-emerald-950">{isAr ? "التحليل الذكي" : "AI Smart Analysis"}</h4>
-                    <p className="text-xs text-slate-700 font-bold leading-relaxed max-w-xs mx-auto">
-                      {isAr ? "نفهم المنتج، حالته، مواده وقابليته للاستدامة." : "AI identifies materials and exact condition."}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-emerald-50/40 border border-emerald-100/90 space-y-2">
-                  <div className="w-9 h-9 rounded-2xl bg-emerald-800 text-white font-black text-xs flex items-center justify-center shadow-md border border-emerald-400/40 ring-2 ring-emerald-100 shrink-0">
-                    3
-                  </div>
-                  <div className="space-y-0.5">
-                    <h4 className="text-xs sm:text-sm font-extrabold text-emerald-950">{isAr ? "توصية المسار الأفضل" : "Optimal Pathway"}</h4>
-                    <p className="text-xs text-slate-700 font-bold leading-relaxed max-w-xs mx-auto">
-                      {isAr ? "نقترح أفضل قرار دائري يحافظ على قيمة المنتج." : "Recommends best reuse, repair, donation, or recycling route."}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-emerald-50/40 border border-emerald-100/90 space-y-2">
-                  <div className="w-9 h-9 rounded-2xl bg-emerald-800 text-white font-black text-xs flex items-center justify-center shadow-md border border-emerald-400/40 ring-2 ring-emerald-100 shrink-0">
-                    4
-                  </div>
-                  <div className="space-y-0.5">
-                    <h4 className="text-xs sm:text-sm font-extrabold text-emerald-950">{isAr ? "تعرّف على الأثر" : "Environmental Impact"}</h4>
-                    <p className="text-xs text-slate-700 font-bold leading-relaxed max-w-xs mx-auto">
-                      {isAr ? "اعرف أثر قرارك البيئي بطريقة واضحة." : "View CO2 saved and sustainability score."}
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
             {/* PRIVACY MESSAGE TRUST CARD */}
-            <div className="bg-emerald-50 border border-emerald-200 rounded-3xl p-5 space-y-2 text-emerald-950 shadow-2xs">
-              <div className="flex items-center gap-2 text-emerald-900 font-black text-xs">
-                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
+            <div className="bg-emerald-50 border border-emerald-200 rounded-3xl p-5 space-y-2.5 text-emerald-950 shadow-2xs">
+              <div className="flex items-center gap-2 text-emerald-900 font-black text-sm">
+                <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0" />
                 <span>{isAr ? "خصوصيتك مهمة" : "Your Privacy Matters"}</span>
               </div>
-              <p className="text-xs text-slate-700 font-bold leading-relaxed">
+              <p className="text-sm text-slate-700 font-medium leading-relaxed">
                 {isAr
                   ? "لا نشارك صورك مع أي جهة خارج دَوْر."
                   : "We do not share your images with any third party outside DAWR."}
@@ -756,8 +753,8 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                 </div>
               </div>
               <div>
-                <h3 className="text-base font-black text-slate-900">{isAr ? "صوّر المنتج" : "Snap Item"}</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                <h3 className="text-base sm:text-lg font-black text-emerald-950">{isAr ? "صوّر المنتج" : "Snap Item"}</h3>
+                <p className="text-sm text-slate-700 font-medium leading-relaxed pt-1.5">
                   {isAr ? "التقط صورة بالكاميرا الحية أو ارفع ملف من جهازك." : "Take a live photo or upload an image file."}
                 </p>
               </div>
@@ -765,7 +762,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
 
             <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
               <div className="flex items-center justify-between">
-                <span className="w-9 h-9 rounded-2xl bg-teal-100 text-teal-900 font-black text-xs flex items-center justify-center border border-teal-300">
+                <span className="w-9 h-9 rounded-2xl bg-teal-100 text-teal-900 font-black text-sm flex items-center justify-center border border-teal-300">
                   02
                 </span>
                 <div className="w-10 h-10 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-600 shrink-0">
@@ -773,8 +770,8 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                 </div>
               </div>
               <div>
-                <h3 className="text-base font-black text-slate-900">{isAr ? "يحلله الذكاء الاصطناعي" : "AI Vision Analysis"}</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                <h3 className="text-base sm:text-lg font-black text-emerald-950">{isAr ? "يحلله الذكاء الاصطناعي" : "AI Vision Analysis"}</h3>
+                <p className="text-sm text-slate-700 font-medium leading-relaxed pt-1.5">
                   {isAr ? "نموذج Gemini يكتشف الخامات وحالة المنتج الدقيقة." : "Gemini Vision detects item materials and exact state."}
                 </p>
               </div>
@@ -782,7 +779,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
 
             <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
               <div className="flex items-center justify-between">
-                <span className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-900 font-black text-xs flex items-center justify-center border border-emerald-300">
+                <span className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-900 font-black text-sm flex items-center justify-center border border-emerald-300">
                   03
                 </span>
                 <div className="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
@@ -790,8 +787,8 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                 </div>
               </div>
               <div>
-                <h3 className="text-base font-black text-slate-900">{isAr ? "دَوْر يقارن المسارات" : "Compare Pathways"}</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                <h3 className="text-base sm:text-lg font-black text-emerald-950">{isAr ? "دَوْر يقارن المسارات" : "Compare Pathways"}</h3>
+                <p className="text-sm text-slate-700 font-medium leading-relaxed pt-1.5">
                   {isAr ? "مقارنة خيارات إعادة الاستخدام، الإصلاح، التبرع، والتدوير." : "Evaluates reuse, repair, donation, and recycling options."}
                 </p>
               </div>
@@ -799,7 +796,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
 
             <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-400 transition-all space-y-3 relative group">
               <div className="flex items-center justify-between">
-                <span className="w-9 h-9 rounded-2xl bg-amber-100 text-amber-900 font-black text-xs flex items-center justify-center border border-amber-300">
+                <span className="w-9 h-9 rounded-2xl bg-amber-100 text-amber-900 font-black text-sm flex items-center justify-center border border-amber-300">
                   04
                 </span>
                 <div className="w-10 h-10 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
@@ -807,8 +804,8 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
                 </div>
               </div>
               <div>
-                <h3 className="text-base font-black text-slate-900">{isAr ? "تحصل على أفضل قرار" : "Get Best Decision"}</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                <h3 className="text-base sm:text-lg font-black text-emerald-950">{isAr ? "تحصل على أفضل قرار" : "Get Best Decision"}</h3>
+                <p className="text-sm text-slate-700 font-medium leading-relaxed pt-1.5">
                   {isAr ? "تنفيذ المسار الأنسب وحصد نقاط استدامة حسابك." : "Execute the recommended route & claim DAWR points."}
                 </p>
               </div>
