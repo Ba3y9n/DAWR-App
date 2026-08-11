@@ -217,6 +217,7 @@ export default function App() {
         {/* Top Header */}
         <HeaderStats
           userStats={userStats}
+          currentUserProfile={currentUserProfile}
           language={language}
           onToggleLanguage={handleToggleLanguage}
           showBackButton={activeTab !== "home" || analysisData !== null}
@@ -235,6 +236,8 @@ export default function App() {
               setAnalysisData(null);
             }
           }}
+          onOpenAuthModal={() => setIsAuthModalOpen(true)}
+          onSignOut={handleSignOut}
         />
 
         {/* Main Tab View Controller */}

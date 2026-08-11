@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { UserStats, Language, ActiveTab } from "../types";
-import { Recycle, ArrowLeft, ArrowRight, Globe, Camera, Award, Bot, Bell, User, Menu, X, Sparkles, Leaf } from "lucide-react";
+import { UserStats, UserProfile, Language, ActiveTab } from "../types";
+import { Recycle, ArrowLeft, ArrowRight, Globe, Camera, Award, Bot, Bell, User, Menu, X, Sparkles, Leaf, LogOut, Settings, Bookmark, CheckCircle2, ChevronDown } from "lucide-react";
 
 interface HeaderStatsProps {
   userStats: UserStats;
+  currentUserProfile?: UserProfile | null;
   language: Language;
   onToggleLanguage: () => void;
   showBackButton?: boolean;
@@ -11,10 +12,13 @@ interface HeaderStatsProps {
   cameraReady?: boolean;
   activeTab?: ActiveTab;
   onChangeTab?: (tab: ActiveTab) => void;
+  onOpenAuthModal?: () => void;
+  onSignOut?: () => void;
 }
 
 export const HeaderStats: React.FC<HeaderStatsProps> = ({
   userStats,
+  currentUserProfile,
   language,
   onToggleLanguage,
   showBackButton,
@@ -22,9 +26,14 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
   cameraReady = true,
   activeTab = "home",
   onChangeTab,
+  onOpenAuthModal,
+  onSignOut,
 }) => {
   const isAr = language === "ar";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
+
+  const displayName = currentUserProfile?.fullName || (isAr ? "مستكشف دَوْر" : "DAWR Explorer");
 
   const navLinks = [
     { 
@@ -96,6 +105,14 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
     },
   ];
 
+  const handleAccountClick = () => {
+    if (!currentUserProfile) {
+      if (onOpenAuthModal) onOpenAuthModal();
+    } else {
+      setAccountDropdownOpen(!accountDropdownOpen);
+    }
+  };
+
   return (
     <header className="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50 w-full shadow-xs">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
@@ -117,7 +134,11 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
           )}
 
           <div 
-            onClick={() => onChangeTab?.("home")}
+            onClick={() => {
+              onChangeTab?.("home");
+              if (onBack) onBack();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className="flex items-center gap-3 cursor-pointer group py-0.5"
           >
             <img 
@@ -149,7 +170,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
         </nav>
 
         {/* 3. Left Side: Tools, Points & Account */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 relative">
           {/* Sustainability Points Glass Badge */}
           <div 
             onClick={() => onChangeTab?.("profile")}
@@ -157,7 +178,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
             title={isAr ? "نقاط الاستدامة المكتسبة" : "Earned Eco Points"}
           >
             <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-            <span>{userStats.points} {isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
+            <span>{currentUserProfile?.points ?? userStats.points} {isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
           </div>
 
           {/* Language Switcher */}
@@ -170,7 +191,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
             <span>{isAr ? "EN" : "عربي"}</span>
           </button>
 
-          {/* Olive Green Main CTA Action Button */}
+          {/* Main Scan Action Button */}
           <button
             onClick={() => onChangeTab?.("scan")}
             className="hidden xs:flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 hover:from-emerald-900 hover:to-teal-900 text-white font-black text-xs shadow-md shadow-emerald-900/15 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
@@ -180,17 +201,101 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
           </button>
 
           {/* User Account Button */}
-          <button
-            onClick={() => onChangeTab?.("profile")}
-            className={`p-2 rounded-xl border transition-all active:scale-95 cursor-pointer ${
-              activeTab === "profile"
-                ? "bg-emerald-800 text-white border-emerald-700"
-                : "bg-slate-100 hover:bg-emerald-50 text-slate-700 border-slate-200"
-            }`}
-            title={isAr ? "الحساب الشخصي" : "Account Profile"}
-          >
-            <User className="w-4 h-4" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={handleAccountClick}
+              className={`px-3 py-2 rounded-xl border transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 ${
+                currentUserProfile
+                  ? "bg-emerald-50 text-emerald-950 border-emerald-300 hover:bg-emerald-100"
+                  : activeTab === "profile"
+                  ? "bg-emerald-800 text-white border-emerald-700"
+                  : "bg-slate-100 hover:bg-emerald-50 text-slate-700 border-slate-200"
+              }`}
+              title={isAr ? "الحساب الشخصي" : "Account Profile"}
+            >
+              <User className="w-4 h-4 text-emerald-700" />
+              {currentUserProfile && (
+                <span className="text-xs font-extrabold max-w-[100px] truncate hidden sm:inline-block">
+                  {displayName}
+                </span>
+              )}
+              {currentUserProfile && (
+                <ChevronDown className="w-3.5 h-3.5 text-emerald-700" />
+              )}
+            </button>
+
+            {/* Logged in Account Dropdown Menu */}
+            {accountDropdownOpen && currentUserProfile && (
+              <div className="absolute left-0 sm:right-auto sm:left-0 top-12 w-56 bg-white border border-slate-200 rounded-2xl p-2 shadow-xl z-50 space-y-1 animate-in fade-in zoom-in-95 duration-150">
+                <div className="p-2.5 bg-slate-50 border border-slate-100 rounded-xl space-y-0.5">
+                  <span className="text-xs font-black text-slate-900 block truncate">👤 {displayName}</span>
+                  <span className="text-[11px] font-bold text-slate-500 block truncate">{currentUserProfile.email}</span>
+                </div>
+
+                <button
+                  onClick={() => {
+                    onChangeTab?.("profile");
+                    setAccountDropdownOpen(false);
+                  }}
+                  className="w-full text-right py-2 px-3 rounded-xl hover:bg-emerald-50 text-xs font-black text-slate-800 flex items-center gap-2 cursor-pointer"
+                >
+                  <User className="w-4 h-4 text-emerald-700" />
+                  <span>{isAr ? "الملف الشخصي" : "My Profile"}</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    onChangeTab?.("profile");
+                    setAccountDropdownOpen(false);
+                  }}
+                  className="w-full text-right py-2 px-3 rounded-xl hover:bg-emerald-50 text-xs font-black text-slate-800 flex items-center gap-2 cursor-pointer"
+                >
+                  <Bookmark className="w-4 h-4 text-teal-700" />
+                  <span>{isAr ? "قراراتي الدائرية" : "My Decisions"}</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    onChangeTab?.("profile");
+                    setAccountDropdownOpen(false);
+                  }}
+                  className="w-full text-right py-2 px-3 rounded-xl hover:bg-emerald-50 text-xs font-black text-slate-800 flex items-center justify-between cursor-pointer"
+                >
+                  <span className="flex items-center gap-2">
+                    <Leaf className="w-4 h-4 text-emerald-600" />
+                    <span>{isAr ? "النقاط" : "Eco Points"}</span>
+                  </span>
+                  <span className="text-xs font-black text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md">
+                    {currentUserProfile.points ?? userStats.points}
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    onChangeTab?.("profile");
+                    setAccountDropdownOpen(false);
+                  }}
+                  className="w-full text-right py-2 px-3 rounded-xl hover:bg-emerald-50 text-xs font-black text-slate-800 flex items-center gap-2 cursor-pointer"
+                >
+                  <Settings className="w-4 h-4 text-slate-600" />
+                  <span>{isAr ? "الإعدادات" : "Settings"}</span>
+                </button>
+
+                <div className="border-t border-slate-100 pt-1">
+                  <button
+                    onClick={() => {
+                      if (onSignOut) onSignOut();
+                      setAccountDropdownOpen(false);
+                    }}
+                    className="w-full text-right py-2 px-3 rounded-xl hover:bg-red-50 text-xs font-black text-red-700 flex items-center gap-2 cursor-pointer"
+                  >
+                    <LogOut className="w-4 h-4 text-red-600" />
+                    <span>{isAr ? "تسجيل الخروج" : "Sign Out"}</span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Mobile Hamburger Menu Toggle Button */}
           <button
@@ -208,7 +313,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
           <div className="flex items-center justify-between pb-2 border-b border-slate-100">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-900 font-extrabold text-xs">
               <Leaf className="w-4 h-4 text-emerald-600" />
-              <span>{userStats.points} {isAr ? "نقطة استدامة" : "points"}</span>
+              <span>{currentUserProfile?.points ?? userStats.points} {isAr ? "نقطة استدامة" : "points"}</span>
             </div>
             <button
               onClick={() => {
