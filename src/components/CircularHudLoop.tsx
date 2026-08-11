@@ -44,10 +44,10 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
   ];
 
   return (
-    <div className="relative w-full max-w-[440px] aspect-square mx-auto flex items-center justify-center select-none" dir={isAr ? "rtl" : "ltr"}>
+    <div className="relative w-full max-w-[480px] sm:max-w-[520px] aspect-square mx-auto flex items-center justify-center select-none" dir={isAr ? "rtl" : "ltr"}>
       
       {/* 1. Ambient Outer Glowing Background Halo */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/25 via-teal-400/15 to-emerald-400/25 blur-3xl animate-pulse pointer-events-none" />
+      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-400/20 to-emerald-400/30 blur-3xl animate-pulse pointer-events-none" />
 
       {/* 2. Slow Ambient Rotating SVG HUD Outer Ring (Open & Transparent Center) */}
       <div className="absolute inset-4 sm:inset-6 rounded-full border border-emerald-400/40 animate-[spin_45s_linear_infinite] pointer-events-none">
@@ -60,7 +60,7 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
       {/* 3. Outer Interactive SVG Arc Segments (5 Glowing Neon Arcs) */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 200 200">
         <defs>
-          <linearGradient id="neonEmeraldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="highContrastGlow" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#34d399" />
             <stop offset="50%" stopColor="#10b981" />
             <stop offset="100%" stopColor="#059669" />
@@ -78,8 +78,8 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
                 cy="100"
                 r="88"
                 fill="none"
-                stroke={isActive ? "url(#neonEmeraldGlow)" : "rgba(52, 211, 153, 0.25)"}
-                strokeWidth={isActive ? "5" : "2"}
+                stroke={isActive ? "url(#highContrastGlow)" : "rgba(52, 211, 153, 0.25)"}
+                strokeWidth={isActive ? "6" : "2.5"}
                 strokeDasharray="92 20"
                 transform={`rotate(${angle} 100 100)`}
                 className="transition-all duration-300"
@@ -90,14 +90,14 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
       </svg>
 
       {/* 4. 100% Hollow & Transparent Center Target Reticle */}
-      <div className="absolute inset-20 sm:inset-24 rounded-full border border-emerald-400/20 pointer-events-none flex items-center justify-center">
+      <div className="absolute inset-24 sm:inset-28 rounded-full border border-emerald-400/20 pointer-events-none flex items-center justify-center">
         <div className="w-full h-[1px] bg-emerald-400/20" />
         <div className="h-full w-[1px] bg-emerald-400/20 absolute" />
       </div>
 
-      {/* 5. 5 Perfect Circular Nodes Directly Centered on Circle Circumference Path */}
+      {/* 5. 5 ENLARGED PERFECT CIRCULAR NODES (w-20 h-20 sm:w-24 sm:h-24) */}
       {segments.map((seg, idx) => {
-        const radius = 138; // Radius matching circle stroke line exactly
+        const radius = 152; // Orbit radius matching circle circumference line
         const angleRad = ((idx * 360) / 5 - 90) * (Math.PI / 180);
         const x = Math.cos(angleRad) * radius;
         const y = Math.sin(angleRad) * radius;
@@ -106,43 +106,30 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
         const Icon = seg.icon;
 
         return (
-          <div
+          <button
             key={seg.id}
+            onClick={() => {
+              setActiveSegmentIndex(idx);
+              if (onSelectPathway) onSelectPathway(seg.id);
+            }}
+            onMouseEnter={() => {
+              setActiveSegmentIndex(idx);
+            }}
             style={{
               transform: `translate(${x}px, ${y}px)`,
             }}
-            className="absolute flex flex-col items-center justify-center z-30 transition-all duration-300 pointer-events-auto"
-          >
-            {/* Perfect Circular Node Button */}
-            <button
-              onClick={() => {
-                setActiveSegmentIndex(idx);
-                if (onSelectPathway) onSelectPathway(seg.id);
-              }}
-              onMouseEnter={() => {
-                setActiveSegmentIndex(idx);
-              }}
-              className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex flex-col items-center justify-center transition-all duration-300 cursor-pointer shadow-2xl backdrop-blur-md border-2 ${
-                isActive
-                  ? "bg-emerald-400 text-slate-950 border-white shadow-[0_0_35px_#34d399] scale-115 ring-4 ring-emerald-400/60"
-                  : "bg-emerald-950/90 text-emerald-300 hover:bg-emerald-900 hover:text-white border-emerald-400/50 hover:border-emerald-300 hover:scale-105"
-              }`}
-              title={isAr ? seg.labelAr : seg.labelEn}
-            >
-              <Icon className={`w-6 h-6 sm:w-7 sm:h-7 ${isActive ? "animate-bounce text-slate-950" : "text-emerald-300"}`} />
-            </button>
-
-            {/* Clear Unclipped Bold Label Pill Below Circle */}
-            <div className={`mt-1.5 px-3 py-0.5 rounded-full backdrop-blur-md border transition-all duration-300 ${
+            className={`absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full flex flex-col items-center justify-center p-2 text-center transition-all duration-300 cursor-pointer z-30 shadow-2xl backdrop-blur-md border-2 border-emerald-400/60 ${
               isActive
-                ? "bg-emerald-400 text-slate-950 font-black border-white shadow-[0_0_15px_#34d399] scale-105"
-                : "bg-emerald-950/90 text-white font-bold border-emerald-500/40"
-            }`}>
-              <span className="text-xs sm:text-sm font-black whitespace-nowrap tracking-tight">
-                {isAr ? seg.labelAr : seg.labelEn}
-              </span>
-            </div>
-          </div>
+                ? "bg-emerald-400 text-slate-950 border-white shadow-[0_0_40px_#34d399] scale-115 ring-4 ring-emerald-400/70"
+                : "bg-emerald-950/95 text-white hover:bg-emerald-900 hover:border-emerald-300 hover:scale-105"
+            }`}
+            title={isAr ? seg.labelAr : seg.labelEn}
+          >
+            <Icon className={`w-7 h-7 sm:w-8 sm:h-8 mb-0.5 shrink-0 ${isActive ? "animate-bounce text-slate-950" : "text-emerald-300"}`} />
+            <span className={`text-[10px] sm:text-xs font-black tracking-tight leading-tight max-w-[74px] text-center ${isActive ? "text-slate-950 font-extrabold" : "text-white font-bold"}`}>
+              {isAr ? seg.labelAr : seg.labelEn}
+            </span>
+          </button>
         );
       })}
     </div>
