@@ -314,7 +314,17 @@ export default function App() {
           )}
 
           {activeTab === "updates" && (
-            <UpdatesTab userStats={userStats} language={language} />
+            <UpdatesTab
+              userStats={userStats}
+              language={language}
+              onChangeTab={(tab, categoryFilter) => {
+                if (categoryFilter && tab === "map") {
+                  setSelectedMapCategory(categoryFilter);
+                }
+                setActiveTab(tab);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            />
           )}
 
           {activeTab === "profile" && (
