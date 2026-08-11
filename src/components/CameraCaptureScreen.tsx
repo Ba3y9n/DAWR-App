@@ -660,9 +660,9 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
     <div className="w-full bg-white space-y-12 pb-12">
       {/* 1. Full-Bleed 100% Width Hero Portal Banner (min-h-[85vh] Portal Height) */}
       <section className="w-full relative min-h-[80vh] sm:min-h-[85vh] lg:min-h-[88vh] flex flex-col justify-center rounded-none overflow-hidden shadow-xl border-b border-emerald-800/40 bg-emerald-950 px-6 sm:px-12 md:px-20 py-16 sm:py-24">
-        {/* Vivid Sustainable Nature Background Image */}
+        {/* Vivid Sustainable Nature / Industrial Circular Facility Background Image */}
         <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-95 transform scale-105"
+          className="absolute inset-0 bg-[url('/assets/dawr_hero_banner_new.jpg')] bg-cover bg-center opacity-95 transform scale-105"
         />
         {/* Soft Light Overlay for Clear & Vivid Background View */}
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/45 via-emerald-900/30 to-black/20" />

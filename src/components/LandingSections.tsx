@@ -414,29 +414,42 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
       </section>
       </div>
 
-      {/* 2. Full-Bleed 100% Width Main Features Strip (المميزات الرئيسية - شارات مبسطة) */}
-      <section id="ideas-section" className="w-full py-10 bg-gradient-to-r from-slate-950 via-teal-950 to-slate-950 text-white border-y border-teal-800/40 shadow-xl px-6 sm:px-12 md:px-20 rounded-none scroll-mt-24">
+      {/* 2. Main Features Section (المميزات الرئيسية - خلفية بيضاء وبطاقات ناعمة بنصوص سوداء) */}
+      <section id="ideas-section" className="w-full py-12 bg-white text-slate-900 px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="w-full max-w-7xl mx-auto space-y-6 text-center">
-          <div className="space-y-1">
-            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          <div className="space-y-1.5 max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span>{isAr ? "خصائص المنصة" : "Platform Features"}</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               {isAr ? "المميزات الرئيسية" : "Key Features"}
             </h2>
-            <p className="text-xs sm:text-sm text-emerald-300 font-extrabold">
+            <p className="text-xs sm:text-sm text-emerald-800 font-extrabold">
               {isAr ? "كل ما تحتاجه لتصبح بطلاً في الاقتصاد الدائري" : "Everything You Need to Become an Eco Hero"}
             </p>
           </div>
 
-          {/* Single-Row Minimal Eco Badges Grid */}
-          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
+          {/* Minimal Clean Eco Badges Grid with White/Light Background & Black Text */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 pt-2">
             {keyFeatures.map((feat) => {
               const Icon = feat.icon;
               return (
                 <div
                   key={feat.id}
-                  className="inline-flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-extrabold text-xs sm:text-sm shadow-sm backdrop-blur-md transition-all duration-300 cursor-default hover:scale-105"
+                  onClick={() => setActiveFeatureModal({
+                    title: feat.title,
+                    icon: feat.icon,
+                    color: feat.color,
+                    desc: feat.desc,
+                    details: feat.details
+                  })}
+                  className="flex flex-col items-center justify-center text-center gap-2 p-4 rounded-2xl bg-emerald-50/50 hover:bg-emerald-100/60 border border-emerald-200/80 text-slate-900 font-black text-xs sm:text-sm shadow-2xs transition-all duration-300 cursor-pointer hover:scale-[1.03] group"
                 >
-                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0" />
-                  <span>{feat.title}</span>
+                  <div className="w-9 h-9 rounded-xl bg-white border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-2xs group-hover:scale-110 transition-transform">
+                    <Icon className="w-4 h-4 text-emerald-700 shrink-0" />
+                  </div>
+                  <span className="text-slate-900 font-black tracking-tight">{feat.title}</span>
                 </div>
               );
             })}
@@ -447,6 +460,13 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
       {/* 3. Official Full-Bleed Darker Teal Footer (أسفل الصفحة) */}
       <footer id="stores-section" className="w-full mt-16 border-t border-teal-900 bg-gradient-to-b from-teal-900 via-cyan-950 to-slate-950 text-white px-6 sm:px-12 md:px-20 pt-12 pb-24 shadow-xl space-y-8 rounded-none scroll-mt-24">
         <div className="w-full max-w-7xl mx-auto space-y-8">
+          <div className="flex items-center justify-between border-b border-teal-800/60 pb-6">
+            <img src="/assets/dawr_logo_new.png" alt="DAWR Logo" className="h-10 w-auto object-contain bg-white/90 p-1.5 rounded-xl shadow-xs" />
+            <span className="text-xs font-bold text-teal-200">
+              {isAr ? "منصة الاقتصاد الدائري الذكية في المملكة" : "Saudi Smart Circular Economy Platform"}
+            </span>
+          </div>
+
           <div className="grid grid-cols-3 gap-6 text-start">
             {/* Column 1: الرئيسية */}
             <div className="space-y-3">

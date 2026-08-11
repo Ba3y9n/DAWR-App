@@ -76,23 +76,13 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
 
           <div 
             onClick={() => onChangeTab?.("home")}
-            className="flex items-center gap-2.5 cursor-pointer group"
+            className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-800 via-teal-700 to-green-600 p-0.5 shadow-md shadow-emerald-800/15 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
-              <div className="w-full h-full bg-emerald-900 rounded-[14px] flex items-center justify-center border border-emerald-500/30">
-                <Recycle className="w-5 h-5 text-emerald-300" />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <h1 className="text-base font-black text-slate-900 tracking-tight">
-                  {isAr ? "دَوْر | DAWR" : "DAWR | Platform"}
-                </h1>
-              </div>
-              <p className="text-[10px] text-emerald-800 font-extrabold tracking-wide">
-                {isAr ? "منصة الاقتصاد الدائري الذكية" : "Smart Circular Economy Platform"}
-              </p>
-            </div>
+            <img 
+              src="/assets/dawr_logo_new.png" 
+              alt="DAWR Logo" 
+              className="h-10 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+            />
           </div>
         </div>
 

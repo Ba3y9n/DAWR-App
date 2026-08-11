@@ -9,7 +9,7 @@ export const PRESET_SAMPLES = [
     circularScore: "95/100",
     routeAr: "تبرع وإعادة استخدام - كسوة",
     bgGradient: "from-emerald-500/20 to-teal-500/10 border-emerald-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=800&auto=format&fit=crop&q=80"
+    sampleImage: "/assets/preset_thobe_saudi.png"
   },
   {
     id: "plastic",
@@ -19,7 +19,7 @@ export const PRESET_SAMPLES = [
     circularScore: "88/100",
     routeAr: "فرز وآلات RVM بالقصيم",
     bgGradient: "from-cyan-500/20 to-sky-500/10 border-cyan-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&auto=format&fit=crop&q=80"
+    sampleImage: "/assets/preset_pet_bottles.png"
   },
   {
     id: "cardboard",
@@ -29,7 +29,7 @@ export const PRESET_SAMPLES = [
     circularScore: "90/100",
     routeAr: "تدوير ورقي - مراكز القصيم",
     bgGradient: "from-amber-500/20 to-orange-500/10 border-amber-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&auto=format&fit=crop&q=80"
+    sampleImage: "/assets/preset_cardboard_boxes.png"
   },
   {
     id: "electronics",
