@@ -411,20 +411,41 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
         </section>
 
         {/* 2. Main Features Section (المميزات الرئيسية) */}
-        <section id="features" className="space-y-6 scroll-mt-24">
-          <div className="space-y-1.5 max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+        <section id="features" className="space-y-10 scroll-mt-24 py-4">
+
+          {/* Section Header */}
+          <div className="text-center space-y-3 max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-3.5 py-1 rounded-full">
+              ✦ {isAr ? "ما الذي يميز دَوْر؟" : "What makes DAWR special?"}
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
               {isAr ? "المميزات الرئيسية" : "Key Features"}
             </h2>
-            <p className="text-xs sm:text-sm text-emerald-800 font-extrabold">
+            <p className="text-sm sm:text-base text-slate-500 font-semibold">
               {isAr ? "كل ما تحتاجه لتصبح بطلاً في الاقتصاد الدائري" : "Everything You Need to Become an Eco Hero"}
             </p>
           </div>
 
-          {/* Minimal Clean Eco Badges Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 pt-2">
+          {/* Premium 3×2 Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {keyFeatures.map((feat) => {
               const Icon = feat.icon;
+              const subDescAr: Record<string, string> = {
+                score:        "قياس حقيقي لمعدل إسهامك الدائري",
+                challenges:   "شارك في التحديات واكسب أوسمة",
+                impact:       "تتبع حجم انبعاثات CO₂ المتجنبة",
+                points:       "استبدل نقاطك بمكافآت واستدامة",
+                alternatives: "اكتشف خيارات مبتكرة لإعادة الاستخدام",
+                community:    "تواصل وشارك أثرك مع المهتمين بالبيئة",
+              };
+              const subDescEn: Record<string, string> = {
+                score:        "Real measurement of your circular contribution",
+                challenges:   "Join challenges and earn eco badges",
+                impact:       "Track CO₂ emissions avoided through your choices",
+                points:       "Redeem your points for rewards and sustainability perks",
+                alternatives: "Discover creative options for upcycling & reuse",
+                community:    "Connect and share your impact with eco enthusiasts",
+              };
               return (
                 <div
                   key={feat.id}
@@ -435,17 +456,33 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
                     desc: feat.desc,
                     details: feat.details
                   })}
-                  className="flex flex-col items-center justify-center text-center gap-2 p-4 rounded-2xl bg-emerald-50/50 hover:bg-emerald-100/60 border border-emerald-200/80 text-slate-900 font-black text-xs sm:text-sm shadow-2xs transition-all duration-300 cursor-pointer hover:scale-[1.03] group"
+                  className="group flex flex-col gap-4 p-6 bg-white border border-emerald-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-emerald-300 transition-all duration-300 cursor-pointer"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-white border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-2xs group-hover:scale-110 transition-transform">
-                    <Icon className="w-4 h-4 text-emerald-700 shrink-0" />
+                  {/* Icon Circle */}
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-100 group-hover:scale-105 transition-all duration-300 shadow-sm">
+                    <Icon className="w-7 h-7" />
                   </div>
-                  <span className="text-slate-900 font-black tracking-tight">{feat.title}</span>
+
+                  {/* Title & Sub-description */}
+                  <div className="space-y-1.5">
+                    <h3 className="text-lg font-extrabold text-emerald-950 tracking-tight group-hover:text-emerald-700 transition-colors">
+                      {feat.title}
+                    </h3>
+                    <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                      {isAr ? subDescAr[feat.id] : subDescEn[feat.id]}
+                    </p>
+                  </div>
+
+                  {/* Tap hint */}
+                  <span className="mt-auto text-xs font-black text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    {isAr ? "اضغط للتفاصيل ←" : "Tap for details →"}
+                  </span>
                 </div>
               );
             })}
           </div>
         </section>
+
       </div>
 
       <footer id="updates" className="w-full mt-16 border-t border-emerald-900/60 bg-gradient-to-b from-[#04291e] via-emerald-950 to-slate-950 text-white px-6 sm:px-12 md:px-16 pt-14 pb-10 shadow-xl rounded-none scroll-mt-24">
