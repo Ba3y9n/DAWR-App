@@ -158,7 +158,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
         </div>
 
         {/* 2. Center: Quick Navigation Links (Desktop) */}
-        <nav className="hidden lg:flex items-center gap-1 bg-slate-100/70 p-1.5 rounded-2xl border border-slate-200/80">
+        <nav className="hidden md:flex items-center gap-1 bg-slate-100/70 p-1.5 rounded-2xl border border-slate-200/80">
           {navLinks.map((link) => {
             const isActive = activeTab === link.id || (link.id === "home" && activeTab === "home");
             return (
@@ -308,7 +308,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
           {/* Mobile Hamburger Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 transition-all cursor-pointer"
+            className="md:hidden p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 transition-all cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -317,7 +317,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
 
       {/* 4. Mobile Menu Dropdown Overlay */}
       {mobileMenuOpen && (
-        <div className="lg:hidden w-full bg-white border-b border-slate-200 px-4 py-4 space-y-3 shadow-lg">
+        <div className="md:hidden w-full bg-white border-b border-slate-200 px-4 py-4 space-y-3 shadow-lg">
           <div className="flex items-center justify-between pb-2 border-b border-slate-100">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-900 font-extrabold text-xs">
               <Leaf className="w-4 h-4 text-emerald-600" />

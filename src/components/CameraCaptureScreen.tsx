@@ -596,7 +596,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
           <div className="lg:col-span-5 space-y-6">
 
             {/* HOW DAWR WORKS SIDE PANEL (COMPACT VERTICAL EXTENSION) */}
-            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-5 sm:p-6 space-y-5 max-w-sm sm:max-w-md mx-auto w-full">
+            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-5 sm:p-6 space-y-5 lg:max-w-none max-w-md mx-auto w-full">
               <h3 className="text-lg font-black text-emerald-950 border-b border-slate-100 pb-3 flex items-center justify-center gap-2 text-center">
                 <Leaf className="w-5 h-5 text-emerald-700 shrink-0" />
                 <span>{isAr ? "كيف يعمل دَوْر؟ 🍃" : "How DAWR Works 🍃"}</span>
@@ -933,7 +933,7 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
       {/* 5. Landing Sections (Circular Economy Pillars, Ecosystem & Features) */}
       <LandingSections
         language={language}
-        onAnalyzeClick={() => onNavigateToScan?.()}
+        onStartClick={() => onNavigateToScan?.()}
       />
     </div>
   );
