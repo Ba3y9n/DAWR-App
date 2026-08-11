@@ -98,7 +98,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
         onChangeTab?.("home");
         if (onBack) onBack();
         setTimeout(() => {
-          document.getElementById("circular-impact")?.scrollIntoView({ behavior: "smooth" });
+          document.getElementById("impact-section")?.scrollIntoView({ behavior: "smooth" });
         }, 120);
       },
     },
