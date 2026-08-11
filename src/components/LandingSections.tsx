@@ -426,8 +426,8 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
             </p>
           </div>
 
-          {/* Premium 3×2 Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* 6-Column Horizontal Cards Row */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 xl:gap-4">
             {keyFeatures.map((feat) => {
               const Icon = feat.icon;
               const subDescAr: Record<string, string> = {
@@ -456,25 +456,25 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
                     desc: feat.desc,
                     details: feat.details
                   })}
-                  className="group flex flex-col gap-4 p-6 bg-white border border-emerald-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-emerald-300 transition-all duration-300 cursor-pointer"
+                  className="group flex flex-col gap-3 p-4 xl:p-5 bg-white border border-emerald-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-emerald-300 transition-all duration-300 cursor-pointer"
                 >
                   {/* Icon Circle */}
-                  <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-100 group-hover:scale-105 transition-all duration-300 shadow-sm">
-                    <Icon className="w-7 h-7" />
+                  <div className="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-100 group-hover:scale-105 transition-all duration-300 shadow-sm shrink-0">
+                    <Icon className="w-5 h-5" />
                   </div>
 
                   {/* Title & Sub-description */}
-                  <div className="space-y-1.5">
-                    <h3 className="text-lg font-extrabold text-emerald-950 tracking-tight group-hover:text-emerald-700 transition-colors">
+                  <div className="space-y-1 min-w-0">
+                    <h3 className="text-sm font-extrabold text-emerald-950 tracking-tight group-hover:text-emerald-700 transition-colors leading-tight">
                       {feat.title}
                     </h3>
-                    <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                    <p className="text-[11px] xl:text-xs text-slate-500 font-medium leading-relaxed">
                       {isAr ? subDescAr[feat.id] : subDescEn[feat.id]}
                     </p>
                   </div>
 
                   {/* Tap hint */}
-                  <span className="mt-auto text-xs font-black text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <span className="mt-auto text-[10px] font-black text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                     {isAr ? "اضغط للتفاصيل ←" : "Tap for details →"}
                   </span>
                 </div>
