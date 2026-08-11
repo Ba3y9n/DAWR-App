@@ -339,11 +339,7 @@ export default function App() {
             />
           )}
 
-          {/* Floating AI Assistant Widget anchored on all pages */}
-          <FloatingChatWidget
-            language={language}
-            productName={analysisData?.productName}
-          />
+
         </main>
 
         {/* Global Footer */}

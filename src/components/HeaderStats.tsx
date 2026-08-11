@@ -156,19 +156,7 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
             />
           </div>
 
-          {/* Sustainability Points Glass Badge next to Logo */}
-          <div 
-            onClick={(e) => {
-              e.stopPropagation();
-              onChangeTab?.("profile");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 text-emerald-950 border border-emerald-200/90 shadow-3xs font-black text-[10px] sm:text-xs cursor-pointer hover:border-emerald-400 transition-all select-none shrink-0"
-            title={isAr ? "نقاط الاستدامة المكتسبة" : "Earned Eco Points"}
-          >
-            <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-            <span>{currentUserProfile?.points ?? userStats.points} {isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
-          </div>
+
         </div>
 
         {/* 2. Center: Quick Navigation Links (Desktop) */}
