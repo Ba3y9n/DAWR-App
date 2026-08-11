@@ -39,7 +39,7 @@ export const PRESET_SAMPLES = [
     circularScore: "94/100",
     routeAr: "إصلاح وإعادة استخدام محلي",
     bgGradient: "from-blue-500/20 to-indigo-500/10 border-blue-500/30",
-    sampleImage: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80"
+    sampleImage: "/assets/preset_electronics.png"
   }
 ];
 
