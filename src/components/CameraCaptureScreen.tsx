@@ -4,6 +4,7 @@ import { PRESET_SAMPLES } from "../data/presetSamples";
 import { Language, ActiveTab } from "../types";
 import { LandingSections } from "./LandingSections";
 import { CircularHudLoop } from "./CircularHudLoop";
+import { CircularImpactDashboard } from "./CircularImpactDashboard";
 
 interface CameraCaptureScreenProps {
   onAnalyzeSample: (presetId: string) => void;
@@ -929,61 +930,8 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         </section>
       </div>
 
-      {/* 4. Full-Bleed 100% Width Clean Impact Dashboard Banner (أثر قرارات الاستدامة) */}
-      <section 
-        id="impact-section" 
-        className="w-full relative py-12 my-8 bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white shadow-xl border-y border-emerald-800/40 rounded-none overflow-hidden px-6 sm:px-12 md:px-20"
-      >
-        <div className="w-full max-w-7xl mx-auto space-y-8">
-          {/* Top Row: Centered Section Title & Gamification Badge */}
-          <div className="flex flex-col items-center justify-center text-center space-y-3 border-b border-white/10 pb-6 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-300 bg-emerald-950/80 px-3.5 py-1 rounded-full border border-emerald-500/30">
-              <Leaf className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>{isAr ? "مؤشرات الأثر البيئي الوطنية" : "Environmental Impact Stats"}</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight pt-0.5">
-              {isAr ? "أثر قرارات الاستدامة في منصة دَوْر" : "Sustainability Impact Index"}
-            </h3>
-            <div className="inline-flex items-center gap-2 bg-emerald-950/90 border border-emerald-400/30 px-4 py-1.5 rounded-2xl text-xs font-extrabold text-emerald-200 shadow-md backdrop-blur-xs">
-              <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>{isAr ? "تحصل على +50 نقطة دَوْر عند كل قرار دائري منفّذ" : "Earn +50 DAWR points per circular decision"}</span>
-            </div>
-          </div>
-
-          {/* Clean Minimal Stats Row (3 Metrics with Vertical Dividers & No Inner Boxes) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 py-2">
-            {/* Stat 1: CO2 Avoided */}
-            <div className="flex flex-col items-center text-center space-y-1 md:border-l md:border-white/10 px-4">
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight drop-shadow-md">
-                18.5 <span className="text-base sm:text-lg text-emerald-300 font-bold">{isAr ? "كجم CO2e" : "kg CO2e"}</span>
-              </span>
-              <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
-                {isAr ? "وفورات الانبعاثات الكربونية الحالية" : "CO2 Emissions Avoided"}
-              </span>
-            </div>
-
-            {/* Stat 2: Products Saved */}
-            <div className="flex flex-col items-center text-center space-y-1 md:border-l md:border-white/10 px-4">
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight drop-shadow-md">
-                15 <span className="text-base sm:text-lg text-emerald-300 font-bold">{isAr ? "منتجاً" : "items"}</span>
-              </span>
-              <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
-                {isAr ? "المنتجات المستفادة وتحويل مسارها" : "Products Saved & Diverted"}
-              </span>
-            </div>
-
-            {/* Stat 3: DAWR Points */}
-            <div className="flex flex-col items-center text-center space-y-1 px-4">
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-300 tracking-tight drop-shadow-md">
-                270 <span className="text-base sm:text-lg text-white font-bold">{isAr ? "نقطة دَوْر" : "DAWR pts"}</span>
-              </span>
-              <span className="text-xs sm:text-sm text-emerald-200/90 font-extrabold pt-1">
-                {isAr ? "رصيد نقاط دَوْر الاستدامة المكتسبة" : "Earned Sustainability DAWR Points"}
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 4. Circular Impact Dashboard (أثرك الدائري مع دَوْر) */}
+      <CircularImpactDashboard language={language} />
 
       {/* 5. Landing Sections (Circular Economy Pillars, Ecosystem & Features) */}
       <LandingSections

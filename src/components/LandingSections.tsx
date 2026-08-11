@@ -129,7 +129,7 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
   const keyFeatures = [
     {
       id: "score",
-      title: isAr ? "Circular Score" : "Circular Score",
+      title: isAr ? "مؤشر الاستدامة" : "Circular Score",
       desc: isAr
         ? "مؤشر يوضح أفضلية الخيارات المتاحة لكل منتج بناءً على تحليل ذكي"
         : "An intelligent metric showing the best circular pathway score for each product",
@@ -455,25 +455,25 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
       {/* 3. Official Full-Bleed Darker Teal Footer (التحديثات والروابط) */}
       <footer id="updates" className="w-full mt-16 border-t border-teal-900 bg-gradient-to-b from-teal-900 via-cyan-950 to-slate-950 text-white px-6 sm:px-12 md:px-20 pt-12 pb-24 shadow-xl space-y-8 rounded-none scroll-mt-24">
         <div className="w-full max-w-7xl mx-auto space-y-8">
-          <div className="flex items-center justify-between border-b border-teal-800/60 pb-6">
-            <img src="/assets/dawr_logo_new.png" alt="DAWR Logo" className="h-10 w-auto object-contain bg-white/90 p-1.5 rounded-xl shadow-xs" />
-          </div>
 
-          <div className="grid grid-cols-3 gap-6 text-start">
-            {/* Column 1: الرئيسية */}
-            <div className="space-y-3">
-              <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
-                {isAr ? "الرئيسية" : "Home"}
-              </h4>
-              <ul className="space-y-2 text-sm font-bold text-white">
-                <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "عن المشروع" : "About Project"}</li>
-                <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "التطبيق" : "App Features"}</li>
-                <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "المساعدة" : "Help Center"}</li>
-              </ul>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-start">
+            {/* Column 1: الشعار والرئيسية */}
+            <div className="space-y-4">
+              <img src="/assets/dawr_logo_new.png" alt="DAWR Logo" className="h-10 w-auto object-contain bg-white/90 p-1.5 rounded-xl shadow-xs" />
+              <div className="space-y-3 pt-1">
+                <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
+                  {isAr ? "الرئيسية" : "Home"}
+                </h4>
+                <ul className="space-y-2 text-sm font-bold text-white">
+                  <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "عن المشروع" : "About Project"}</li>
+                  <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "التطبيق" : "App Features"}</li>
+                  <li className="hover:text-cyan-300 cursor-pointer transition">{isAr ? "المساعدة" : "Help Center"}</li>
+                </ul>
+              </div>
             </div>
 
             {/* Column 2: المساعدة */}
-            <div className="space-y-3">
+            <div className="space-y-3 md:pt-14">
               <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
                 {isAr ? "المساعدة" : "Support"}
               </h4>
@@ -485,7 +485,7 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
             </div>
 
             {/* Column 3: تابعنا */}
-            <div className="space-y-3">
+            <div className="space-y-3 md:pt-14">
               <h4 className="text-sm sm:text-base font-black text-cyan-300 tracking-wider">
                 {isAr ? "تابعنا" : "Follow Us"}
               </h4>
@@ -502,22 +502,22 @@ export const LandingSections: React.FC<LandingSectionsProps> = ({ language, onSt
               {isAr ? "© 2026 DAWR - جميع الحقوق محفوظة" : "© 2026 DAWR - All rights reserved"}
             </p>
 
-            {/* Development Team Badges */}
+            {/* Development Team Badges with Hover Zoom & Glassmorphism */}
             <div className="pt-2 space-y-2">
               <span className="text-xs font-black text-emerald-300 uppercase tracking-widest block">
                 {isAr ? "فريق التطوير" : "Development Team"}
               </span>
               <div className="flex flex-wrap items-center justify-center gap-2.5 max-w-2xl mx-auto pt-1">
-                <span className="bg-teal-900/70 border border-teal-600/50 text-cyan-200 hover:text-white hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all cursor-default backdrop-blur-xs">
+                <span className="bg-emerald-900/40 border border-emerald-500/30 text-emerald-100 hover:scale-105 hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all duration-200 cursor-default backdrop-blur-xs">
                   {isAr ? "بيان المطيري" : "Bayan Almutiri"}
                 </span>
-                <span className="bg-teal-900/70 border border-teal-600/50 text-cyan-200 hover:text-white hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all cursor-default backdrop-blur-xs">
+                <span className="bg-emerald-900/40 border border-emerald-500/30 text-emerald-100 hover:scale-105 hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all duration-200 cursor-default backdrop-blur-xs">
                   {isAr ? "متعب القرني" : "Mutaeb Alqarni"}
                 </span>
-                <span className="bg-teal-900/70 border border-teal-600/50 text-cyan-200 hover:text-white hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all cursor-default backdrop-blur-xs">
+                <span className="bg-emerald-900/40 border border-emerald-500/30 text-emerald-100 hover:scale-105 hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all duration-200 cursor-default backdrop-blur-xs">
                   {isAr ? "عبدالعزيز الشمري" : "Abdulaziz Alshammari"}
                 </span>
-                <span className="bg-teal-900/70 border border-teal-600/50 text-cyan-200 hover:text-white hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all cursor-default backdrop-blur-xs">
+                <span className="bg-emerald-900/40 border border-emerald-500/30 text-emerald-100 hover:scale-105 hover:border-emerald-400 px-4 py-1.5 rounded-full text-xs font-black shadow-xs transition-all duration-200 cursor-default backdrop-blur-xs">
                   {isAr ? "فيصل ال عبدالله" : "Faisal Al Abdullah"}
                 </span>
               </div>
