@@ -9,6 +9,14 @@ interface CircularHudLoopProps {
 export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSelectPathway }) => {
   const isAr = language === "ar";
   const [activeSegmentIndex, setActiveSegmentIndex] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const segments = [
     {
@@ -44,7 +52,7 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
   ];
 
   return (
-    <div className="relative w-full max-w-[300px] sm:max-w-[480px] lg:max-w-[520px] aspect-square mx-auto flex items-center justify-center select-none" dir={isAr ? "rtl" : "ltr"}>
+    <div className="relative w-full max-w-[270px] sm:max-w-[480px] lg:max-w-[520px] aspect-square mx-auto flex items-center justify-center select-none" dir={isAr ? "rtl" : "ltr"}>
       
       {/* 1. Ambient Outer Glowing Background Halo */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-400/20 to-emerald-400/30 blur-3xl animate-pulse pointer-events-none" />
@@ -90,14 +98,14 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
       </svg>
 
       {/* 4. 100% Hollow & Transparent Center Target Reticle */}
-      <div className="absolute inset-24 sm:inset-28 rounded-full border border-emerald-400/20 pointer-events-none flex items-center justify-center">
+      <div className="absolute inset-[56px] sm:inset-28 rounded-full border border-emerald-400/20 pointer-events-none flex items-center justify-center">
         <div className="w-full h-[1px] bg-emerald-400/20" />
         <div className="h-full w-[1px] bg-emerald-400/20 absolute" />
       </div>
 
-      {/* 5. 5 ENLARGED PERFECT CIRCULAR NODES (w-20 h-20 sm:w-24 sm:h-24) */}
+      {/* 5. 5 ENLARGED PERFECT CIRCULAR NODES */}
       {segments.map((seg, idx) => {
-        const radius = 152; // Orbit radius matching circle circumference line
+        const radius = isMobile ? 96 : 152; // Orbit radius matching circle circumference line
         const angleRad = ((idx * 360) / 5 - 90) * (Math.PI / 180);
         const x = Math.cos(angleRad) * radius;
         const y = Math.sin(angleRad) * radius;
@@ -118,15 +126,15 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
             style={{
               transform: `translate(${x}px, ${y}px)`,
             }}
-            className={`absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full flex flex-col items-center justify-center p-2 text-center transition-all duration-300 cursor-pointer z-30 shadow-2xl backdrop-blur-md border-2 border-emerald-400/60 ${
+            className={`absolute w-16 h-16 sm:w-24 sm:h-24 rounded-full flex flex-col items-center justify-center p-1.5 text-center transition-all duration-300 cursor-pointer z-30 shadow-2xl backdrop-blur-md border-2 border-emerald-400/60 ${
               isActive
-                ? "bg-emerald-400 text-slate-950 border-white shadow-[0_0_40px_#34d399] scale-115 ring-4 ring-emerald-400/70"
+                ? "bg-emerald-400 text-slate-950 border-white shadow-[0_0_40px_#34d399] scale-110 ring-4 ring-emerald-400/70"
                 : "bg-emerald-950/95 text-white hover:bg-emerald-900 hover:border-emerald-300 hover:scale-105"
             }`}
             title={isAr ? seg.labelAr : seg.labelEn}
           >
-            <Icon className={`w-7 h-7 sm:w-8 sm:h-8 mb-0.5 shrink-0 ${isActive ? "animate-bounce text-slate-950" : "text-emerald-300"}`} />
-            <span className={`text-[10px] sm:text-xs font-black tracking-tight leading-tight max-w-[74px] text-center ${isActive ? "text-slate-950 font-extrabold" : "text-white font-bold"}`}>
+            <Icon className={`w-5.5 h-5.5 sm:w-8 sm:h-8 mb-0.5 shrink-0 ${isActive ? "animate-bounce text-slate-950" : "text-emerald-300"}`} />
+            <span className={`text-[9px] sm:text-xs font-black tracking-tight leading-tight max-w-[58px] sm:max-w-[74px] text-center ${isActive ? "text-slate-950 font-extrabold" : "text-white font-bold"}`}>
               {isAr ? seg.labelAr : seg.labelEn}
             </span>
           </button>
