@@ -9,18 +9,18 @@ import {
   MapPin, 
   MessageSquare, 
   CheckCircle2, 
-  Droplet, 
   Cloud, 
-  Trash2, 
   Award,
   ExternalLink,
   Lightbulb,
   ShieldCheck,
   Building2,
-  Share2,
   Wrench,
   RotateCcw,
-  AlertTriangle
+  AlertTriangle,
+  Leaf,
+  Coins,
+  Bot
 } from "lucide-react";
 
 interface CircularAnalysisScreenProps {
@@ -47,10 +47,15 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
   const [claimed, setClaimed] = useState<boolean>(false);
 
   // Calculate circular SVG progress ring attributes
-  const score = Math.min(100, Math.max(0, analysis.circularScore || 90));
-  const radius = 46;
+  const score = Math.min(100, Math.max(0, analysis.circularScore || 85));
+  const radius = 54;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (score / 100) * circumference;
+
+  // Determine low vs high score dynamic theme
+  const isLowScore = score < 50;
+  const gaugeGradientStart = isLowScore ? "#f59e0b" : "#059669";
+  const gaugeGradientEnd = isLowScore ? "#ea580c" : "#10b981";
 
   // Calculate condition & donation eligibility
   const conditionText = (analysis.condition || "").toLowerCase();
@@ -81,145 +86,164 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 pb-28 bg-white">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 pb-32 bg-slate-50/60 font-sans text-slate-900" dir={isAr ? "rtl" : "ltr"}>
+      
       {/* Top Header Back Navigation & Result Title */}
-      <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+      <div className="flex items-center justify-between border-b border-slate-200/90 pb-4">
         <button
           onClick={onBackToCamera}
-          className="flex items-center gap-1.5 text-slate-800 hover:text-emerald-900 bg-white border border-slate-200 px-3.5 py-1.5 rounded-xl text-xs font-bold transition active:scale-95 cursor-pointer shadow-2xs"
+          className="flex items-center gap-2 text-slate-800 hover:text-emerald-950 bg-white border border-slate-200 px-4 py-2 rounded-2xl text-xs font-black transition hover:scale-105 active:scale-95 cursor-pointer shadow-xs"
         >
-          <ArrowRight className="w-4 h-4 text-emerald-700" />
+          <ArrowRight className={`w-4 h-4 text-emerald-700 ${isAr ? "rotate-0" : "rotate-180"}`} />
           <span>{isAr ? "الرجوع للفحص" : "Back to Scan"}</span>
         </button>
 
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-black text-slate-900">{isAr ? "نتيجة الفحص" : "Inspection Result"}</span>
-          <span className="text-xs font-bold text-emerald-900 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="flex items-center gap-3">
+          <span className="text-base font-extrabold text-emerald-950">{isAr ? "نتيجة الفحص الذكي" : "Smart Inspection Result"}</span>
+          <span className="text-xs font-black text-emerald-900 bg-emerald-50 border border-emerald-300 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-2xs">
+            <Sparkles className="w-4 h-4 text-emerald-600" />
             <span>
               {analysis.isRealGeminiAnalysis !== false
-                ? (isAr ? "مدعوم بالذكاء الاصطناعي" : "Gemini AI")
-                : (isAr ? "تحليل القرار الدائري" : "Circular Analysis")}
+                ? (isAr ? "لوحة تحكم الذكاء الاصطناعي" : "Gemini AI Dashboard")
+                : (isAr ? "لوحة تحكم القرار الدائري" : "Circular Dashboard")}
             </span>
           </span>
         </div>
       </div>
 
       {/* 4-Step Timeline Stepper Indicator */}
-      <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-3.5">
-        <div className="flex items-center justify-between gap-2 max-w-3xl mx-auto text-xs font-bold">
-          <div className="flex items-center gap-1.5 text-emerald-900 font-black">
-            <span className="w-5 h-5 rounded-full bg-emerald-800 text-white flex items-center justify-center text-[10px]">1</span>
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs">
+        <div className="flex items-center justify-between gap-3 max-w-3xl mx-auto text-xs font-black">
+          <div className="flex items-center gap-2 text-emerald-900">
+            <span className="w-6 h-6 rounded-full bg-emerald-800 text-white flex items-center justify-center text-xs font-black">1</span>
             <span>{isAr ? "المنتج" : "Item"}</span>
           </div>
-          <div className="flex-1 h-0.5 bg-emerald-300" />
-          <div className="flex items-center gap-1.5 text-emerald-900 font-black">
-            <span className="w-5 h-5 rounded-full bg-emerald-800 text-white flex items-center justify-center text-[10px]">2</span>
+          <div className="flex-1 h-1 bg-emerald-400 rounded-full" />
+          <div className="flex items-center gap-2 text-emerald-900">
+            <span className="w-6 h-6 rounded-full bg-emerald-800 text-white flex items-center justify-center text-xs font-black">2</span>
             <span>{isAr ? "التحليل" : "Analysis"}</span>
           </div>
-          <div className="flex-1 h-0.5 bg-emerald-300" />
-          <div className="flex items-center gap-1.5 text-emerald-900 font-black">
-            <span className="w-5 h-5 rounded-full bg-emerald-800 text-white flex items-center justify-center text-[10px]">3</span>
+          <div className="flex-1 h-1 bg-emerald-400 rounded-full" />
+          <div className="flex items-center gap-2 text-emerald-900">
+            <span className="w-6 h-6 rounded-full bg-emerald-800 text-white flex items-center justify-center text-xs font-black">3</span>
             <span>{isAr ? "المسار المقترح" : "Pathway"}</span>
           </div>
-          <div className="flex-1 h-0.5 bg-emerald-300" />
-          <div className="flex items-center gap-1.5 text-emerald-900 font-black">
-            <span className="w-5 h-5 rounded-full bg-emerald-800 text-white flex items-center justify-center text-[10px]">4</span>
+          <div className="flex-1 h-1 bg-emerald-400 rounded-full" />
+          <div className="flex items-center gap-2 text-emerald-900">
+            <span className="w-6 h-6 rounded-full bg-emerald-800 text-white flex items-center justify-center text-xs font-black">4</span>
             <span>{isAr ? "الإجراء المستدام" : "Action"}</span>
           </div>
         </div>
       </div>
 
-      {/* Product Summary Card */}
-      <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-xs space-y-4 relative overflow-hidden">
-        <div className="flex items-start gap-4">
+      {/* 1️⃣ PRODUCT SUMMARY CARD & CORRECT IMPACT METRICS */}
+      <div className="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm space-y-6">
+        {/* Product Details Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-4 border-b border-slate-100">
           {analysis.imagePreview ? (
             <img
               src={analysis.imagePreview}
               alt={analysis.productName || analysis.product}
-              className="w-20 h-20 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-2xs"
+              className="w-24 h-24 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-xs"
             />
           ) : (
-            <div className="w-20 h-20 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
-              <Recycle className="w-9 h-9 text-emerald-700" />
+            <div className="w-24 h-24 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0 shadow-xs">
+              <Recycle className="w-10 h-10 text-emerald-700" />
             </div>
           )}
 
-          <div className="space-y-1.5 flex-1">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-black text-slate-900 tracking-tight">
+          <div className="space-y-2 flex-1 w-full">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-emerald-950 tracking-tight">
                 {analysis.productName || analysis.product}
-              </h3>
-              <span className="text-xs font-black text-emerald-900 bg-emerald-100/80 border border-emerald-300 px-3 py-1 rounded-full">
-                {analysis.condition || (isAr ? "قابل لإعادة الاستخدام" : "Reusable")}
+              </h2>
+              {/* Smart Product Condition Badge */}
+              <span className="text-xs font-black text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-4 py-1.5 rounded-full shadow-2xs">
+                {analysis.condition || (isAr ? "نفايات إلكترونية قابلة للتدوير" : "Recyclable E-Waste")}
               </span>
             </div>
-            <div className="flex flex-wrap items-center gap-2 text-xs pt-0.5">
-              <span className="bg-slate-100 text-slate-800 px-2.5 py-1 rounded-lg border border-slate-200 font-medium">
+
+            <div className="flex flex-wrap items-center gap-2.5 text-xs pt-1">
+              <span className="bg-slate-100 text-slate-800 px-3 py-1.5 rounded-xl border border-slate-200 font-bold">
                 {isAr ? "الخامة / المكونات: " : "Material: "}
-                <strong className="text-slate-900">{analysis.material || (isAr ? "غير محدد" : "Unspecified")}</strong>
+                <strong className="text-emerald-950 font-black">{analysis.material || (isAr ? "بلاستيك ومكونات دقيقة" : "Plastic & Micro-components")}</strong>
               </span>
-              <span className="bg-emerald-50 text-emerald-900 px-2.5 py-1 rounded-lg border border-emerald-200 font-medium">
-                {isAr ? "القيمة المتبقية: " : "Residual Value: "}
-                <strong className="text-emerald-950">{analysis.scores?.reuse ? `${analysis.scores.reuse}%` : "85%"}</strong>
+              <span className="bg-emerald-50 text-emerald-900 px-3 py-1.5 rounded-xl border border-emerald-200 font-bold">
+                {isAr ? "الحالة التشغيلية: " : "Operational Status: "}
+                <strong className="text-emerald-950 font-black">{analysis.condition || (isAr ? "مستعمل بحالة جيدة" : "Good Condition")}</strong>
               </span>
             </div>
           </div>
         </div>
 
-        {/* Environmental Impact Quick Bar */}
-        <div className="bg-cyan-50/50 border border-cyan-100 rounded-2xl p-2.5 flex items-center justify-around text-center text-xs">
-          <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-600 flex items-center justify-center gap-1 font-bold">
-              <Cloud className="w-3 h-3 text-cyan-600" />
-              {isAr ? "وفر الانبعاثات" : "CO₂ Saved"}
-            </span>
-            <span className="font-black text-cyan-900">{analysis.quickStats?.savedCo2 || "2.5 kg"}</span>
+        {/* 3 Exact & Elegant Environmental Impact Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Metric 1: CO2 Avoided */}
+          <div className="bg-emerald-50/60 border border-emerald-200/90 rounded-2xl p-4 flex items-center justify-between shadow-2xs">
+            <div className="space-y-1">
+              <span className="text-xs font-bold text-slate-600 flex items-center gap-1.5">
+                <Leaf className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>{isAr ? "تقليل الانبعاثات الكربونية" : "CO2 Emissions Saved"}</span>
+              </span>
+              <span className="text-xl sm:text-2xl font-extrabold text-emerald-950 block pt-0.5">
+                {analysis.quickStats?.savedCo2 || "2.5"} <span className="text-xs font-bold text-emerald-800">{isAr ? "كجم CO2e" : "kg CO2e"}</span>
+              </span>
+            </div>
           </div>
-          <div className="h-6 w-[1px] bg-cyan-200"></div>
-          <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-600 flex items-center justify-center gap-1 font-bold">
-              <Droplet className="w-3 h-3 text-sky-600" />
-              {isAr ? "وفر المياه" : "Water Saved"}
-            </span>
-            <span className="font-black text-sky-900">{analysis.quickStats?.savedWater || "600 L"}</span>
+
+          {/* Metric 2: Recyclable Component % */}
+          <div className="bg-emerald-50/60 border border-emerald-200/90 rounded-2xl p-4 flex items-center justify-between shadow-2xs">
+            <div className="space-y-1">
+              <span className="text-xs font-bold text-slate-600 flex items-center gap-1.5">
+                <Recycle className="w-4 h-4 text-teal-600 shrink-0" />
+                <span>{isAr ? "المكونات القابلة للتدوير" : "Recyclable Content"}</span>
+              </span>
+              <span className="text-xl sm:text-2xl font-extrabold text-emerald-950 block pt-0.5">
+                {analysis.scores?.recycling || "85"}%
+              </span>
+            </div>
           </div>
-          <div className="h-6 w-[1px] bg-cyan-200"></div>
-          <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-600 flex items-center justify-center gap-1 font-bold">
-              <Trash2 className="w-3 h-3 text-teal-600" />
-              {isAr ? "منع الردم" : "Diverted"}
-            </span>
-            <span className="font-black text-teal-900">{analysis.quickStats?.landfillDiverted || "0.5 kg"}</span>
+
+          {/* Metric 3: Residual Value */}
+          <div className="bg-emerald-50/60 border border-emerald-200/90 rounded-2xl p-4 flex items-center justify-between shadow-2xs">
+            <div className="space-y-1">
+              <span className="text-xs font-bold text-slate-600 flex items-center gap-1.5">
+                <Coins className="w-4 h-4 text-emerald-700 shrink-0" />
+                <span>{isAr ? "القيمة المتبقية للمنتج" : "Product Residual Value"}</span>
+              </span>
+              <span className="text-xl sm:text-2xl font-extrabold text-emerald-950 block pt-0.5">
+                {analysis.scores?.reuse ? `${analysis.scores.reuse * 2.5} ر.س` : "120 ر.س"}
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Circular Score Gauge Visual */}
-      <div className="bg-white border border-cyan-200 rounded-3xl p-5 shadow-sm relative flex flex-col items-center justify-center text-center space-y-3">
-        <div className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-          <Recycle className="w-4 h-4 text-cyan-600" />
-          <span>{isAr ? "مؤشر القرار الدائري الاستدامي" : "Circular Score Index"}</span>
+      {/* 2️⃣ CIRCULAR SCORE GAUGE (GLASSMORPHISM & DYNAMIC COLOR THEME) */}
+      <div className="bg-white/90 backdrop-blur-md border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-lg flex flex-col items-center justify-center text-center space-y-4 relative overflow-hidden">
+        <div className="text-sm font-black text-emerald-950 uppercase tracking-wider flex items-center gap-2">
+          <Recycle className="w-5 h-5 text-emerald-700" />
+          <span>{isAr ? "مؤشر القرار الدائري الاستدامي" : "Circular Decision Score Gauge"}</span>
         </div>
 
         {/* Circular Ring Gauge */}
-        <div className="relative w-36 h-36 flex items-center justify-center my-1">
+        <div className="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center my-2">
           <svg className="w-full h-full transform -rotate-90">
             <circle
-              cx="72"
-              cy="72"
+              cx="96"
+              cy="96"
               r={radius}
               stroke="currentColor"
-              strokeWidth="10"
-              className="text-gray-100"
+              strokeWidth="12"
+              className="text-slate-100"
               fill="transparent"
             />
             <circle
-              cx="72"
-              cy="72"
+              cx="96"
+              cy="96"
               r={radius}
-              stroke="url(#circularGradient)"
-              strokeWidth="10"
+              stroke="url(#dynamicGradient)"
+              strokeWidth="12"
               strokeDasharray={circumference}
               strokeDashoffset={strokeDashoffset}
               strokeLinecap="round"
@@ -227,128 +251,137 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
               fill="transparent"
             />
             <defs>
-              <linearGradient id="circularGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#0f766e" />
-                <stop offset="50%" stopColor="#0891b2" />
-                <stop offset="100%" stopColor="#06b6d4" />
+              <linearGradient id="dynamicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor={gaugeGradientStart} />
+                <stop offset="100%" stopColor={gaugeGradientEnd} />
               </linearGradient>
             </defs>
           </svg>
 
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <span className="text-3xl font-black text-slate-900 tracking-tight">
-              {score}<span className="text-sm font-bold text-cyan-600">/100</span>
+            <span className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+              {score}<span className="text-base font-bold text-slate-500">/100</span>
             </span>
-            <span className="text-[11px] text-cyan-800 font-extrabold flex items-center gap-0.5">
-              <span>Circular Score</span>
+            <span className="text-xs text-emerald-900 font-extrabold pt-1">
+              Circular Score
             </span>
           </div>
         </div>
 
-        <div className="space-y-1">
-          <p className="text-xs font-black text-cyan-950 bg-cyan-50 border border-cyan-200 px-3 py-1 rounded-full inline-block">
-            {analysis.scoreLabel}
-          </p>
-          <p className="text-xs text-slate-600 leading-relaxed max-w-xs mx-auto font-medium">
-            {analysis.environmentalImpact}
+        {/* Dynamic Badge & Warning Notice based on score */}
+        <div className="space-y-2 max-w-md mx-auto">
+          {isLowScore ? (
+            <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-300 text-amber-900 px-4 py-2 rounded-2xl text-xs font-black shadow-xs">
+              <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>{isAr ? "تحذير: يحتاج معالجة إلكترونية خاصة" : "Warning: Requires Special Processing"}</span>
+            </div>
+          ) : (
+            <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-300 text-emerald-900 px-4 py-2 rounded-2xl text-xs font-black shadow-xs">
+              <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>{isAr ? "ممتاز: قابل لإعادة الاستخدام المباشر" : "Excellent: Eligible for Direct Reuse"}</span>
+            </div>
+          )}
+          
+          <p className="text-xs text-slate-600 font-bold leading-relaxed pt-1">
+            {analysis.environmentalImpact || (isAr ? "يوفر هذا المنتج إمكانيات عالية لتدوير المواد والحفاظ على القيمة المستدامة." : "High circular potential for material preservation.")}
           </p>
         </div>
       </div>
 
-      {/* Structured Circular Breakdown Card */}
-      <div className="bg-white border border-gray-200 rounded-3xl p-4 space-y-3 shadow-sm">
-        <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-          <h3 className="text-xs font-black text-slate-900 flex items-center gap-1.5">
+      {/* 3️⃣ INTERACTIVE ANIMATED PROGRESS BARS BREAKDOWN */}
+      <div className="bg-white border border-slate-200/90 rounded-3xl p-6 space-y-5 shadow-sm">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 className="text-base font-extrabold text-emerald-950 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-emerald-700" />
-            <span>{isAr ? "تقييم إمكانيات الاقتصاد الدائري للمنتج:" : "Circular Pathways Score Breakdown:"}</span>
+            <span>{isAr ? "تقييم إمكانيات الاقتصاد الدائري:" : "Circular Economy Potential Breakdown:"}</span>
           </h3>
-          <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
-            {isAr ? "أفضل مسار مقترح" : "Best Recommended"}
+          <span className="text-xs font-black text-emerald-900 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+            {isAr ? "مسارات تفاعلية" : "Interactive Progress"}
           </span>
         </div>
 
-        {/* Breakdown Progress Bars Grid */}
-        <div className="space-y-2.5 text-xs">
+        {/* Breakdown Progress Bars */}
+        <div className="space-y-4 text-xs">
           {/* Reuse */}
-          <div className="space-y-1">
-            <div className="flex justify-between font-bold text-slate-800">
-              <span className="flex items-center gap-1.5">
-                <RotateCcw className="w-3.5 h-3.5 text-emerald-700" />
-                {isAr ? "إعادة الاستخدام (Reuse)" : "Reuse Option"}
+          <div className="space-y-1.5">
+            <div className="flex justify-between font-bold text-slate-900">
+              <span className="flex items-center gap-2">
+                <RotateCcw className="w-4 h-4 text-emerald-700" />
+                <span>{isAr ? "إعادة الاستخدام (Reuse)" : "Reuse Pathway"}</span>
               </span>
-              <span className="text-emerald-800 font-extrabold">{analysis.scores?.reuse ?? 90}%</span>
+              <span className="text-emerald-950 font-black text-sm">{analysis.scores?.reuse ?? 90}%</span>
             </div>
-            <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden border border-gray-200">
-              <div className="bg-emerald-700 h-full rounded-full transition-all duration-700" style={{ width: `${analysis.scores?.reuse ?? 90}%` }}></div>
+            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+              <div className="bg-gradient-to-r from-emerald-600 to-teal-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: `${analysis.scores?.reuse ?? 90}%` }}></div>
             </div>
           </div>
 
           {/* Repair */}
-          <div className="space-y-1">
-            <div className="flex justify-between font-bold text-slate-800">
-              <span className="flex items-center gap-1.5">
-                <Wrench className="w-3.5 h-3.5 text-cyan-600" />
-                {isAr ? "الإصلاح والصيانة (Repair)" : "Repair & Upcycling"}
+          <div className="space-y-1.5">
+            <div className="flex justify-between font-bold text-slate-900">
+              <span className="flex items-center gap-2">
+                <Wrench className="w-4 h-4 text-cyan-700" />
+                <span>{isAr ? "الإصلاح والصيانة (Repair)" : "Repair & Upcycling"}</span>
               </span>
-              <span className="text-cyan-700 font-extrabold">{analysis.scores?.repair ?? 70}%</span>
+              <span className="text-cyan-950 font-black text-sm">{analysis.scores?.repair ?? 70}%</span>
             </div>
-            <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden border border-gray-200">
-              <div className="bg-cyan-600 h-full rounded-full transition-all duration-700" style={{ width: `${analysis.scores?.repair ?? 70}%` }}></div>
+            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+              <div className="bg-gradient-to-r from-cyan-600 to-teal-400 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: `${analysis.scores?.repair ?? 70}%` }}></div>
             </div>
           </div>
 
           {/* Donation */}
-          <div className="space-y-1">
-            <div className="flex justify-between font-bold text-slate-800">
-              <span className="flex items-center gap-1.5">
-                <HeartHandshake className="w-3.5 h-3.5 text-teal-700" />
-                {isAr ? "التبرع والإهداء (Donation)" : "Donation Potential"}
+          <div className="space-y-1.5">
+            <div className="flex justify-between font-bold text-slate-900">
+              <span className="flex items-center gap-2">
+                <HeartHandshake className="w-4 h-4 text-teal-700" />
+                <span>{isAr ? "التبرع والإهداء (Donation)" : "Donation Potential"}</span>
               </span>
-              <span className="text-teal-800 font-extrabold">{analysis.scores?.donation ?? 95}%</span>
+              <span className="text-teal-950 font-black text-sm">{analysis.scores?.donation ?? 95}%</span>
             </div>
-            <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden border border-gray-200">
-              <div className="bg-teal-700 h-full rounded-full transition-all duration-700" style={{ width: `${analysis.scores?.donation ?? 95}%` }}></div>
+            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+              <div className="bg-gradient-to-r from-teal-600 to-emerald-400 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: `${analysis.scores?.donation ?? 95}%` }}></div>
             </div>
           </div>
 
           {/* Recycling */}
-          <div className="space-y-1">
-            <div className="flex justify-between font-bold text-slate-800">
-              <span className="flex items-center gap-1.5">
-                <Recycle className="w-3.5 h-3.5 text-emerald-700" />
-                {isAr ? "إعادة التدوير (Recycling)" : "Industrial Recycling"}
+          <div className="space-y-1.5">
+            <div className="flex justify-between font-bold text-slate-900">
+              <span className="flex items-center gap-2">
+                <Recycle className="w-4 h-4 text-emerald-700" />
+                <span>{isAr ? "إعادة التدوير (Recycling)" : "Industrial Recycling"}</span>
               </span>
-              <span className="text-emerald-700 font-extrabold">{analysis.scores?.recycling ?? 80}%</span>
+              <span className="text-emerald-950 font-black text-sm">{analysis.scores?.recycling ?? 80}%</span>
             </div>
-            <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden border border-gray-200">
-              <div className="bg-emerald-600 h-full rounded-full transition-all duration-700" style={{ width: `${analysis.scores?.recycling ?? 80}%` }}></div>
+            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+              <div className="bg-gradient-to-r from-emerald-700 to-emerald-500 h-full rounded-full transition-all duration-1000 shadow-xs" style={{ width: `${analysis.scores?.recycling ?? 80}%` }}></div>
             </div>
           </div>
 
           {/* Disposal Note */}
-          <div className="pt-1 text-[11px] text-slate-600 flex items-center justify-between bg-gray-50 p-2 rounded-xl border border-gray-200">
-            <span className="flex items-center gap-1 text-rose-700 font-bold">
-              <Trash2 className="w-3.5 h-3.5" />
+          <div className="pt-2 text-xs text-slate-700 flex items-center justify-between bg-slate-50 p-3 rounded-2xl border border-slate-200 font-bold">
+            <span className="flex items-center gap-2 text-rose-700 font-black">
+              <AlertTriangle className="w-4 h-4" />
               <span>{isAr ? "التخلص والردم (Disposal)" : "Landfill Disposal"}</span>
             </span>
-            <span className="text-slate-500 font-bold">{isAr ? "الملاذ الأخير المطلق" : "Absolute Last Resort"}</span>
+            <span className="text-slate-600 font-extrabold">{isAr ? "الملاذ الأخير المطلق" : "Absolute Last Resort"}</span>
           </div>
         </div>
       </div>
 
-      {/* Ranked Pathways Section */}
-      <div className="space-y-3">
+      {/* 4️⃣ RECOMMENDED PATHWAYS CARDS & WIDE ACTION BUTTONS */}
+      <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-black text-slate-900 flex items-center gap-2">
-            <Award className="w-4 h-4 text-emerald-700" />
-            <span>{isAr ? "ترتيب المسارات المقترحة:" : "Ranked Sustainable Pathways:"}</span>
+          <h3 className="text-base font-extrabold text-emerald-950 flex items-center gap-2">
+            <Award className="w-5 h-5 text-emerald-700" />
+            <span>{isAr ? "المسارات المقترحة للقرار الدائري:" : "Recommended Circular Pathways:"}</span>
           </h3>
-          <span className="text-[11px] text-slate-500 font-bold">
+          <span className="text-xs text-slate-600 font-extrabold">
             {isAr ? "مرتبة حسَب الفائدة" : "Priority Ranked"}
           </span>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-4">
           {pathwaysList.map((pathway: any, idx: number) => {
             const rank = pathway.rank || (idx + 1);
             const isSelected = selectedPathway === rank;
@@ -357,42 +390,43 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
               <div
                 key={pathway.rank}
                 onClick={() => setSelectedPathway(pathway.rank)}
-                className={`rounded-2xl border p-4 transition-all cursor-pointer relative overflow-hidden ${
+                className={`rounded-3xl border-2 p-5 transition-all cursor-pointer relative overflow-hidden ${
                   isSelected
-                    ? "bg-emerald-50 border-emerald-600 shadow-md"
-                    : "bg-white border-gray-200 hover:border-emerald-500/50"
+                    ? "bg-emerald-50/60 border-emerald-600 shadow-md scale-[1.01]"
+                    : "bg-white border-slate-200 hover:border-emerald-400"
                 }`}
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-800 text-white">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-xs font-black px-3 py-1.5 rounded-xl bg-emerald-900 text-white shadow-xs">
                       {pathway.badge}
                     </span>
-                    <span className="text-xs font-semibold text-slate-600">
-                      {isAr ? "الملائمة: " : "Fit: "}{pathway.suitability}
+                    <span className="text-xs font-bold text-slate-600">
+                      {isAr ? "الملائمة: " : "Fit: "}<strong className="text-emerald-950">{pathway.suitability}</strong>
                     </span>
                   </div>
 
-                  <span className="text-xs font-black text-emerald-900 bg-emerald-100 px-2.5 py-1 rounded-lg border border-emerald-300">
-                    {pathway.points}
+                  {/* Prominent DAWR Points Badge */}
+                  <span className="text-xs sm:text-sm font-black text-emerald-950 bg-emerald-100 border border-emerald-300 px-3.5 py-1.5 rounded-xl shadow-xs">
+                    +{pathway.points || "850"} {isAr ? "نقطة دَوْر" : "DAWR Points"}
                   </span>
                 </div>
 
-                <div className="mt-2.5 space-y-1">
-                  <h4 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <div className="mt-3 space-y-1.5">
+                  <h4 className="text-lg font-extrabold text-emerald-950 flex items-center gap-2">
                     {pathway.title}
                   </h4>
-                  <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-bold">
                     {pathway.description}
                   </p>
                 </div>
 
-                <div className="mt-3 pt-2.5 border-t border-gray-200 flex items-center justify-between text-xs font-bold">
+                <div className="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs font-black">
                   <span className="text-slate-500">
                     {isSelected ? (isAr ? "مسارك المفضل الحالي" : "Selected Route") : (isAr ? "انقر لاختيار المسار" : "Click to Select")}
                   </span>
-                  <div className="flex items-center gap-1 text-emerald-800">
-                    {isSelected && <CheckCircle2 className="w-4 h-4" />}
+                  <div className="flex items-center gap-1.5 text-emerald-900">
+                    {isSelected && <CheckCircle2 className="w-4.5 h-4.5 text-emerald-700" />}
                     <span>{isSelected ? (isAr ? "محدد" : "Selected") : (isAr ? "تحديد" : "Choose")}</span>
                   </div>
                 </div>
@@ -404,18 +438,18 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
 
       {/* Smart Donation Rules - Hide charities if damaged/broken/dirty */}
       {isDonationEligible ? (
-        <div className="bg-emerald-50/70 border-2 border-emerald-200 rounded-3xl p-4 space-y-3.5 shadow-sm">
-          <div className="flex items-center justify-between border-b border-emerald-200 pb-2.5">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-emerald-800 text-white flex items-center justify-center shrink-0">
-                <Building2 className="w-4 h-4" />
+        <div className="bg-emerald-50/70 border-2 border-emerald-200 rounded-3xl p-5 space-y-4 shadow-sm">
+          <div className="flex items-center justify-between border-b border-emerald-200 pb-3">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-2xl bg-emerald-900 text-white flex items-center justify-center shrink-0 shadow-xs">
+                <Building2 className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm font-black text-slate-900 flex items-center gap-1.5">
+                <h3 className="text-base font-extrabold text-emerald-950 flex items-center gap-2">
                   <span>{isAr ? "الجمعيات والمنصات الرسمية المعتمدة" : "Verified Official Donation Platforms"}</span>
-                  <ShieldCheck className="w-4 h-4 text-emerald-700" />
+                  <ShieldCheck className="w-5 h-5 text-emerald-700" />
                 </h3>
-                <p className="text-[11px] text-slate-600 font-medium">
+                <p className="text-xs text-slate-600 font-bold">
                   {isAr ? "تبرع مباشرة عبر القنوات الوطنية المرخصة" : "Directly donate through licensed national channels"}
                 </p>
               </div>
@@ -426,19 +460,19 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
             {VERIFIED_CHARITIES.map((charity) => (
               <div
                 key={charity.id}
-                className="bg-white border border-gray-200 rounded-2xl p-3.5 shadow-xs space-y-2.5"
+                className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs space-y-3"
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="space-y-0.5">
-                    <div className="flex items-center gap-1.5">
-                      <h4 className="text-xs font-black text-slate-900">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-sm font-extrabold text-emerald-950">
                         {isAr ? charity.name : charity.nameEn}
                       </h4>
                       <span className="p-0.5 bg-emerald-100 text-emerald-800 rounded-full">
-                        <ShieldCheck className="w-3 h-3" />
+                        <ShieldCheck className="w-3.5 h-3.5" />
                       </span>
                     </div>
-                    <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200 inline-block">
+                    <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200 inline-block">
                       {isAr ? charity.category : charity.categoryEn}
                     </span>
                   </div>
@@ -448,43 +482,28 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
                     href={charity.websiteUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-extrabold flex items-center gap-1.5 transition active:scale-95 shadow-xs shrink-0"
+                    className="px-4 py-2 rounded-xl bg-emerald-900 hover:bg-emerald-950 text-white text-xs font-black flex items-center gap-1.5 transition active:scale-95 shadow-xs shrink-0"
                     title={isAr ? `انتقل لموقع ${charity.name}` : `Visit ${charity.nameEn}`}
                   >
                     <span>{isAr ? "زيارة المنصة" : "Visit Site"}</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-white" />
+                    <ExternalLink className="w-4 h-4 text-white" />
                   </a>
                 </div>
 
-                <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                <p className="text-xs text-slate-700 leading-relaxed font-bold">
                   {isAr ? charity.description : charity.descriptionEn}
                 </p>
-
-                {/* Accepted items tags */}
-                <div className="flex flex-wrap items-center gap-1 pt-1 border-t border-gray-100">
-                  <span className="text-[10px] text-slate-500 font-bold pl-1">
-                    {isAr ? "تستقبل:" : "Accepts:"}
-                  </span>
-                  {charity.acceptedItems.map((item, idx) => (
-                    <span
-                      key={idx}
-                      className="text-[10px] font-semibold bg-gray-100 text-slate-700 px-2 py-0.5 rounded-md"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
               </div>
             ))}
           </div>
         </div>
       ) : (
-        <div className="bg-amber-50 border border-amber-200 rounded-3xl p-4 space-y-2 shadow-xs">
-          <div className="flex items-center gap-2 text-amber-900 font-black text-xs">
-            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+        <div className="bg-amber-50 border border-amber-200 rounded-3xl p-5 space-y-2 shadow-xs">
+          <div className="flex items-center gap-2 text-amber-900 font-extrabold text-xs sm:text-sm">
+            <AlertTriangle className="w-4.5 h-4.5 text-amber-600 shrink-0" />
             <span>{isAr ? "قسم التبرع غير متاح لهذا المنتج" : "Donation Not Eligible"}</span>
           </div>
-          <p className="text-xs text-amber-900 font-medium leading-relaxed">
+          <p className="text-xs text-amber-900 font-bold leading-relaxed">
             {isAr
               ? `بناءً على التقييم البصري وتصنيف الحالة (${analysis.condition})، هذا المنتج غير صالح للتبرع المباشر للجمعيات الخيريّة لضمان السلامة والجودة. تم توجيه المنتج تلقائياً نحو مراكز الفرز، الإصلاح، أو التدوير الصناعي.`
               : `Based on the visual condition (${analysis.condition}), this product is not eligible for direct donation. It has been routed to recycling, sorting, or repair.`}
@@ -492,54 +511,58 @@ export const CircularAnalysisScreen: React.FC<CircularAnalysisScreenProps> = ({
         </div>
       )}
 
-      {/* Auxiliary Actions */}
-      <div className="space-y-2.5 pt-1">
+      {/* WIDE ACTION BUTTONS ROW */}
+      <div className="space-y-3 pt-2">
+        {/* Button 1: AI Upcycling */}
         <button
           onClick={onOpenCreativeIdeas}
-          className="w-full py-3.5 px-5 rounded-2xl bg-emerald-800 hover:bg-emerald-900 text-white font-black text-xs shadow-md flex items-center justify-center gap-2 transition active:scale-95 cursor-pointer"
+          className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 hover:from-emerald-900 hover:to-teal-900 text-white font-extrabold text-sm sm:text-base shadow-md flex items-center justify-center gap-2.5 transition active:scale-98 cursor-pointer border border-emerald-500/30"
         >
-          <Lightbulb className="w-4 h-4 text-emerald-300" />
-          <span>{isAr ? "بدائل إبداعية لاستخدامه بالذكاء الاصطناعي (AI Upcycling)" : "Creative Upcycling Ideas (AI)"}</span>
+          <Lightbulb className="w-5 h-5 text-emerald-300 shrink-0" />
+          <span>{isAr ? "💡 بدائل إبداعية لاستخدامه بالذكاء الاصطناعي (AI Upcycling)" : "💡 Creative Upcycling Ideas (AI)"}</span>
         </button>
 
-        <div className="grid grid-cols-2 gap-2">
-          <button
-            onClick={onOpenMapModal}
-            className="py-2.5 px-3 rounded-xl bg-white border border-gray-200 hover:border-emerald-600 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer shadow-xs"
-          >
-            <MapPin className="w-4 h-4 text-emerald-700" />
-            <span>{isAr ? "خريطة نقاط الفرز" : "Recycling Hubs"}</span>
-          </button>
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Button 2: Ask Gemini AI */}
           <button
             onClick={onOpenAiChat}
-            className="py-2.5 px-3 rounded-xl bg-white border border-gray-200 hover:border-teal-600 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer shadow-xs"
+            className="py-3.5 px-5 rounded-2xl bg-white hover:bg-emerald-50 text-emerald-950 border border-emerald-300 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition active:scale-98 cursor-pointer shadow-xs"
           >
-            <MessageSquare className="w-4 h-4 text-teal-700" />
-            <span>{isAr ? "استشر Gemini" : "Ask Gemini AI"}</span>
+            <Bot className="w-4.5 h-4.5 text-teal-700 shrink-0" />
+            <span>{isAr ? "🤖 استشر Gemini" : "🤖 Ask Gemini AI"}</span>
+          </button>
+
+          {/* Map Hubs Button */}
+          <button
+            onClick={onOpenMapModal}
+            className="py-3.5 px-5 rounded-2xl bg-white hover:bg-slate-100 text-slate-900 border border-slate-300 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition active:scale-98 cursor-pointer shadow-xs"
+          >
+            <MapPin className="w-4.5 h-4.5 text-emerald-700 shrink-0" />
+            <span>{isAr ? "خريطة نقاط الفرز" : "Recycling Hubs"}</span>
           </button>
         </div>
       </div>
 
-      {/* Claim Points Button — Start Next Step */}
+      {/* Button 3: Start Next Step & Claim Points */}
       <div className="pt-2">
         <button
           onClick={handleClaim}
           disabled={claimed}
-          className={`w-full py-4 px-6 rounded-2xl font-black text-sm sm:text-base shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer ${
+          className={`w-full py-4.5 px-6 rounded-2xl font-black text-sm sm:text-base shadow-xl transition-all flex items-center justify-center gap-2.5 cursor-pointer border ${
             claimed
-              ? "bg-emerald-950 text-white border border-emerald-700"
-              : "bg-emerald-900 hover:bg-emerald-950 text-white active:scale-95 shadow-emerald-950/30"
+              ? "bg-emerald-950 text-white border-emerald-700"
+              : "bg-emerald-900 hover:bg-emerald-950 text-white hover:scale-[1.01] active:scale-[0.98] border-emerald-600 shadow-emerald-950/30"
           }`}
         >
-          <CheckCircle2 className="w-5 h-5 text-emerald-300" />
+          <CheckCircle2 className="w-5 h-5 text-emerald-300 shrink-0" />
           <span>
             {claimed
               ? (isAr ? "تم تنفيذ الخطوة وإضافة النقاط بنجاح!" : "Step Completed & Points Added!")
-              : (isAr ? "ابدأ الخطوة التالية واكسب النقاط" : "Start Next Step & Claim Points")}
+              : (isAr ? "🚀 ابدأ الخطوة التالية واكسب النقاط" : "🚀 Start Next Step & Claim Points")}
           </span>
         </button>
       </div>
     </div>
   );
 };
+
