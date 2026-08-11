@@ -274,52 +274,52 @@ export const DawrMapScreen: React.FC<DawrMapScreenProps> = ({
             </span>
           </div>
 
-          {/* Map Canvas Frame */}
-          <div className="w-full flex-1 rounded-2xl bg-slate-900 relative overflow-hidden border border-slate-200/80 flex items-center justify-center">
-            {/* Custom Styled Map Surface */}
-            <div 
-              className="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px] opacity-20 bg-slate-950"
+          {/* Map Canvas Frame with Real Street Map Tiles */}
+          <div className="w-full flex-1 rounded-2xl bg-slate-950 relative overflow-hidden border border-slate-200/80 flex items-center justify-center">
+            {/* Real Street Map Tiles Iframe Layer */}
+            <iframe
+              title="Saudi Arabia Interactive Map"
+              width="100%"
+              height="100%"
+              className="absolute inset-0 w-full h-full border-0 z-0 opacity-85 hover:opacity-100 transition-opacity"
+              src={`https://www.openstreetmap.org/export/embed.html?bbox=${
+                selectedHub ? selectedHub.longitude - 0.08 : (userLocation ? userLocation.lng - 0.15 : 46.55)
+              }%2C${
+                selectedHub ? selectedHub.latitude - 0.08 : (userLocation ? userLocation.lat - 0.15 : 24.58)
+              }%2C${
+                selectedHub ? selectedHub.longitude + 0.08 : (userLocation ? userLocation.lng + 0.15 : 46.85)
+              }%2C${
+                selectedHub ? selectedHub.latitude + 0.08 : (userLocation ? userLocation.lat + 0.15 : 24.85)
+              }&layer=mapnik&marker=${selectedHub ? `${selectedHub.latitude}%2C${selectedHub.longitude}` : "24.7136%2C46.6753"}`}
             />
-            
-            {/* City Grid Visual Representation */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-40">
-              <svg className="w-full h-full text-emerald-900/30 stroke-current" width="100%" height="100%" fill="none">
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                </pattern>
-                <rect width="100%" height="100%" fill="url(#grid)" />
-              </svg>
-            </div>
 
-            {/* Saudi Hub Markers on Custom Canvas */}
-            <div className="absolute inset-0 p-6 flex flex-wrap items-center justify-around gap-4 z-10 overflow-auto">
-              {filteredHubs.map((hub) => {
+            {/* Custom Interactive Pins Overlay on Map Top */}
+            <div className="absolute top-3 right-3 left-3 flex flex-wrap items-center gap-2 z-20 pointer-events-auto">
+              {filteredHubs.slice(0, 6).map((hub) => {
                 const isSelected = selectedHub?.id === hub.id;
                 return (
                   <button
                     key={hub.id}
                     onClick={() => setSelectedHub(hub)}
-                    className={`p-3 rounded-2xl transition transform hover:scale-110 active:scale-95 shadow-md flex items-center gap-2 border cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-xl transition transform hover:scale-105 active:scale-95 shadow-md flex items-center gap-1.5 border text-xs font-black cursor-pointer ${
                       isSelected
-                        ? "bg-emerald-900 text-white border-emerald-400 ring-4 ring-emerald-500/30 scale-105 z-30"
-                        : "bg-white text-slate-900 border-emerald-200 hover:border-emerald-500 z-20"
+                        ? "bg-emerald-900 text-white border-emerald-400 ring-2 ring-emerald-400/50"
+                        : "bg-white/95 backdrop-blur-md text-slate-900 border-slate-300 hover:bg-emerald-50"
                     }`}
                   >
-                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-black text-xs ${isSelected ? "bg-emerald-400 text-emerald-950" : "bg-emerald-100 text-emerald-900"}`}>
-                      📍
-                    </div>
-                    <div className="text-right space-y-0.5 max-w-[130px] truncate">
-                      <span className="text-xs font-black block truncate">{hub.name}</span>
-                      <span className="text-[10px] font-bold text-emerald-700 block">{hub.distanceKm} كم</span>
-                    </div>
+                    <span>📍</span>
+                    <span className="max-w-[100px] truncate">{hub.name}</span>
+                    <span className="text-[10px] text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded-md">
+                      {hub.distanceKm} كم
+                    </span>
                   </button>
                 );
               })}
             </div>
 
-            {/* Selected Hub Popup Box on Map */}
+            {/* Selected Hub Card Overlay */}
             {selectedHub && (
-              <div className="absolute bottom-4 right-4 left-4 sm:right-6 sm:left-6 bg-white/95 backdrop-blur-md border-2 border-emerald-500 p-4 rounded-2xl shadow-xl z-40 space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-200">
+              <div className="absolute bottom-3 right-3 left-3 bg-white/95 backdrop-blur-md border-2 border-emerald-600 p-4 rounded-2xl shadow-xl z-30 space-y-2 animate-in fade-in slide-in-from-bottom-3 duration-200">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-black text-emerald-900 bg-emerald-100 px-2 py-0.5 rounded-md border border-emerald-300">
                     {selectedHub.typeAr}
@@ -334,7 +334,7 @@ export const DawrMapScreen: React.FC<DawrMapScreenProps> = ({
                 <p className="text-xs text-slate-600 font-bold truncate">
                   📍 {selectedHub.address}
                 </p>
-                <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+                <div className="flex items-center justify-between pt-1.5 border-t border-slate-100">
                   <span className="text-xs font-black text-emerald-950">
                     المسافة: {selectedHub.distanceKm} كم
                   </span>
@@ -345,7 +345,7 @@ export const DawrMapScreen: React.FC<DawrMapScreenProps> = ({
                     className="px-3.5 py-1.5 rounded-xl bg-emerald-900 hover:bg-emerald-950 text-white font-black text-xs shadow-2xs transition flex items-center gap-1 cursor-pointer"
                   >
                     <Navigation className="w-3.5 h-3.5 text-emerald-300" />
-                    <span>{isAr ? "الاتجاهات" : "Navigate"}</span>
+                    <span>{isAr ? "فتح في Google Maps" : "Open Google Maps"}</span>
                   </a>
                 </div>
               </div>
