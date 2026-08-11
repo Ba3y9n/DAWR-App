@@ -12,6 +12,7 @@ import { ProfileTab } from "./components/ProfileTab";
 import { BottomNav } from "./components/BottomNav";
 import { ImpactToast } from "./components/ImpactToast";
 import { AuthModal } from "./components/AuthModal";
+import { Footer } from "./components/Footer";
 import { PRESET_SAMPLES } from "./data/presetSamples";
 import { Smartphone, Laptop } from "lucide-react";
 import { auth, listenUserProfile, addScanAndRewardToUser, signOutUser, ensureUserProfile } from "./lib/firebase";
@@ -210,7 +211,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen font-['Cairo',sans-serif] flex flex-col justify-start relative overflow-x-hidden bg-slate-50 text-slate-900">
+    <div className="min-h-screen font-sans flex flex-col justify-start relative overflow-x-hidden bg-slate-50 text-slate-900">
       {/* App Envelope Container */}
       <div
         id="app-root"
@@ -344,6 +345,15 @@ export default function App() {
             productName={analysisData?.productName}
           />
         </main>
+
+        {/* Global Footer */}
+        <Footer 
+          language={language} 
+          onChangeTab={(tab) => {
+            setActiveTab(tab);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }} 
+        />
 
         {/* Bottom Navigation Bar */}
         <BottomNav
