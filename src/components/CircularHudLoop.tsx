@@ -44,13 +44,13 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
   ];
 
   return (
-    <div className="relative w-full max-w-[480px] aspect-square mx-auto flex items-center justify-center select-none" dir={isAr ? "rtl" : "ltr"}>
+    <div className="relative w-full max-w-[440px] aspect-square mx-auto flex items-center justify-center select-none" dir={isAr ? "rtl" : "ltr"}>
       
       {/* 1. Ambient Outer Glowing Background Halo */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/25 via-teal-400/15 to-emerald-400/25 blur-3xl animate-pulse pointer-events-none" />
 
       {/* 2. Slow Ambient Rotating SVG HUD Outer Ring (Open & Transparent Center) */}
-      <div className="absolute inset-4 sm:inset-6 rounded-full border border-emerald-400/40 animate-[spin_40s_linear_infinite] pointer-events-none">
+      <div className="absolute inset-4 sm:inset-6 rounded-full border border-emerald-400/40 animate-[spin_45s_linear_infinite] pointer-events-none">
         <svg className="w-full h-full text-emerald-400/50 stroke-current" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="48" fill="none" strokeWidth="0.8" strokeDasharray="4 4" />
           <circle cx="50" cy="50" r="42" fill="none" strokeWidth="0.4" strokeDasharray="1 5" />
@@ -95,9 +95,9 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
         <div className="h-full w-[1px] bg-emerald-400/20 absolute" />
       </div>
 
-      {/* 5. 5 Enlarged Interactive Badges (دوائر خضراء كبيرة وواضحة جداً) */}
+      {/* 5. 5 Perfect Circular Nodes Directly Centered on Circle Circumference Path */}
       {segments.map((seg, idx) => {
-        const radius = 145; // Orbit radius from center in px
+        const radius = 138; // Radius matching circle stroke line exactly
         const angleRad = ((idx * 360) / 5 - 90) * (Math.PI / 180);
         const x = Math.cos(angleRad) * radius;
         const y = Math.sin(angleRad) * radius;
@@ -106,30 +106,43 @@ export const CircularHudLoop: React.FC<CircularHudLoopProps> = ({ language, onSe
         const Icon = seg.icon;
 
         return (
-          <button
+          <div
             key={seg.id}
-            onClick={() => {
-              setActiveSegmentIndex(idx);
-              if (onSelectPathway) onSelectPathway(seg.id);
-            }}
-            onMouseEnter={() => {
-              setActiveSegmentIndex(idx);
-            }}
             style={{
               transform: `translate(${x}px, ${y}px)`,
             }}
-            className={`absolute py-2 px-3.5 sm:px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer z-30 shadow-2xl backdrop-blur-md ${
-              isActive
-                ? "bg-emerald-500 text-slate-950 border-2 border-white shadow-[0_0_30px_#34d399] scale-110 ring-4 ring-emerald-400/60"
-                : "bg-emerald-950/90 text-white hover:bg-emerald-900 border border-emerald-400/50 hover:border-emerald-300 hover:scale-105"
-            }`}
-            title={isAr ? seg.labelAr : seg.labelEn}
+            className="absolute flex flex-col items-center justify-center z-30 transition-all duration-300 pointer-events-auto"
           >
-            <Icon className={`w-5 h-5 sm:w-6 sm:h-6 shrink-0 ${isActive ? "animate-bounce text-slate-950" : "text-emerald-300"}`} />
-            <span className={`text-xs sm:text-sm font-black whitespace-nowrap tracking-tight ${isActive ? "text-slate-950" : "text-white"}`}>
-              {isAr ? seg.labelAr : seg.labelEn}
-            </span>
-          </button>
+            {/* Perfect Circular Node Button */}
+            <button
+              onClick={() => {
+                setActiveSegmentIndex(idx);
+                if (onSelectPathway) onSelectPathway(seg.id);
+              }}
+              onMouseEnter={() => {
+                setActiveSegmentIndex(idx);
+              }}
+              className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex flex-col items-center justify-center transition-all duration-300 cursor-pointer shadow-2xl backdrop-blur-md border-2 ${
+                isActive
+                  ? "bg-emerald-400 text-slate-950 border-white shadow-[0_0_35px_#34d399] scale-115 ring-4 ring-emerald-400/60"
+                  : "bg-emerald-950/90 text-emerald-300 hover:bg-emerald-900 hover:text-white border-emerald-400/50 hover:border-emerald-300 hover:scale-105"
+              }`}
+              title={isAr ? seg.labelAr : seg.labelEn}
+            >
+              <Icon className={`w-6 h-6 sm:w-7 sm:h-7 ${isActive ? "animate-bounce text-slate-950" : "text-emerald-300"}`} />
+            </button>
+
+            {/* Clear Unclipped Bold Label Pill Below Circle */}
+            <div className={`mt-1.5 px-3 py-0.5 rounded-full backdrop-blur-md border transition-all duration-300 ${
+              isActive
+                ? "bg-emerald-400 text-slate-950 font-black border-white shadow-[0_0_15px_#34d399] scale-105"
+                : "bg-emerald-950/90 text-white font-bold border-emerald-500/40"
+            }`}>
+              <span className="text-xs sm:text-sm font-black whitespace-nowrap tracking-tight">
+                {isAr ? seg.labelAr : seg.labelEn}
+              </span>
+            </div>
+          </div>
         );
       })}
     </div>
