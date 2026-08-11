@@ -32,8 +32,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onChangeTab, la
     },
     {
       id: "updates" as ActiveTab,
-      labelAr: "عن المنصة",
-      labelEn: "About",
+      labelAr: "التحديثات",
+      labelEn: "Updates",
       icon: Bell,
     },
     {
