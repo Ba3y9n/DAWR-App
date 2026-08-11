@@ -102,17 +102,14 @@ export const HeaderStats: React.FC<HeaderStatsProps> = ({
         }, 120);
       },
     },
-    {
-      id: "updates" as any,
-      labelAr: "التحديثات",
-      labelEn: "Updates",
+    { 
+      id: "updates" as ActiveTab, 
+      labelAr: "التحديثات", 
+      labelEn: "Updates", 
       action: () => {
-        onChangeTab?.("home");
-        if (onBack) onBack();
-        setTimeout(() => {
-          document.getElementById("updates")?.scrollIntoView({ behavior: "smooth" });
-        }, 120);
-      },
+        onChangeTab?.("updates");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } 
     },
   ];
 
