@@ -3,6 +3,7 @@ import { Camera, Upload, RefreshCw, Sparkles, Zap, Search, HelpCircle, AlertCirc
 import { PRESET_SAMPLES } from "../data/presetSamples";
 import { Language, ActiveTab } from "../types";
 import { LandingSections } from "./LandingSections";
+import { CircularHudLoop } from "./CircularHudLoop";
 
 interface CameraCaptureScreenProps {
   onAnalyzeSample: (presetId: string) => void;
@@ -690,52 +691,56 @@ export const CameraCaptureScreen: React.FC<CameraCaptureScreenProps> = ({
         {/* Soft Light Overlay for Clear & Vivid Background View */}
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/45 via-emerald-900/30 to-black/20" />
 
-        {/* Right-Aligned Text & Action Buttons Container inside Max-W-7xl */}
-        <div className="w-full max-w-7xl mx-auto relative z-10 flex flex-col items-start text-right space-y-5 pt-0 sm:pt-2 -mt-4 sm:-mt-6">
-          {/* Main Value Proposition Headline */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
-            {isAr ? "قبل أن ترميه... دَوْر يعرف قيمته" : "Before throwing it... DAWR knows its value"}
-          </h1>
+        {/* 2-Column Grid Hero Container (Right: Main Value Headline & Text, Left: Futuristic Circular HUD Loop) */}
+        <div className="w-full max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* Right Column: Text & Primary Action Buttons (7 Columns) */}
+          <div className="lg:col-span-7 flex flex-col items-start text-right space-y-5">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/80 text-emerald-300 border border-emerald-400/40 text-xs font-black shadow-md backdrop-blur-md">
+              <Sparkles className="w-4 h-4 text-emerald-300 shrink-0" />
+              <span>{isAr ? "تحليل اصطناعي لمسارات الاستدامة" : "AI Circular Intelligence Engine"}</span>
+            </div>
 
-          {/* Explanatory Paragraph */}
-          <p className="text-sm sm:text-base md:text-lg text-white font-extrabold leading-relaxed max-w-2xl drop-shadow-md">
-            {isAr
-              ? "صوّر أي منتج، ودع الذكاء الاصطناعي يحلل حالته وخامته ويقترح أفضل مسار دائري له قبل أن يتحول إلى نفايات."
-              : "Scan any product with AI to analyze its condition and materials, discovering the optimum circular route."}
-          </p>
+            {/* Main Value Proposition Headline */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
+              {isAr ? "قبل أن ترميه... دَوْر يعرف قيمته" : "Before throwing it... DAWR knows its value"}
+            </h1>
 
-          {/* Circular Pathways Pill List */}
-          <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-bold text-emerald-100">
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة استخدام</span>
-            <span>•</span>
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إصلاح</span>
-            <span>•</span>
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تبرع</span>
-            <span>•</span>
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">إعادة بيع</span>
-            <span>•</span>
-            <span className="bg-emerald-900/80 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-xs">تدوير</span>
+            {/* Explanatory Paragraph */}
+            <p className="text-sm sm:text-base md:text-lg text-white font-extrabold leading-relaxed max-w-2xl drop-shadow-md">
+              {isAr
+                ? "صوّر أي منتج، ودع الذكاء الاصطناعي يحلل حالته وخامته ويقترح أفضل مسار دائري له قبل أن يتحول إلى نفايات."
+                : "Scan any product with AI to analyze its condition and materials, discovering the optimum circular route."}
+            </p>
+
+            {/* Action Buttons Row */}
+            <div className="flex flex-wrap items-center gap-3 pt-3 w-full sm:w-auto">
+              <button
+                onClick={() => onNavigateToScan?.()}
+                className="py-3.5 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-700 hover:from-emerald-600 hover:to-teal-700 text-slate-950 font-black text-sm sm:text-base shadow-xl shadow-emerald-950/50 hover:scale-[1.03] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-300/50"
+              >
+                <Camera className="w-5 h-5 text-slate-950 shrink-0" />
+                <span>{isAr ? "افحص منتجًا الآن" : "Scan Product Now"}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="py-3.5 px-6 rounded-2xl bg-emerald-950/80 hover:bg-emerald-900 text-white border border-emerald-400/40 font-bold text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer backdrop-blur-xs"
+              >
+                <span>{isAr ? "شاهد كيف يعمل" : "See How It Works"}</span>
+                <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
+              </button>
+            </div>
           </div>
 
-          {/* Action Buttons Row */}
-          <div className="flex flex-wrap items-center gap-3 pt-3 w-full sm:w-auto">
-            <button
-              onClick={() => onNavigateToScan?.()}
-              className="py-3.5 px-7 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 hover:from-emerald-700 hover:to-teal-800 text-white font-black text-sm sm:text-base shadow-xl shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-400/40"
-            >
-              <Camera className="w-4 h-4 text-emerald-200 shrink-0" />
-              <span>{isAr ? "افحص منتجًا الآن" : "Scan Product Now"}</span>
-            </button>
-
-            <button
-              onClick={() => {
-                document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="py-3.5 px-6 rounded-2xl bg-emerald-950/80 hover:bg-emerald-950 text-white border border-emerald-400/40 font-bold text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer backdrop-blur-xs"
-            >
-              <span>{isAr ? "شاهد كيف يعمل" : "See How It Works"}</span>
-              <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : "rotate-0"}`} />
-            </button>
+          {/* Left Column: Hero Interactive Circular HUD Loop (5 Columns) */}
+          <div className="lg:col-span-5 flex items-center justify-center pt-6 lg:pt-0">
+            <CircularHudLoop
+              language={language}
+              onSelectPathway={() => onNavigateToScan?.()}
+            />
           </div>
         </div>
       </section>
